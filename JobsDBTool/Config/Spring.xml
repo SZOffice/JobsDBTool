@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database">
+  <description>
+    This is the primary configuration file for Spring.NET which imports all of the
+    configuration settings.
+  </description>
+  <object type="Spring.Objects.Factory.Config.VariablePlaceholderConfigurer, Spring.Core">
+    <property name="VariableSources">
+      <list>
+        <object type="Spring.Objects.Factory.Config.ConfigSectionVariableSource, Spring.Core">
+          <property name="SectionNames" value="appSettings" />
+        </object>
+        <object type="Spring.Objects.Factory.Config.ConnectionStringsVariableSource, Spring.Core" />
+      </list>
+    </property>
+  </object>
+
+  <object id="UnhandledExceptionCatcher" type="Solr.Common.Logging.UnhandledExceptionCatcher, Solr.Common" singleton="true"
+     destroy-method="Dispose">
+    <constructor-arg name="logger">
+      <object type="Common.Logging.LogManager, Common.Logging" factory-method="GetLogger">
+        <constructor-arg name="name" value="UnhandledExceptionLogger" />
+      </object>
+    </constructor-arg>
+  </object>
+
+  <object id="Logger" type="Solr.Common.Logging.Logger, Solr.Common" singleton="true">
+    <constructor-arg name="logger">
+      <object type="Common.Logging.LogManager, Common.Logging" factory-method="GetLogger">
+        <constructor-arg name="name" value="Logger" />
+      </object>
+    </constructor-arg>
+  </object>
+  
+  <object id="JobAdCoreLogger" type="Solr.Common.Logging.Logger, Solr.Common" singleton="true">
+    <constructor-arg name="logger">
+      <object type="Common.Logging.LogManager, Common.Logging" factory-method="GetLogger">
+        <constructor-arg name="name" value="JobAdCoreLogger" />
+      </object>
+    </constructor-arg>
+  </object>
+
+  <object id="EngineCommandEasyNetSolr" type="Solr.Common.Helper.EngineCommandEasyNetSolr, Solr.Common">
+  </object>
+  <object id="EngineCommandSolrNet" type="Solr.Common.Helper.EngineCommandSolrNet, Solr.Common">
+  </object>
+
+  <!--CreateIndex From HK-->
+  <object id="HKJobAd" type="Solr.Core.JobAdCoreService, Solr.Core">
+    <property name="JobAdDao" ref="HKJobAdDao" />
+    <property name="Logger" ref="JobAdCoreLogger" />
+    <!--<property name="EngineCommand" ref="EngineCommandSolrNet" />-->
+  </object>
+  <object id="IDJobAd" type="Solr.Core.JobAdCoreService, Solr.Core">
+    <property name="JobAdDao" ref="IDJobAdDao" />
+    <property name="Logger" ref="JobAdCoreLogger" />
+    <!--<property name="EngineCommand" ref="EngineCommandSolrNet" />-->
+  </object>
+  <object id="THJobAd" type="Solr.Core.JobAdCoreService, Solr.Core">
+    <property name="JobAdDao" ref="THJobAdDao" />
+    <property name="Logger" ref="JobAdCoreLogger" />
+    <!--<property name="EngineCommand" ref="EngineCommandSolrNet" />-->
+  </object>
+  <object id="HKTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
+    <property name="TalentSearchDao" ref="HKTalentSearchDao" />
+  </object>
+  <object id="IDTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
+    <property name="TalentSearchDao" ref="IDTalentSearchDao" />
+  </object>
+  <object id="THTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
+    <property name="TalentSearchDao" ref="THTalentSearchDao" />
+  </object>
+  
+  <object id="HKTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
+    <property name="TalentSearchStatusDao" ref="HKTalentSearchStatusDao" />
+  </object>
+  <object id="IDTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
+    <property name="TalentSearchStatusDao" ref="IDTalentSearchStatusDao" />
+  </object>
+  <object id="THTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
+    <property name="TalentSearchStatusDao" ref="THTalentSearchStatusDao" />
+  </object>
+
+  <object id="HKJobAd_Partial" type="Solr.Core.JobAdPartialCoreService, Solr.Core">
+  </object>
+  <object id="IDJobAd_Partial" type="Solr.Core.JobAdPartialCoreService, Solr.Core">
+  </object>
+  <object id="THJobAd_Partial" type="Solr.Core.JobAdPartialCoreService, Solr.Core">
+  </object>
+  <object id="HKTalentSearch_Partial" type="Solr.Core.TalentSearchPartialCoreService, Solr.Core">    
+  </object>
+  <object id="IDTalentSearch_Partial" type="Solr.Core.TalentSearchPartialCoreService, Solr.Core">    
+  </object>
+  <object id="THTalentSearch_Partial" type="Solr.Core.TalentSearchPartialCoreService, Solr.Core">    
+  </object>
+  <object id="HKTalentSearchStatus_Partial" type="Solr.Core.TalentSearchStatusPartialCoreService, Solr.Core">
+  </object>
+  <object id="IDTalentSearchStatus_Partial" type="Solr.Core.TalentSearchStatusPartialCoreService, Solr.Core">
+  </object>
+  <object id="THTalentSearchStatus_Partial" type="Solr.Core.TalentSearchStatusPartialCoreService, Solr.Core">
+  </object>
+
+  <object id="HKJobAdDao" type="Solr.Data.JobAdDao, Solr.Data">    
+    <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
+    <!--<property name="ConnectionString" value="${MySql_JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${MySql_JobsDB_HK.providerName}" />-->
+  </object>
+  <object id="IDJobAdDao" type="Solr.Data.JobAdDao, Solr.Data">    
+    <!--<property name="ConnectionString" value="${JobsDB_ID.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_ID.providerName}" />-->
+  </object>
+  <object id="THJobAdDao" type="Solr.Data.JobAdDao, Solr.Data">    
+    <!--<property name="ConnectionString" value="${JobsDB_TH.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_TH.providerName}" />-->
+  </object>
+  
+  <object id="HKTalentSearchDao" type="Solr.Data.TalentSearchDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
+  </object>
+  <object id="IDTalentSearchDao" type="Solr.Data.TalentSearchDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_ID.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_ID.providerName}" />-->
+  </object>
+  <object id="THTalentSearchDao" type="Solr.Data.TalentSearchDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_TH.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_TH.providerName}" />-->
+  </object>
+  
+  <object id="HKTalentSearchStatusDao" type="Solr.Data.TalentSearchStatusDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
+  </object>
+  <object id="IDTalentSearchStatusDao" type="Solr.Data.TalentSearchStatusDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_ID.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_ID.providerName}" />-->
+  </object>
+  <object id="THTalentSearchStatusDao" type="Solr.Data.TalentSearchStatusDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_TH.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_TH.providerName}" />-->
+  </object>
+  
+</objects>

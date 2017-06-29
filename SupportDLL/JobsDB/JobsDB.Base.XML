@@ -1,0 +1,1442 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JobsDB.Base</name>
+    </assembly>
+    <members>
+        <member name="T:JobsDB.Base.Cache.ReaderWriterLockCache`2">
+            <summary>
+            The ReaderWriterLockCache is an abstract class which encapsulate a dictionary and
+            have its Get method protected by ReaderWriterLock.
+            </summary>
+            <typeparam name="TKey">The type of the Key</typeparam>
+            <typeparam name="TValue">The type of the value</typeparam>
+        </member>
+        <member name="M:JobsDB.Base.Cache.ReaderWriterLockCache`2.#ctor">
+            <summary>
+            The constructor of the ReaderWriterLockCache.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Cache.ReaderWriterLockCache`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            the constructor of the Reader WriterLockCache.
+            </summary>
+            <param name="dictionary">The dictionary which will be used as the underlying storage</param>
+        </member>
+        <member name="M:JobsDB.Base.Cache.ReaderWriterLockCache`2.Get(`0)">
+            <summary>
+            Gets a value from the underlying storage with a specific key. If the value cannot be retrieved
+            with a specific key, the abstract Getvalue method will be called.
+            </summary>
+            <param name="key">the specific key</param>
+            <returns>The value</returns>
+        </member>
+        <member name="M:JobsDB.Base.Cache.ReaderWriterLockCache`2.GetValue(`0)">
+            <summary>
+            The GetValue method that should be implemented by derived class to retrieve the value from the actual source
+            in case the cache does not contains the specific item.
+            </summary>
+            <param name="key">The specific key</param>
+            <returns>The value</returns>
+        </member>
+        <member name="T:JobsDB.Base.Collections.IOrderedDictionary`2">
+            <summary>
+            The interface of the generic OrderedDictionary.
+            </summary>
+            <typeparam name="TKey">The type of the key</typeparam>
+            <typeparam name="TValue">The type of the value</typeparam>
+        </member>
+        <member name="M:JobsDB.Base.Collections.IOrderedDictionary`2.Insert(System.Int32,`0,`1)">
+            <summary>
+            Insert an item to the specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+            <param name="key">The key</param>
+            <param name="value">The value</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.IOrderedDictionary`2.RemoveAt(System.Int32)">
+            <summary>
+            Remove an item from a specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+        </member>
+        <member name="P:JobsDB.Base.Collections.IOrderedDictionary`2.Item(System.Int32)">
+            <summary>
+            Gets or sets the value from the specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+            <returns>The value retrieved from the specific index of the dictionary</returns>
+        </member>
+        <member name="T:JobsDB.Base.Collections.OrderedDictionary`2">
+            <summary>
+            The generic OrderedDictionary.
+            </summary>
+            <typeparam name="TKey">The type of the key</typeparam>
+            <typeparam name="TValue">The type of the value</typeparam>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.#ctor">
+            <summary>
+            Initialize a new instance of OrderedDictionary.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.#ctor(System.Collections.IEqualityComparer)">
+            <summary>
+            Initialize a new instance of OrderedDictionary.
+            </summary>
+            <param name="comparer">An IEqualityComparer instance</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Insert(System.Int32,`0,`1)">
+            <summary>
+            Insert an item to the specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+            <param name="key">the key</param>
+            <param name="value">The value</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.RemoveAt(System.Int32)">
+            <summary>
+            Remove an item from the specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Add(`0,`1)">
+            <summary>
+            Add a key value pair to the current dictionary instance.
+            </summary>
+            <param name="key">The key</param>
+            <param name="value">The value</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.ContainsKey(`0)">
+            <summary>
+            Gets a boolean flag which indicates if the specific key exists in the current instance.
+            </summary>
+            <param name="key">The specific key</param>
+            <returns>The boolean flag which indicates if the specific key exists</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Remove(`0)">
+            <summary>
+            Remove a specific entry from the current instance with a specific key.
+            </summary>
+            <param name="key">The specific key</param>
+            <returns>Gets a boolean flag which indicates if any item has been removed from the current instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Try to get a value from the current instance with a specific key.
+            </summary>
+            <param name="key">The specific key</param>
+            <param name="value">The retrieved value</param>
+            <returns>A boolean flag which indicates if any item has been retrieve from the current value</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Add a specific key value pair to the current instance.
+            </summary>
+            <param name="item">The specific KeyValuePair instance</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Clear">
+            <summary>
+            Remove all items from the current instance.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Gets a boolean flag which indicates if the specific key value pair exists in current instance or not.
+            </summary>
+            <param name="item">The specific KeyValuePair</param>
+            <returns>The boolean flag which indiciates if the specific key value pair exists</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+            Copy the entries from the current instance to the specific KeyValuePair array.
+            </summary>
+            <param name="array">The specific KeyValuePair array</param>
+            <param name="arrayIndex">The start index of the array</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Remove a specific KeyValuePair from the current instance.
+            </summary>
+            <param name="item">The specific KeyValuePair</param>
+            <returns>A boolean flag which indicates if any item has been removed</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.GetEnumerator">
+            <summary>
+            Gets an enumerator of the current dictionary instance.
+            </summary>
+            <returns>The enumerator instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Gets an enumerator of the current dictionary instance.
+            </summary>
+            <returns>The enumerator instance</returns>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.Item(`0)">
+            <summary>
+            Gets or sets the value from the dictionary with a specific key.
+            </summary>
+            <param name="key">The specific key</param>
+            <returns>The retrieved value from the dictionary</returns>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.Item(System.Int32)">
+            <summary>
+            Gets or sets the value from the specific index of the dictionary.
+            </summary>
+            <param name="index">The specific index</param>
+            <returns>The value retrieved from the specific index of the dictionary</returns>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.Keys">
+            <summary>
+            Gets all keys from the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.Values">
+            <summary>
+            Gets all values from the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.Count">
+            <summary>
+            Gets the number of entries stored in the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.IsReadOnly">
+            <summary>
+            Gets a flag which indicates if only read operation is allowed.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator">
+            <summary>
+            The OrderedDictionaryEnumerator is the enumerator of the OrderedDictionary.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.#ctor(System.Collections.IDictionaryEnumerator)">
+            <summary>
+            Initialize a new instance of OrderedDictionaryEnumerator.
+            </summary>
+            <param name="enumerator">The underlying IDictionaryEnumerator instance</param>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.Dispose">
+            <summary>
+            Dispose all the resouce from the current instance.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.MoveNext">
+            <summary>
+            Move to the next item.
+            </summary>
+            <returns>A boolean flag which indicate if the the next item exists</returns>
+        </member>
+        <member name="M:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.Reset">
+            <summary>
+            Reset the state of the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.Current">
+            <summary>
+            Gets the key value pair from the current location of the enumerator.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Collections.OrderedDictionary`2.OrderedDictionaryEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the key value pair from the current location of the enumerator.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.CmsType">
+            <summary>
+            Enumeration of Cms Type.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataFormatValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataFormatValue.JSON">
+            <summary>
+            Value for JSON.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataFormatValue.XML">
+            <summary>
+            Values for XML
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.RefNumberGenerator.refNumGenerator">
+            <summary>
+            Instance of DataIdGeneratorBase used for generating reference number.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.RefNumberGenerator.#cctor">
+            <summary>
+            Initializes static members of the RefNumberGenerator class.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.RefNumberGenerator.GetMaxNumber(JobsDB.Base.Data.ReferenceNumType)">
+            <summary>
+            Gets the maximum number.
+            </summary>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated maximum key ID.</returns>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.Empty">
+            <summary>
+            Value for changing primary resume or choose online resume.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.Pending">
+            <summary>
+            Value for pending resume for parsing.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.Uploaded">
+            <summary>
+            Value for resume is uploaded.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.ParseSuccess">
+            <summary>
+            Value for resume parse success.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.UploadFail">
+            <summary>
+            Value for resume fail upload to S3.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeParsingStatusValue.ParseFail">
+            <summary>
+            Value for resume fail to parse.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.SqlRefNumberGenerator">
+            <summary>
+            SQL Server implementation of RefNumberGenerator.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SqlRefNumberGenerator.getCommandText">
+            <summary>
+            Command text of SQL to generate and retrieve max reference number.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Data.SqlRefNumberGenerator.GetCommandText">
+            <summary>
+            Gets the command text of SQL to generate and retrieve max reference number.
+            </summary>
+            <value>The command text of SQL to generate and retrieve max reference number.</value>
+        </member>
+        <member name="P:JobsDB.Base.Data.SqlRefNumberGenerator.GetCommandType">
+            <summary>
+            Gets the type of the command of SQL to generate and retrieve max key.
+            </summary>
+            <value>The type of the command of SQL to generate and retrieve max key.</value>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_HK">
+            <summary>
+            Represent HK ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_SG">
+            <summary>
+            Represent SG ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_MY">
+            <summary>
+            Represent MY ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_PH">
+            <summary>
+            Represent PH ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_ID">
+            <summary>
+            Represent ID ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_TH">
+            <summary>
+            Represent TH ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_AU">
+            <summary>
+            Represent AU ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_IN">
+            <summary>
+            Represent IN ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_KR">
+            <summary>
+            Represent KR ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_US">
+            <summary>
+            Represent US ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ReferenceNumType.ShortAdsRef_TW">
+            <summary>
+            Represent TW ShortAdsRef for JobAd entity.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.DbProvider">
+            <summary>
+            Defines operations to generate maximum key ID from database.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.DbProvider.#cctor">
+            <summary>
+            Initializes static members of the DataIdGeneratorBase class.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Data.DbProvider.ConnectionString">
+            <summary>
+            Connection string.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Data.DbProvider.Factory">
+            <summary>
+            Static instance of the DbProviderFactory
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.DataStatus">
+            <summary>
+            Enumeration of data status.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataStatus.Empty">
+            <summary>
+            Indicates unassigned value.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataStatus.Synchronized">
+            <summary>
+            Indicates the data is synchronized between remote sites.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataStatus.Synchronizing">
+            <summary>
+            Indicates the data is being synchronized between remote sites.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataStatus.SynchronizingWithPendingEdit">
+            <summary>
+            Indicates the data is being synchronized between remote sites,
+            and source data has been edited.  Further synchronization is required.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataStatus.PendingSynchronizing">
+            <summary>
+            Indicates that data synchronization is in hold.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.IDGenerator">
+            <summary>
+            IDGenerator is responsible for composing 32-bit ID for data entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.MaxInstanceIdValue">
+            <summary>
+            Maximum Instance Id value.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.ReservedStartDigits">
+            <summary>
+            Number of most significant digits reserved.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.SequenceDigits">
+            <summary>
+            Number of digits for sequence.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.ReferencePadLength">
+            <summary>
+            Padded length of generated ID in reference.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.SequenceMaxValue">
+            <summary>
+            Maximum value represented by sequence digits in the composed data entity ID.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator.instanceIdOffsets">
+            <summary>
+            Precalculated values for the offsets identitying the Instance ID for the data entity composite ID.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator.#cctor">
+            <summary>
+            Initializes static members of the IDGenerator class.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator.GetCompositeId(System.Int32,System.Int32)">
+            <summary>
+            Create composite ID based on the given parameters.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="seqId">The input sequence ID.</param>
+            <returns>Resulted composite ID value.</returns>
+        </member>
+        <member name="T:JobsDB.Base.Data.DataIdGenerator">
+            <summary>
+            Generates maximum key ID from database.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataIdGenerator.TypeNameKeyNameSuffix">
+            <summary>
+            Application setting key name suffix of type name.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataIdGenerator.dataIdGenerator">
+            <summary>
+            Instance of DataIdGeneratorBase used for generating key.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGenerator.#cctor">
+            <summary>
+            Initializes static members of the DataIdGenerator class.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGenerator.GetMaxKeyId(JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the maximum key 32-bit ID.
+            </summary>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated maximum key ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGenerator.GetMaxKeyId64(JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the maximum key 64-bit ID.
+            </summary>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated maximum key ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGenerator.GetCompositeId(System.Int32,JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the composite 32-bit ID.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated composite ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGenerator.GetCompositeId64(System.Int32,JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the composite 64-bit ID.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated composite ID.</returns>
+        </member>
+        <member name="T:JobsDB.Base.Data.DataIdGeneratorBase">
+            <summary>
+            Defines operations to generate maximum key ID from database.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.DataIdGeneratorBase.KeyTypeParameterName">
+            <summary>
+            Parameter name of stored procedure for getting the next key value.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGeneratorBase.GetMaxKeyId(JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the maximum 32-bit key ID.
+            </summary>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated maximum 32-bit key ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGeneratorBase.GetMaxKeyId64(JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the maximum 64-bit key ID.
+            </summary>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated maximum 64-bit key ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGeneratorBase.GetCompositeId(System.Int32,JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the 32-bit composite ID.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated 32-bit composite ID.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.DataIdGeneratorBase.GetCompositeId64(System.Int32,JobsDB.Base.Data.MaxKeyIdType)">
+            <summary>
+            Gets the 64-bit composite ID.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="maxKeyIdType">Max key ID type.</param>
+            <returns>Generated 64-bit composite ID.</returns>
+        </member>
+        <member name="P:JobsDB.Base.Data.DataIdGeneratorBase.GetMaxKeyIdCommandText">
+            <summary>
+            Gets the command text.
+            </summary>
+            <value>The command text.</value>
+        </member>
+        <member name="P:JobsDB.Base.Data.DataIdGeneratorBase.GetMaxKeyIdCommandType">
+            <summary>
+            Gets the type of the command.
+            </summary>
+            <value>The type of the command.</value>
+        </member>
+        <member name="T:JobsDB.Base.Data.IDGenerator64">
+            <summary>
+            IDGenerator is responsible for composing 64-bit ID for data entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator64.MaxInstanceIdValue">
+            <summary>
+            Maximum Instance Id value.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator64.ReservedStartDigits">
+            <summary>
+            Number of most significant digits reserved.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator64.SequenceDigits">
+            <summary>
+            Number of digits for sequence.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator64.SequenceMaxValue">
+            <summary>
+            Maximum value represented by sequence digits in the composed data entity ID.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.IDGenerator64.instanceIdOffsets">
+            <summary>
+            Precalculated values for the offsets identitying the Instance ID for the data entity composite ID.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.#cctor">
+            <summary>
+            Initializes static members of the IDGenerator64 class.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.GetCompositeId(System.Int32,System.Int64)">
+            <summary>
+            Create composite ID based on the given parameters.
+            </summary>
+            <param name="instanceId">The instance ID of current datacentre.</param>
+            <param name="seqId">The input sequence ID.</param>
+            <returns>Resulted composite ID value.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.GetJobAdsRef(System.Int64,System.String)">
+            <summary>
+            Gets the Job Ads Reference from given parameters.
+            </summary>
+            <param name="jobAdsId">The Job Ads ID value.</param>
+            <param name="postCountry">The post country.</param>
+            <returns>Job Ads Reference.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.GetResumeRef(System.Int64,System.String)">
+            <summary>
+            Gets the Job Ads Reference from given parameters.
+            </summary>
+            <param name="resumeId">The resume ID value.</param>
+            <param name="postCountry">The post country.</param>
+            <returns>Job Ads Reference.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.GetResumeRequestRef(System.Int64,System.String)">
+            <summary>
+            Gets the Resume Request Reference number from given parameters.
+            </summary>
+            <param name="resumeRequestId">The resume request Id value.</param>
+            <param name="postCountry">The post country</param>
+            <returns>The Resume Request Reference number </returns>
+        </member>
+        <member name="M:JobsDB.Base.Data.IDGenerator64.GetRef(System.Int64,System.String,System.String)">
+            <summary>
+            Get Ref by giving the Id, PostCountry and Prefix value
+            </summary>
+            <param name="id">The given ID.</param>
+            <param name="postCountry">The post country.</param>
+            <param name="prefix">The prefix.</param>
+            <returns>The reference string.</returns>
+        </member>
+        <member name="T:JobsDB.Base.Data.MaxKeyIdType">
+            <summary>
+            Key type for data entity.
+            </summary>
+            <remarks>
+            For enumeration representing key type of an entity class,
+            the name of enumeration should be same as name of corresponding entity class.
+            </remarks>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsJobSeeker">
+            <summary>
+            Represent key type for JsJobSeeker entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpMaster">
+            <summary>
+            Represent key type for EmpMaster entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalCoverLetter">
+            <summary>
+            Represent key type for JsGlobalCoverLetter entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JobAd">
+            <summary>
+            Represent key type for JobAd entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpCandidate">
+            <summary>
+            Represent key type for EmpCandidate entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerEmail">
+            <summary>
+            Represent key type for JsGlobalJobSeekerEmail entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpTemplate">
+            <summary>
+            Represent key type for EmpTemplate entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsResume">
+            <summary>
+            Represent key type for JsResume entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerState">
+            <summary>
+            Represent key type for JsGlobalJobSeekerState entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerStatistic">
+            <summary>
+            Represent key type for JsGlobalJobSeekerStatistic entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpResumeRequest">
+            <summary>
+            Represent key type for EmpResumeRequest entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpResumeRequestCandidate">
+            <summary>
+            Represent key type for EmpResumeRequestCandidate entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerResumeRequestCompanyFilter">
+            <summary>
+            Represent key type for JsGlobalJobSeekerResumeRequestCompanyFilter entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerResumeRequestJobTitleFilter">
+            <summary>
+            Represent key type for JobSeekerResumeRequestJobTitleFilter entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsResumeMetaSubscription">
+            <summary>
+            Represent key type for JsResumeMetaSubscription entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.AttachmentKey">
+            <summary>
+            Represent key type for AttachmentKey entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.BotDetectionClientIndentityId">
+            <summary>
+            Represent key type for BotDetectionClientIndentityId entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.BotDetectionCaptchaTicket">
+            <summary>
+            Represent key type for BotDetectionCaptchaTicket entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpTempData">
+            <summary>
+            Represent key type for EmpTempData entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpTalentRequest">
+            <summary>
+            Represent key type for EmpTalentRequest entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpTalentRequestCandidate">
+            <summary>
+            Represent key type for EmpTalentRequestCandidate entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.EmpScreeningQuestion">
+            <summary>
+            Represent key type for EmpScreeningQuestion entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JobAdScreening">
+            <summary>
+            Represent key type for JobAdScreening entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JobApplicationScreening">
+            <summary>
+            Represent key type for JobApplicationScreening entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsResumeParsingStatus">
+            <summary>
+            Represent key type for JsResumeParsingStatus entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalParsedJsResume">
+            <summary>
+            Represent key type for JsGlobalParsedJsResume entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.MaxKeyIdType.JsGlobalJobSeekerABTesting">
+            <summary>
+            Represent key type for JsGlobalJobSeekerABTesting entity.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.CreditCard">
+            <summary>
+            Value for CreditCard.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Invoice">
+            <summary>
+            Value for Invoice.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Debit">
+            <summary>
+            Value for Debit.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Bill">
+            <summary>
+            Value for Bill.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.AltPayment">
+            <summary>
+            Value for Alternate Payment.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Hsbc">
+            <summary>
+            Value for HSBC.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.OnlinePaymentCodeTypeValue.Dokupay">
+            <summary>
+            Value for Dokupay.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.PaymentGatewaySuccessCodeValue">
+            <summary>
+            Values of PaymentGatewaySuccessCode field.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentGatewaySuccessCodeValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentGatewaySuccessCodeValue.Success">
+            <summary>
+            Value for Success.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentGatewaySuccessCodeValue.Failure">
+            <summary>
+            Value for Failure.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.PaymentSuccessCodeValue">
+            <summary>
+            Values of PaymentSuccessCode field.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentSuccessCodeValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentSuccessCodeValue.Success">
+            <summary>
+            Value for Success.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentSuccessCodeValue.Failure">
+            <summary>
+            Value for Failure.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.PaymentSuccessCodeValue.Cancel">
+            <summary>
+            Value for Failure.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.ResumeSubmitSourceValue">
+            <summary>
+            Values of SubmitSrc field.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeSubmitSourceValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeSubmitSourceValue.Dimension">
+            <summary>
+            Value for Dimension.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.ResumeSubmitSourceValue.CEF">
+            <summary>
+            Value for CEF Import
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.SISBillingInvoiceDataType">
+            <summary>
+            Values of SIS billing invoice data type.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISBillingInvoiceDataType.All">
+            <summary>
+            Value for all invoice item.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISBillingInvoiceDataType.ValidOnly">
+            <summary>
+            Value for only valide invoice item.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.SISBillingLoginCountryCode">
+            <summary>
+            Values of SIS billing login country code.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISBillingLoginCountryCode.AllCountry">
+            <summary>
+            Value for all country.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.SISReceiveSuccessCodeValue">
+            <summary>
+            Values of SISReceiveSuccessCodeValue field.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISReceiveSuccessCodeValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISReceiveSuccessCodeValue.Success">
+            <summary>
+            Value for Success.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SISReceiveSuccessCodeValue.Failure">
+            <summary>
+            Value for Failure.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Data.SqlDataIdGenerator">
+            <summary>
+            SQL Server implementation of DataIdGeneratorBase.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.SqlDataIdGenerator.getMaxKeyIdCommandText">
+            <summary>
+            Command text of SQL to generate and retrieve max key.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Data.SqlDataIdGenerator.GetMaxKeyIdCommandText">
+            <summary>
+            Gets the command text of SQL to generate and retrieve max key.
+            </summary>
+            <value>The command text of SQL to generate and retrieve max key.</value>
+        </member>
+        <member name="P:JobsDB.Base.Data.SqlDataIdGenerator.GetMaxKeyIdCommandType">
+            <summary>
+            Gets the type of the command of SQL to generate and retrieve max key.
+            </summary>
+            <value>The type of the command of SQL to generate and retrieve max key.</value>
+        </member>
+        <member name="T:JobsDB.Base.Data.StatusValue">
+            <summary>
+            Values of Status field.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Empty">
+            <summary>
+            Value for Empty.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Active">
+            <summary>
+            Value for Active.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Deactivated">
+            <summary>
+            Value for Deactivated.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Deleted">
+            <summary>
+            Value for Deleted.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Draft">
+            <summary>
+            Value for Draft.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Expired">
+            <summary>
+            Value for Expired.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Scheduled">
+            <summary>
+            Value for Scheduled.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Data.StatusValue.Pending">
+            <summary>
+            Value for Pending.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Security.AuthenTicketType.External">
+            <summary>
+            Refers to external users, for example job seekers and employers.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Security.AuthenTicketType.SIS">
+            <summary>
+            Refers to internal users, for example login from SIS.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.AuthenTicketCache`1">
+            <summary>
+            The AuthenTicketCache is responsible to cache the authentication ticket string and allow fast lookup with AuthenTicketKey.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketCache`1.#ctor(JobsDB.Base.Collections.IOrderedDictionary{JobsDB.Base.Security.AuthenTicketKey,`0},System.Int32,JobsDB.Base.Security.TicketGenerator.ComputeAuthenTicketDelegate)">
+            <summary>
+            Initialize a new instance of AuthenTicketCache.
+            </summary>
+            <param name="orderedDictionary">An OrderedDictionary instance</param>
+            <param name="maxSize">the maximum size of the current instance</param>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketCache`1.GetValue(JobsDB.Base.Security.AuthenTicketKey)">
+            <summary>
+            The GetValue method will be called when a specific entry does not exists in the cache.
+            </summary>
+            <param name="key">The key of the specific entry</param>
+            <returns>The value</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketCache`1.TryRemoveExpiredEntry">
+            <summary>
+            Try to remove the oldest entry from the current instance if the maximum size reached.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Security.AuthenTicketCache`1.MaxSize">
+            <summary>
+            Gets the maximum size of the current instance.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.AuthenTicketKey">
+            <summary>
+            the AuthenTicketKey is a data structure that will be used as the key of the AuthenTicketCache.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketKey.#ctor(System.String,System.DateTime,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Initialize a new instance of AuthenTicketKey.
+            </summary>
+            <param name="userId">The user Id</param>
+            <param name="timeSlot">The time slot</param>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketKey.Equals(System.Object)">
+            <summary>
+            Gets a boolean flag which indicates if the current instance equals to the specific instance.
+            </summary>
+            <param name="obj">The specific object</param>
+            <returns>The boolean flag which indicates if the current instance equals to the specific instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketKey.GetHashCode">
+            <summary>
+            Gets the hash code of the current instance.
+            </summary>
+            <returns>The hash code of the current instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.AuthenTicketKey.ToString">
+            <summary>
+            Gets a string which can represent the state of the current instance.
+            </summary>
+            <returns>A string which can represent the state of the current instance</returns>
+        </member>
+        <member name="P:JobsDB.Base.Security.AuthenTicketKey.UserId">
+            <summary>
+            Gets the user Id from the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Security.AuthenTicketKey.TimeSlot">
+            <summary>
+            Gets the time slot from the current instance.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.Configuration.CryptographyConfigurationSection">
+            <summary>
+            CryptographyConfigurationSection is a configuration section for storing cryptography related settings.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Security.Configuration.CryptographyConfigurationSection.SymmetricKey">
+            <summary>
+            Gets or sets the symmetric key.
+            </summary>
+            <value>The symmetric key.</value>
+        </member>
+        <member name="P:JobsDB.Base.Security.Configuration.CryptographyConfigurationSection.SymmetricKeyForSmartPhonePlatforms">
+            <summary>
+            Gets or sets the symmetric key.
+            </summary>
+            <value>The symmetric key.</value>
+        </member>
+        <member name="P:JobsDB.Base.Security.Configuration.CryptographyConfigurationSection.HashSeed">
+            <summary>
+            Gets or sets the hash seed.
+            </summary>
+            <value>The hash seed.</value>
+        </member>
+        <member name="T:JobsDB.Base.Security.CryptographyUtility">
+            <summary>
+            CryptographyUtility is a helper class which contains help methods related to Cryptography.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Security.CryptographyUtility.CryptographyConfigSectionName">
+            <summary>
+            Configuration section name.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Security.CryptographyUtility.symSecurityKeys">
+            <summary>
+            Security key.
+            </summary>
+        </member>
+        <member name="F:JobsDB.Base.Security.CryptographyUtility.symSecurityInitVectors">
+            <summary>
+            Initial vector.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.GetHashedPassword(System.String,JobsDB.Base.Security.CryptographyUtility.HashingAlgorithmType)">
+            <summary>
+            Gets the Hashed value of a specific password.
+            </summary>
+            <param name="password">The original password string</param>
+            <returns>The hashed value of the password string</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.ComputeHash(System.String)">
+            <summary>
+            Computes the hash of specific value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>The hash of specific value.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.GenerateRandomString(System.Int32)">
+            <summary>
+            Generates the random string.
+            </summary>
+            <param name="byteLength">Length of the randomly generated byte.</param>
+            <returns>The random string.</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.Encrypt(System.String)">
+            <summary>
+            Encrypt a string.
+            </summary>
+            <param name="originalString">The original string</param>
+            <returns>The encrypted string</returns>
+            <exception cref="T:System.ArgumentNullException">This exception will be thrown when the original string is null</exception>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.Decrypt(System.String)">
+            <summary>
+            Decrypt a crypted string.
+            </summary>
+            <param name="cryptedString">The crypted string</param>
+            <returns>The decrypted string</returns>
+            <exception cref="T:System.ArgumentNullException">This exception will be thrown when the crypted string is null</exception>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.CreateCryptoTransformForEncryption(System.Security.Cryptography.SymmetricAlgorithm,JobsDB.Base.Security.CryptographyUtility.Method)">
+            <summary>
+            Create a new CryptoTransform instance with the specific SymmetricAlgorithm instance of data encryption.
+            </summary>
+            <param name="cryptoProvider">A SymmetricAlgorithm instance</param>
+            <returns>A cryptoTransform instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.CreateCryptoTransformForDecryption(System.Security.Cryptography.SymmetricAlgorithm,JobsDB.Base.Security.CryptographyUtility.Method)">
+            <summary>
+            Create a new CryptoTransform instance with the specific SymmetricAlgorithm instance for data decryption.
+            </summary>
+            <param name="cryptoProvider">A SymmetricAlgorithm instance</param>
+            <returns>A cryptoTransform instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.CryptographyUtility.LazyInitSymmetricKey(JobsDB.Base.Security.CryptographyUtility.Method)">
+            <summary>
+            Lazy initialize the Symmetric key if required
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.AuthenticationUtility">
+            <summary>
+            The AuthenticationUtility is a helper class to handle authentication tickets.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.LagacyAuthenticationUtility">
+            <summary>
+            It is old authentication code, but please do NOT delete this class as it is used by test case
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetMaximumAuthenTicketCacheSize">
+            <summary>
+            Read the MaximumAuthenTicketCacheSize from the configuration file.
+            </summary>
+            <returns>The value of the MaximumAuthenTicketCacheSize setting</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.#cctor">
+            <summary>
+            The static constructor of the AuthenticationUtility.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.ValidateTimeSlotHourNum(System.Int32)">
+            <summary>
+            Validate the time slot size and throw errors if the size is a non positive number or the size is not a factor of 24 (total number of hours in a day).
+            </summary>
+            <param name="timeSlotHourNum">The size of the timeSlot</param>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetAuthenTicketTimeSlotHourNum">
+            <summary>
+            Read the AuthenTicketTimeSlotHourNum from the configuration file.
+            </summary>
+            <returns>The value of the AuthenTicketTimeSlotHourNum setting</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.RoundUp(System.DateTime)">
+            <summary>
+            Round up the specific datetime.
+            </summary>
+            <param name="dateTime">The specific datetime</param>
+            <returns>The rounded up DateTime</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetPreviousTimeSlot(System.DateTime)">
+            <summary>
+            Gets the previous time slot of the specific time slot.
+            </summary>
+            <param name="dateTime">The specific time slot</param>
+            <returns>The previous time slot</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.ComputeAuthenTicket(System.String,System.DateTime,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Compute the authentication ticket of the specicific user at a specific time slot.
+            </summary>
+            <param name="authenUserId">The user id of the specific user</param>
+            <param name="timeSlot">The specific time slot</param>
+            <param name="ticketType">The type of the authentication ticket</param>
+            <returns>The authentication ticket</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.ComputeWithMD5(System.IO.Stream)">
+            <summary>
+            Compute the md5 hash from the data read from the specific stream.
+            </summary>
+            <param name="stream">The stream where the data are read from</param>
+            <returns>The md5 hash</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetHashSeed">
+            <summary>
+            Gets the seed value for the hash function.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetJobSeekerAuthenticateQueryStringArguments(System.String,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Gets a dictionary which contains the query string arguments for job seeker authentication.
+            </summary>
+            <param name="jobSeekerId">The id of the specific job seeker</param>
+            <param name="ticketType">The type of the authentication ticket</param>
+            <returns>The dictionary which contains the query string argument for job seeker authentication</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetEmployerLoginUrlWithAuthenticationInfo(System.Int32,System.String,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Get the Employer Login Url with Authentication Info.
+            </summary>
+            <param name="employerId">The id of the specific employer</param>
+            <param name="rmsMainActionUrl">The Url of the Rms Main action</param>
+            <param name="ticketType">The type of the authentication ticket</param>
+            <returns>Employer Login Url with Authentication Info</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.GetAuthenTicket(System.String,System.DateTime,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Gets the authenticate ticket with the specific user Id and time slot.
+            </summary>
+            <param name="authenUserId">The specific user Id</param>
+            <param name="timeSlot">The specific time slot</param>
+            <returns>The authenticate ticket</returns>
+        </member>
+        <member name="T:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey">
+            <summary>
+            the AuthenTicketKey is a data structure that will be used as the key of the AuthenTicketCache.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.#ctor(System.String,System.DateTime,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Initialize a new instance of AuthenTicketKey.
+            </summary>
+            <param name="userId">The user Id</param>
+            <param name="timeSlot">The time slot</param>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.Equals(System.Object)">
+            <summary>
+            Gets a boolean flag which indicates if the current instance equals to the specific instance.
+            </summary>
+            <param name="obj">The specific object</param>
+            <returns>The boolean flag which indicates if the current instance equals to the specific instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.GetHashCode">
+            <summary>
+            Gets the hash code of the current instance.
+            </summary>
+            <returns>The hash code of the current instance</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.ToString">
+            <summary>
+            Gets a string which can represent the state of the current instance.
+            </summary>
+            <returns>A string which can represent the state of the current instance</returns>
+        </member>
+        <member name="P:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.UserId">
+            <summary>
+            Gets the user Id from the current instance.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey.TimeSlot">
+            <summary>
+            Gets the time slot from the current instance.
+            </summary>
+        </member>
+        <member name="T:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketCache">
+            <summary>
+            The AuthenTicketCache is responsible to cache the authentication ticket string and allow fast lookup with AuthenTicketKey.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketCache.#ctor(JobsDB.Base.Collections.IOrderedDictionary{JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey,System.String},System.Int32)">
+            <summary>
+            Initialize a new instance of AuthenTicketCache.
+            </summary>
+            <param name="orderedDictionary">An OrderedDictionary instance</param>
+            <param name="maxSize">the maximum size of the current instance</param>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketCache.GetValue(JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketKey)">
+            <summary>
+            The GetValue method will be called when a specific entry does not exists in the cache.
+            </summary>
+            <param name="key">The key of the specific entry</param>
+            <returns>The value</returns>
+        </member>
+        <member name="M:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketCache.TryRemoveExpiredEntry">
+            <summary>
+            Try to remove the oldest entry from the current instance if the maximum size reached.
+            </summary>
+        </member>
+        <member name="P:JobsDB.Base.Security.LagacyAuthenticationUtility.AuthenTicketCache.MaxSize">
+            <summary>
+            Gets the maximum size of the current instance.
+            </summary>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForEmployerResetPassword(System.Int32)">
+            <summary>
+            Gets the link to the employer reset password page
+            </summary>
+            <param name="employerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForEmployerAccountUserResetPassword(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the link with valid hours to the employer account user reset password page
+            </summary>
+            <param name="employerId"></param>
+            <param name="userManagementId"></param>
+            <param name="validHours"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForEmployerAccountUserResetPassword(System.Int32,System.Int32)">
+            <summary>
+            Gets the link to the employer account user reset password page
+            </summary>
+            <param name="employerId"></param>
+            <param name="userManagementId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForDisplayResume(System.String,System.String,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Gets the link for displaying an online resume or downloading an attachment resume.
+            </summary>
+            <param name="jobSeekerId">The Id of the job seeker</param>
+            <param name="resumeId">The Id of the resume</param>
+            <param name="ticketType">The type of the authentication ticket</param>
+            <returns>The hyperlink for displaying an online resume or downloading an attachment resume</returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForDeleteResume(System.String,System.String)">
+            <summary>
+            Gets the link for deleting an resume.
+            </summary>
+            <param name="jobSeekerId">The Id of the job seeker</param>
+            <param name="resumeId">The Id of the resume</param>
+            <returns>The hyperlink for deleting an resume</returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetLinkForDeleteResume(System.String,System.String,JobsDB.Base.Security.AuthenTicketType)">
+            <summary>
+            Gets the link for deleting an resume.
+            </summary>
+            <param name="jobSeekerId">The Id of the job seeker</param>
+            <param name="resumeId">The Id of the resume</param>
+            <param name="ticketType">The type of the authentication ticket</param>
+            <returns>The hyperlink for deleting an resume</returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.GetControllerActionPath(System.String)">
+            <summary>
+            Gets the base url of the specific controller action.
+            </summary>
+            <param name="actionName">The name of the controller action</param>
+            <returns>The base url of the specific controller action</returns>
+        </member>
+        <member name="M:JobsDB.Base.SISUtility.ComposeHyperLink(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Compose the hyperlink with the bath path and the query string arguments dictionary.
+            </summary>
+            <param name="basePath">The base path</param>
+            <param name="queryStringArgs">The dictionary which contains the query string arguments</param>
+            <returns>The composed hyperlink</returns>
+        </member>
+        <member name="T:JobsDB.Base.SISUtility.AccountCompletedLevel">
+            <summary>
+            Account Completed Level for SIS reporting
+            </summary>
+        </member>
+    </members>
+</doc>

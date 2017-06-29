@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+  <log4net debug="true">
+    <appender name="LoggerAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="Logs/Log.txt" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="10" />
+      <maximumFileSize value="2000KB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+    
+    <appender name="JobAdCoreAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="Logs/JobAdCoredLog.txt" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="10" />
+      <maximumFileSize value="2000KB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+
+    <appender name="UnhandledExceptionAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="Logs/UnhandledExceptionLog.txt" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="10" />
+      <maximumFileSize value="2000KB" />
+      <staticLogFileName value="true" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+
+    <!-- Set default logging level to DEBUG -->
+    <logger name="Logger">
+      <level value="ALL" />
+      <appender-ref ref="LoggerAppender" />
+    </logger>
+    
+    <!-- Set default logging level to DEBUG -->
+    <logger name="JobAdCoreLogger">
+      <level value="ALL" />
+      <appender-ref ref="JobAdCoreAppender" />
+    </logger>
+
+    <logger name="UnhandledExceptionLogger">
+      <appender-ref ref="UnhandledExceptionAppender" />
+    </logger>
+
+    <root>
+      <level value="DEBUG" />
+    </root>
+
+  </log4net>
+</configuration>

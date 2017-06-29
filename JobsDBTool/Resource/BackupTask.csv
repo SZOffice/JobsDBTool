@@ -1,0 +1,2 @@
+TaskName,TaskType,BackupPath,TargetPath,IsBackupWordings,FileListPath,,
+Test2,NewRMS,D:\bkTask\BKFiles,d:\jobsDBv8\,True,D:\bkTask\config_JobsDB_BK.txt,

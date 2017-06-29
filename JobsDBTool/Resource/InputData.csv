@@ -1,0 +1,7 @@
+AutoID,WordingsKey,GroupId,Countrycode,LanguageCode,WordingsContent,Comments,
+0,Label_RMS_EmpJobs_FilterApplications,2,XX,EN,Filter applications,,
+1,Label_RMS_EmpJobs_FilterApplications,2,TH,TH,คัดกรองใบสมัคร,,
+2,Label_RMS_EmpJobs_FilterApplications_Desc,2,XX,EN,Applications that do not meet the criteria are filtered out and marked as not suitable in RMS. We will not email a copy of these applications.,,
+3,Label_RMS_EmpJobs_FilterApplications_Desc,2,TH,TH,ใบสมัครที่ไม่เป็นไปตามเกณฑ์จะถูกคัดกรองออกและทำเครื่องหมายว่าไม่เป็นไปตามเกณฑ์ในระบบ RMS เราจะไม่ส่งสำเนาใบสมัครนี้ไปยังอีเมลของคุณ,,
+4,Label_RMS_EmpJobs_WorkIn,2,XX,EN,Candidates must be allowed to work in {0},,
+5,Label_RMS_EmpJobs_WorkIn,2,TH,TH,ผู้สมัครจะต้องได้รับอนุญาตให้ทำงานใน{0},,

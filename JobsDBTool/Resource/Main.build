@@ -1,0 +1,55 @@
+<project name="myproject" default="build" basedir=".">
+    <!--<property name="nant.settings.currentframework" value="net-3.5" />-->
+    <!-- 编译结果 -->
+	<if test="${property::exists('param.base.dir')}">
+		<property name="dir.base" value="${param.base.dir}" />
+	</if>
+    <if test="${not property::exists('param.base.dir')}">
+		<property name="dir.base" value="D:\workspaces\JobsDBTool" />
+	</if>
+	
+    <property name="dir.code" value="${dir.base}\Resource" />
+    <property name="file.dll.SolrUpdateDomain" value="${dir.code}\SolrUpdateDomain.dll" />
+    
+	<if test="${property::exists('param.dll.copy.target')}">
+		<property name="dll.copy.target" value="${param.dll.copy.target}" />
+	</if>
+    <if test="${not property::exists('param.dll.copy.target')}">
+		<property name="dll.copy.target" value="D:\workspaces\JobsDBTool\bin\Debug" />
+	</if>
+	
+    <target name="build" depends="clean, implement" />
+
+
+    <target name="implement" depends="compile">
+    </target>
+
+    <target name="compile" depends="SolrUpdateDomain" />
+	
+    <target name="clean">
+        <delete file="${file.dll.SolrUpdateDomain}" if="${file::exists(file.dll.SolrUpdateDomain)}"/>
+    </target>
+
+    <target name="SolrUpdateDomain">
+        <csc target="library" output="${file.dll.SolrUpdateDomain}" debug="Full" optimize="true" define="TRACE" platform="AnyCPU" warninglevel="4" rebuild="true" filealign="512">
+           <sources>
+                <include name="${dir.code}\SolrUpdateDomain.tm" />
+           </sources>
+        </csc>
+		
+		<copy todir="${dll.copy.target}">
+			<fileset>
+				<include name="${file.dll.SolrUpdateDomain}" if="${file::exists(file.dll.SolrUpdateDomain)}" />
+			</fileset>
+		</copy>
+		
+		<property name="dir.program" value="D:\Program Files\JobsDBTool" />
+		<copy todir="${dir.program}" if="${directory::exists(dir.program)}">
+			<fileset>
+				<include name="${file.dll.SolrUpdateDomain}" if="${file::exists(file.dll.SolrUpdateDomain)}" />
+			</fileset>
+		</copy>
+    </target>
+	
+
+</project>
