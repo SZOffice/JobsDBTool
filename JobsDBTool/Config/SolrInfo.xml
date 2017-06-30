@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="DropDownToText">
+    <![CDATA[
+        
+        <columns name="SolrUpdate_Cores">          
+          <column name="TalentSearch_55">
+            <solrUrl>http://10.1.9.50:8983/solr/ts_55_{CountryCode_Lower}</solrUrl>
+            <idString>100003000010194, 400000000100001, 400000000200001</idString>
+            <solrQueryUrl>http://10.1.0.213:8080/solr/tal-candu-{CountryCode_Lower}/</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath></xmlFilePath>
+            <sqlQuery>Select top 10 Id From JobsDB_Global..JsGlobal_JobSeekerBase order by utcLastModifiedTime desc</sqlQuery>
+          </column>        
+          <column name="TalentSearch_50">
+            <solrUrl>http://10.1.9.50:8983/solr/ts_50_{CountryCode_Lower}</solrUrl>
+            <idString>100003000010194, 400000000100001, 400000000200001</idString>
+            <solrQueryUrl>http://10.1.0.213:8080/solr/tal-candu-{CountryCode_Lower}/</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath></xmlFilePath>
+            <sqlQuery>Select top 10 Id From JobsDB_Global..JsGlobal_JobSeekerBase order by utcLastModifiedTime desc</sqlQuery>
+          </column>
+          <column name="JobAd_55">
+            <solrUrl>http://10.1.9.50:8983/solr/jobad_55_{CountryCode_Lower}</solrUrl>
+            <idString>100003000010418,100003000010419,</idString>
+            <solrQueryUrl>http://202.45.131.63:8080/solr-HD1/{CountryCode}</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath>D:\Normal\SolrOperate\Solr.Update\Resource\JobAdResult.xml</xmlFilePath>
+            <sqlQuery>Select top 10 Id From JobAd Where Status=N'A' And CountryCode=N'{CountryCode}' order by utcLastModifiedTime desc</sqlQuery>
+          </column>
+          <column name="JobAd_50">
+            <solrUrl>http://10.1.9.50:8983/solr/jobad_50_{CountryCode_Lower}</solrUrl>
+            <idString>100003000010418,100003000010419,</idString>
+            <solrQueryUrl>http://202.45.131.63:8080/solr-HD1/{CountryCode}</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath>D:\Normal\SolrOperate\Solr.Update\Resource\JobAdResult.xml</xmlFilePath>
+            <sqlQuery>Select top 10 Id From JobAd Where Status=N'A' And CountryCode=N'{CountryCode}' order by utcLastModifiedTime desc</sqlQuery>
+          </column>
+          <column name="TalentSearch_Old">
+            <solrUrl>http://10.1.0.179:8080/solr-TAL/{CountryCode}2</solrUrl>
+            <idString>100003000010194, 400000000100001, 400000000200001</idString>
+            <solrQueryUrl>http://10.1.0.213:8080/solr/tal-candu-{CountryCode_Lower}/</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath></xmlFilePath>
+            <sqlQuery>Select top 10 Id From JobsDB_Global..JsGlobal_JobSeekerBase order by utcLastModifiedTime desc</sqlQuery>
+          </column>          
+          <column name="TalentSearchStatus_55">
+            <solrUrl>http://10.1.9.50:8983/solr/ts_55_{CountryCode_Lower}_status</solrUrl>
+            <idString>1,3</idString>
+            <solrQueryUrl>http://10.1.0.213:8080/solr/tal-candu-{CountryCode_Lower}status</solrQueryUrl>
+            <solrQuery>*:*</solrQuery>
+            <xmlFilePath></xmlFilePath>
+            <sqlQuery>Select top 10 Id From Emp_TalentStatus order by utcLastModifiedTime desc</sqlQuery>
+          </column>
+        </columns>        
+        
+        <columns name="SolrPartialUpdate_Cores">
+          <column name="TalentSearch_55">
+            <solrUrl>http://10.1.9.50:8983/solr/ts_55_{CountryCode_Lower}</solrUrl>
+          </column>
+          <column name="TalentSearch_50">
+            <solrUrl>http://10.1.9.50:8983/solr/ts_50_{CountryCode_Lower}</solrUrl>
+          </column>          
+          <column name="JobAd_55">
+            <solrUrl>http://10.1.9.50:8983/solr/jobad_55_{CountryCode_Lower}</solrUrl>
+          </column>          
+          <column name="TalentSearchStatus_Dev">
+            <solrUrl>http://10.1.9.55:8080/solr-TalentSearch/{CountryCode}Status</solrUrl>
+          </column>
+        </columns>  
+      ]]>
+  </add>
+</root>

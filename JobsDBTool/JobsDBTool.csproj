@@ -164,6 +164,7 @@
     <Compile Include="GetFiledId\CamelCaseInputDataAliasMappingDictionary.cs" />
     <Compile Include="GetFiledId\InputDataKeys.cs" />
     <Compile Include="Helper\BaseHelper.cs" />
+    <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Helper\TemplateHelper.cs" />
     <Compile Include="Helper\ExcelDatabase.cs" />
     <Compile Include="Form1.cs">
@@ -238,6 +239,30 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Config\AccountInfo.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\SolrInfo.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\OperateDB.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\BackupTask.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\DBInfo.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\Wording.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="log4net.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

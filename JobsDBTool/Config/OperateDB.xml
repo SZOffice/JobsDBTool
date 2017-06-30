@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="OperateDBCheckJobExists">Select Id From JobsDB_{0}..JobAd With(Nolock) Where Id={1}</add>
+  <add key="OperateDBCheckCandidateExists">
+    Select Id, EmailAddress From JobsDB_Global..JsGlobal_JobSeekerBase With(Nolock) Where Id={0} or EmailAddress=N'{1}'
+
+    Select Id From JobsDB_Global..JsGlobal_JobSeekerBasePastItem With(Nolock) Where Id={0}
+  </add>
+</root>

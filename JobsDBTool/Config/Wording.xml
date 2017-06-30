@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <add key="ExcelPath">D:\workspaces\JobsDBTool\bin\Debug\Resource\InputData.csv</add>
+    <add key="GenSqlQueryPath">D:\jobsDBV8\JobsDB.Web.DbMigration\DB_Script\{0}-JobsDB_System-Wording.sql</add>
+    <add key="SheetName">Wording</add>
+    <add key="TableColumns"><![CDATA[
+        <columns>
+          <column type="string">InputStatus</column>
+          <column type="string">AutoID</column>
+          <column type="string">WordingsKey</column>
+          <column type="string">GroupId</column>
+          <column type="string">CountryCode</column>
+          <column type="string">LanguageCode</column>
+          <column type="string">WordingsContent</column>
+          <column type="string">Comments</column>
+        </columns>
+      ]]></add>
+  <add key="SourceCode">
+    Select Row_Number() Over (Order By b.LastUserUpdateTime) as AutoID, a.WordingsKey,
+    a.GroupId, b.CountryCode, b.LanguageCode,  b.WordingsContent, a.Comments
+    From JobsDB_System.dbo.ResourceWordings a With(Nolock)
+    Inner join JobsDB_System.dbo.ResourceWordingsContent b With(Nolock) on a.Id = b.WordingsId
+    Where b.LastUserUpdateTime Between
+    DateAdd(d, -1, Convert(varchar(100), GetDate(), 23))
+    --'2014-1-21'
+    And DateAdd(m, 1, GetDate())
+    Order by b.LastUserUpdateTime;
+  </add>
+  <add key="TargetCode1">
+    /****** Script for assign Id to wordings - Key: @WordingsKey ******/
+
+    IF NOT EXISTS (SELECT 1 FROM [JobsDB_System].[dbo].[ResourceWordings] WITH (NOLOCK) WHERE WordingsKey = @WordingsKey)
+    Begin
+    Insert into [JobsDB_System].[dbo].[ResourceWordings] (WordingsKey, GroupId, Comments) VALUES (@WordingsKey, @GroupId, @Comments)
+    End
+  </add>
+  <add key="TargetCode2">
+    /****** Update Wordings - Key: @WordingsKey, CountryCode: @CountryCode, LanguageCode: @LanguageCode ******/
+
+    Declare @Id bigint
+    Set @Id = (SELECT Id FROM [JobsDB_System].[dbo].[ResourceWordings] WITH (NOLOCK) WHERE WordingsKey = @WordingsKey)
+    If NOT EXISTS (SELECT 1 FROM [JobsDB_System].[dbo].[ResourceWordingsContent] WITH (NOLOCK) WHERE CountryCode = @CountryCode and LanguageCode = @LanguageCode and WordingsId = @Id)
+    Begin
+    Insert into [JobsDB_System].[dbo].[ResourceWordingsContent](WordingsId, LanguageCode, WordingsContent, CountryCode)
+    Values (@Id, @LanguageCode, @WordingsContent, @CountryCode)
+    End
+    Else
+    Begin
+    Update [JobsDB_System].[dbo].[ResourceWordingsContent]
+    SET WordingsContent = @WordingsContent
+    Where WordingsId=@Id And LanguageCode=@LanguageCode And CountryCode=@CountryCode
+    End
+  </add>
+</root>

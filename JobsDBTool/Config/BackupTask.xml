@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="BackupTaskLastestPath">D:\workspaces\JobsDBTool\bin\Debug\Resource\BackupTask.csv</add>
+  <add key="BackupTaskPath">D:\bkTask\BKFiles</add>
+  <add key="BackupTaskPythonPath">D:\workspaces\JobsDBTool\bin\Debug\Resource\Python_CopyFile.py</add>
+  <add key="BackupTaskBat">
+    <![CDATA[
+      @echo off
+
+::python Python_CopyFile.py %*
+
+Set configPath={0}
+Set sourceDir={1}
+Set targetDir={2}
+Set pythonPath="{3}"
+Set isComment=False
+Set isAddToday=True
+Set isBKWording="{4}"
+Set wordingFilePath="D:\\workspaces\\JobsDBTool\\bin\\Debug\\Resource\\InputData.csv"
+
+Set LogFile={5}.log
+Set TempFile={5}.tmp
+Set "RedirectLogCommand=>%TempFile% & type %TempFile% & type %TempFile% > %LogFile%"
+
+echo. %RedirectLogCommand%
+echo Copy JobsDB BK to BKFolder... %RedirectLogCommand%
+	
+If "%isBKWording%" == "True" (
+	python %pythonPath% %configPath% %sourceDir% %targetDir% %isComment% %isAddToday% %RedirectLogCommand%
+) else (
+	python %pythonPath% %configPath% %sourceDir% %targetDir% %isComment% %isAddToday% %isBKWording% %wordingFilePath% %RedirectLogCommand%
+)
+if ERRORLEVEL 1 goto error
+goto eof
+
+:error
+ECHO.
+ECHO. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ECHO. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ECHO. !! Hit an error.  Pls check.     !!
+ECHO. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ECHO. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ECHO.
+goto eof
+
+:eof
+if Exist %TempFile% Del %TempFile%
+pause & exit
+
+      ]]>
+  </add>
+
+  <add key="DropDownToText">
+    <![CDATA[
+    
+        <columns name="BackupTask_TargetPaths">
+          <column name="local">d:\jobsDBv8\</column>
+          <column name="vm50">\\10.1.9.50\d\jobsDBv8\</column>
+        </columns>
+        <columns name="BackupTask_TaskType">
+          <column name="NewRMS">NewRMS</column>
+          <column name="Normal">Normal</column>
+          <column name="Bug">Bug</column>
+          <column name="Issue">Issue</column>
+        </columns>        
+        <columns name="BackupTask_TaskName">
+          <column name="Task Name"></column>
+          <column name="Deploy_1121">Deploy_1121</column>
+          <column name="HotFix">HotFix</column>
+          <column name="Temp">Temp</column>
+          <column name="Debug">Debug</column>
+        </columns>
+        
+      ]]>
+  </add>
+</root>

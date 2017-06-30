@@ -144,15 +144,18 @@ namespace JobsDBTool.Helper
 
                     for (int j = 1; j < ds.Tables[0].Columns.Count; j++)
                     {
+                        string columnName = ds.Tables[0].Columns[j].ColumnName;
+                        string row = ds.Tables[0].Rows[i][j].ToString();
                         if (isAdd)
                         {
-                            SqlParameter para1 = new SqlParameter(ds.Tables[0].Columns[j].ColumnName, ds.Tables[0].Rows[i][j].ToString());
+                            SqlParameter para1 = new SqlParameter(ds.Tables[0].Columns[j].ColumnName, row);
                             cmd.Parameters.Add(para1);
                         }
                         else
                         {
-                            sKeySqlCopy = bKeyExist ? string.Empty : sKeySqlCopy.Replace("@" + ds.Tables[0].Columns[j].ColumnName, "N'" + ds.Tables[0].Rows[i][j].ToString() + "'");
-                            sSQLCopy = sSQLCopy.Replace("@" + ds.Tables[0].Columns[j].ColumnName, "N'" + ds.Tables[0].Rows[i][j].ToString() + "'");
+
+                            sKeySqlCopy = bKeyExist ? string.Empty : sKeySqlCopy.Replace("@" + columnName, "N'" + row.Replace("'", "''") + "'");
+                            sSQLCopy = sSQLCopy.Replace("@" + columnName, "N'" + row.Replace("'", "''") + "'");
                         }
                     }
 

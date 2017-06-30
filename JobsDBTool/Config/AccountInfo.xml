@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="DropDownToText">
+    <![CDATA[
+        <columns name="Others_AccountInfo">
+          <column name="Dev_HK.Dev">
+            <AccountNum>730</AccountNum>
+            <SubAccount>0</SubAccount>
+            <EmployerId>100300085</EmployerId>
+            <InvoiceItemID>58060</InvoiceItemID>
+            <CountryCode>HK</CountryCode>
+            <ToCountryCode>HK</ToCountryCode>
+            <JobAdId>400000000000001</JobAdId>
+            <JobTitle>auto-dev-{1}-{0}</JobTitle>
+            <UserManagementId>773</UserManagementId>            
+          </column>
+          <column name="Demo_HK.Dev">
+            <AccountNum>12146</AccountNum>
+            <SubAccount>0</SubAccount>
+            <EmployerId>-2147473636</EmployerId>
+            <InvoiceItemID>58060</InvoiceItemID>
+            <CountryCode>HK</CountryCode>
+            <ToCountryCode>HK</ToCountryCode>
+            <JobAdId>500000000000001</JobAdId>
+            <JobTitle>auto-demo-{1}-{0}</JobTitle>
+            <UserManagementId>771</UserManagementId>
+          </column>
+          <column name="lily_HK.Dev">
+            <AccountNum>736</AccountNum>
+            <SubAccount>0</SubAccount>
+            <EmployerId>100300511</EmployerId>
+            <InvoiceItemID>58060</InvoiceItemID>
+            <CountryCode>HK</CountryCode>
+            <ToCountryCode>HK</ToCountryCode>
+            <JobAdId>600000000000001</JobAdId>
+            <JobTitle>auto-lily-{1}-{0}</JobTitle>
+            <UserManagementId>1202</UserManagementId>
+          </column>
+          <column name="mirage_HK.Test" itemType="Auth">
+            <Environment>Test</Environment>
+            <AccountNum>13992</AccountNum>
+            <SubAccount>0</SubAccount>
+            <EmployerId>100324438</EmployerId>
+            <CountryCode>HK</CountryCode>
+            <ToCountryCode>HK</ToCountryCode>
+            <UserManagementId>15732</UserManagementId>
+          </column>
+          <column name="mandywang_101.Preview" itemType="Auth">
+            <Environment>Preview</Environment>
+            <EmployerId>100306375</EmployerId>
+            <CountryCode>HK</CountryCode>
+            <UserManagementId>2295</UserManagementId>
+          </column>
+        </columns>   
+      ]]>
+  </add>
+</root>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="DropDownToText">
+    <![CDATA[
+<columns name="DBInfo">
+  <column name="Dev_55">
+    <connStr>Data Source=10.1.9.55;Database=JobsDB_{CountryCode};User Id=sa;Password=P@ssword;Integrated Security=false;</connStr>
+    <providerName>System.Data.SqlClient</providerName>
+  </column>
+  <column name="Dev_50">
+    <connStr>Data Source=10.1.9.50;Database=JobsDB_{CountryCode};User Id=sa;Password=P@ssword;Integrated Security=false;</connStr>
+    <providerName>System.Data.SqlClient</providerName>
+  </column>
+
+  <column name="Dev_MyDB">
+    <connStr>Server=localhost; Database=mysql; User Id=sa; Password=P@ssword;</connStr>
+    <providerName>MySql.Data.MySqlClient</providerName>
+  </column>
+</columns>
+      ]]>
+  </add>
+</root>

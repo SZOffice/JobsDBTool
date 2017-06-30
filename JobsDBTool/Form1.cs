@@ -38,6 +38,13 @@ namespace JobsDBTool
 
             htConfig = CommonHelper.GetConfigValue();
 
+            htConfig = XmlHelper.GetSections("Config/Wording.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/OperateDB.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/BackupTask.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/DBInfo.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/AccountInfo.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/SolrInfo.xml", htConfig);
+
             if (htConfig.ContainsKey("BackupFolderPath"))
             {
                 backupFolderPath = htConfig["BackupFolderPath"].ToString();
@@ -45,7 +52,7 @@ namespace JobsDBTool
 
             if (htConfig.ContainsKey("SourceCode"))
             {
-                string sourceCode = htConfig["SourceCode"].ToString();
+                string sourceCode = textboxWrap(htConfig["SourceCode"].ToString());
                 this.txtGetData.Text = sourceCode;
 
                 rbType_DB.Checked = true;
@@ -59,12 +66,12 @@ namespace JobsDBTool
 
             if (htConfig.ContainsKey("TargetCode2"))
             {
-                string targetCode = htConfig["TargetCode2"].ToString();
+                string targetCode = textboxWrap(htConfig["TargetCode2"].ToString());
                 this.txtContent.Text = targetCode;
             }
             if (htConfig.ContainsKey("TargetCode1"))
             {
-                string targetCode2 = htConfig["TargetCode1"].ToString();
+                string targetCode2 = textboxWrap(htConfig["TargetCode1"].ToString());
                 this.txtAddWordings_WordingKeySql.Text = targetCode2;
             }
             
@@ -91,6 +98,11 @@ namespace JobsDBTool
                     _context = ContextRegistry.GetContext();
                 }
             });
+        }
+
+        private string textboxWrap(string content)
+        {
+            return string.IsNullOrEmpty(content)? "" : content.Replace("\r\n", "\n").Replace("\n", "\r\n");
         }
 
         #region menutrip
@@ -1351,7 +1363,7 @@ namespace JobsDBTool
             Dictionary<string, List<SelectItem>> dic = new Dictionary<string, List<SelectItem>>();
             if (htConfig.ContainsKey("DropDownToText"))
             {
-                XDocument doc = XDocument.Parse(htConfig["DropDownToText"].ToString());
+                XDocument doc = XDocument.Parse(string.Format("<root>{0}</root>", htConfig["DropDownToText"].ToString()));
                 var items = from d in doc.Element("root").Elements("columns")
                             select d;
                 foreach (var item in items)
