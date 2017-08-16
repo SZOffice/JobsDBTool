@@ -100,7 +100,7 @@ namespace JobsDBTool.Helper
             string filePath = Path.Combine(folderPath,
                 (string.IsNullOrEmpty(baseFileName) ? "" : baseFileName+"_") + fileName
                 + "_V" + index + extension);
-            if (KernelClass.PhysicalFile.FileExists(filePath))
+            if (KernelClass.PhysicalFile.FileExists(filePath) || KernelClass.PhysicalFile.FolderExists(filePath))
             {
                 index++;
                 index = getNameIndex(folderPath, baseFileName, extension, index);

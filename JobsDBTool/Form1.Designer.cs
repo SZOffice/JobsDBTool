@@ -104,6 +104,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtGetString = new System.Windows.Forms.TextBox();
             this.tp_AddData = new System.Windows.Forms.TabPage();
+            this.txtAddWordings_WordingKeySql = new System.Windows.Forms.TextBox();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.tp_Result = new System.Windows.Forms.TabPage();
             this.lbWording_SqlQueryPathLabel = new System.Windows.Forms.Label();
@@ -309,6 +310,29 @@
             this.others_txtUserManagementId = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.others_txtEmployerId = new System.Windows.Forms.TextBox();
+            this.tp_AnalyzeLog = new System.Windows.Forms.TabPage();
+            this.btnAnalyzeLog_Import = new System.Windows.Forms.Button();
+            this.cbAnalyzeLog_LogType_JobApplyEx = new System.Windows.Forms.CheckBox();
+            this.cbAnalyzeLog_LogType_UnhandledEx = new System.Windows.Forms.CheckBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.cbAnalyzeLog_ProTH = new System.Windows.Forms.CheckBox();
+            this.cbAnalyzeLog_ProID = new System.Windows.Forms.CheckBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.cbAnalyzeLog_ProHK = new System.Windows.Forms.CheckBox();
+            this.cbAnalyzeLog_PreTH = new System.Windows.Forms.CheckBox();
+            this.cbAnalyzeLog_PreID = new System.Windows.Forms.CheckBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.txtAnalyzeLog_ESType = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.txtAnalyzeLog_ESIndex = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtAnalyzeLog_ESHost = new System.Windows.Forms.TextBox();
+            this.cbAnalyzeLog_PreHK = new System.Windows.Forms.CheckBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txtAnalyzeLog_LogDate = new System.Windows.Forms.TextBox();
+            this.txtAnalyzeLog_Result = new System.Windows.Forms.TextBox();
+            this.btnAnalyzeLog_Submit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbSourceConnName = new System.Windows.Forms.ComboBox();
             this.txtSourceConnStr = new System.Windows.Forms.TextBox();
@@ -316,7 +340,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.txtAddWordings_WordingKeySql = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.txtAnalyzeLog_JsonPath = new System.Windows.Forms.TextBox();
+            this.btnAnlayzeLog_JsonPath = new System.Windows.Forms.Button();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -368,6 +395,7 @@
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.tp_AnalyzeLog.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -454,6 +482,7 @@
             this.tc1.Controls.Add(this.tp_SolrUpdate);
             this.tc1.Controls.Add(this.tp_SendEmail);
             this.tc1.Controls.Add(this.tp_GenAuth);
+            this.tc1.Controls.Add(this.tp_AnalyzeLog);
             this.tc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc1.Location = new System.Drawing.Point(0, 0);
             this.tc1.Multiline = true;
@@ -1151,6 +1180,18 @@
             this.tp_AddData.TabIndex = 3;
             this.tp_AddData.Text = "    Add Data To DB    ";
             this.tp_AddData.UseVisualStyleBackColor = true;
+            // 
+            // txtAddWordings_WordingKeySql
+            // 
+            this.txtAddWordings_WordingKeySql.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtAddWordings_WordingKeySql.Location = new System.Drawing.Point(0, 0);
+            this.txtAddWordings_WordingKeySql.Multiline = true;
+            this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
+            this.txtAddWordings_WordingKeySql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(839, 84);
+            this.txtAddWordings_WordingKeySql.TabIndex = 4;
+            this.txtAddWordings_WordingKeySql.WordWrap = false;
             // 
             // txtContent
             // 
@@ -3357,6 +3398,247 @@
             this.others_txtEmployerId.Size = new System.Drawing.Size(188, 20);
             this.others_txtEmployerId.TabIndex = 81;
             // 
+            // tp_AnalyzeLog
+            // 
+            this.tp_AnalyzeLog.Controls.Add(this.label51);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_JsonPath);
+            this.tp_AnalyzeLog.Controls.Add(this.btnAnlayzeLog_JsonPath);
+            this.tp_AnalyzeLog.Controls.Add(this.label50);
+            this.tp_AnalyzeLog.Controls.Add(this.btnAnalyzeLog_Import);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_LogType_JobApplyEx);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_LogType_UnhandledEx);
+            this.tp_AnalyzeLog.Controls.Add(this.label49);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_ProTH);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_ProID);
+            this.tp_AnalyzeLog.Controls.Add(this.label48);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_ProHK);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_PreTH);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_PreID);
+            this.tp_AnalyzeLog.Controls.Add(this.label47);
+            this.tp_AnalyzeLog.Controls.Add(this.label46);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_ESType);
+            this.tp_AnalyzeLog.Controls.Add(this.label45);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_ESIndex);
+            this.tp_AnalyzeLog.Controls.Add(this.label44);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_ESHost);
+            this.tp_AnalyzeLog.Controls.Add(this.cbAnalyzeLog_PreHK);
+            this.tp_AnalyzeLog.Controls.Add(this.label42);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_LogDate);
+            this.tp_AnalyzeLog.Controls.Add(this.txtAnalyzeLog_Result);
+            this.tp_AnalyzeLog.Controls.Add(this.btnAnalyzeLog_Submit);
+            this.tp_AnalyzeLog.Location = new System.Drawing.Point(4, 22);
+            this.tp_AnalyzeLog.Name = "tp_AnalyzeLog";
+            this.tp_AnalyzeLog.Size = new System.Drawing.Size(847, 421);
+            this.tp_AnalyzeLog.TabIndex = 13;
+            this.tp_AnalyzeLog.Text = "Analyze Log";
+            this.tp_AnalyzeLog.UseVisualStyleBackColor = true;
+            // 
+            // btnAnalyzeLog_Import
+            // 
+            this.btnAnalyzeLog_Import.Location = new System.Drawing.Point(427, 169);
+            this.btnAnalyzeLog_Import.Name = "btnAnalyzeLog_Import";
+            this.btnAnalyzeLog_Import.Size = new System.Drawing.Size(75, 23);
+            this.btnAnalyzeLog_Import.TabIndex = 66;
+            this.btnAnalyzeLog_Import.Text = "Import";
+            this.btnAnalyzeLog_Import.UseVisualStyleBackColor = true;
+            this.btnAnalyzeLog_Import.Click += new System.EventHandler(this.btnAnalyzeLog_Import_Click);
+            // 
+            // cbAnalyzeLog_LogType_JobApplyEx
+            // 
+            this.cbAnalyzeLog_LogType_JobApplyEx.AutoSize = true;
+            this.cbAnalyzeLog_LogType_JobApplyEx.Location = new System.Drawing.Point(212, 89);
+            this.cbAnalyzeLog_LogType_JobApplyEx.Name = "cbAnalyzeLog_LogType_JobApplyEx";
+            this.cbAnalyzeLog_LogType_JobApplyEx.Size = new System.Drawing.Size(81, 17);
+            this.cbAnalyzeLog_LogType_JobApplyEx.TabIndex = 65;
+            this.cbAnalyzeLog_LogType_JobApplyEx.Text = "JobApplyEx";
+            this.cbAnalyzeLog_LogType_JobApplyEx.UseVisualStyleBackColor = true;
+            // 
+            // cbAnalyzeLog_LogType_UnhandledEx
+            // 
+            this.cbAnalyzeLog_LogType_UnhandledEx.AutoSize = true;
+            this.cbAnalyzeLog_LogType_UnhandledEx.Checked = true;
+            this.cbAnalyzeLog_LogType_UnhandledEx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAnalyzeLog_LogType_UnhandledEx.Location = new System.Drawing.Point(93, 89);
+            this.cbAnalyzeLog_LogType_UnhandledEx.Name = "cbAnalyzeLog_LogType_UnhandledEx";
+            this.cbAnalyzeLog_LogType_UnhandledEx.Size = new System.Drawing.Size(90, 17);
+            this.cbAnalyzeLog_LogType_UnhandledEx.TabIndex = 64;
+            this.cbAnalyzeLog_LogType_UnhandledEx.Text = "UnhandledEx";
+            this.cbAnalyzeLog_LogType_UnhandledEx.UseVisualStyleBackColor = true;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(15, 89);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(52, 13);
+            this.label49.TabIndex = 63;
+            this.label49.Text = "Log Type";
+            // 
+            // cbAnalyzeLog_ProTH
+            // 
+            this.cbAnalyzeLog_ProTH.AutoSize = true;
+            this.cbAnalyzeLog_ProTH.Location = new System.Drawing.Point(138, 43);
+            this.cbAnalyzeLog_ProTH.Name = "cbAnalyzeLog_ProTH";
+            this.cbAnalyzeLog_ProTH.Size = new System.Drawing.Size(41, 17);
+            this.cbAnalyzeLog_ProTH.TabIndex = 61;
+            this.cbAnalyzeLog_ProTH.Text = "TH";
+            this.cbAnalyzeLog_ProTH.UseVisualStyleBackColor = true;
+            // 
+            // cbAnalyzeLog_ProID
+            // 
+            this.cbAnalyzeLog_ProID.AutoSize = true;
+            this.cbAnalyzeLog_ProID.Location = new System.Drawing.Point(81, 43);
+            this.cbAnalyzeLog_ProID.Name = "cbAnalyzeLog_ProID";
+            this.cbAnalyzeLog_ProID.Size = new System.Drawing.Size(37, 17);
+            this.cbAnalyzeLog_ProID.TabIndex = 60;
+            this.cbAnalyzeLog_ProID.Text = "ID";
+            this.cbAnalyzeLog_ProID.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(12, 22);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(70, 13);
+            this.label48.TabIndex = 59;
+            this.label48.Text = "Product Web";
+            // 
+            // cbAnalyzeLog_ProHK
+            // 
+            this.cbAnalyzeLog_ProHK.AutoSize = true;
+            this.cbAnalyzeLog_ProHK.Location = new System.Drawing.Point(18, 43);
+            this.cbAnalyzeLog_ProHK.Name = "cbAnalyzeLog_ProHK";
+            this.cbAnalyzeLog_ProHK.Size = new System.Drawing.Size(41, 17);
+            this.cbAnalyzeLog_ProHK.TabIndex = 58;
+            this.cbAnalyzeLog_ProHK.Text = "HK";
+            this.cbAnalyzeLog_ProHK.UseVisualStyleBackColor = true;
+            // 
+            // cbAnalyzeLog_PreTH
+            // 
+            this.cbAnalyzeLog_PreTH.AutoSize = true;
+            this.cbAnalyzeLog_PreTH.Location = new System.Drawing.Point(341, 43);
+            this.cbAnalyzeLog_PreTH.Name = "cbAnalyzeLog_PreTH";
+            this.cbAnalyzeLog_PreTH.Size = new System.Drawing.Size(41, 17);
+            this.cbAnalyzeLog_PreTH.TabIndex = 57;
+            this.cbAnalyzeLog_PreTH.Text = "TH";
+            this.cbAnalyzeLog_PreTH.UseVisualStyleBackColor = true;
+            // 
+            // cbAnalyzeLog_PreID
+            // 
+            this.cbAnalyzeLog_PreID.AutoSize = true;
+            this.cbAnalyzeLog_PreID.Location = new System.Drawing.Point(281, 43);
+            this.cbAnalyzeLog_PreID.Name = "cbAnalyzeLog_PreID";
+            this.cbAnalyzeLog_PreID.Size = new System.Drawing.Size(37, 17);
+            this.cbAnalyzeLog_PreID.TabIndex = 56;
+            this.cbAnalyzeLog_PreID.Text = "ID";
+            this.cbAnalyzeLog_PreID.UseVisualStyleBackColor = true;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(191, 21);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(71, 13);
+            this.label47.TabIndex = 55;
+            this.label47.Text = "Preview Web";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(424, 129);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(31, 13);
+            this.label46.TabIndex = 54;
+            this.label46.Text = "Type";
+            // 
+            // txtAnalyzeLog_ESType
+            // 
+            this.txtAnalyzeLog_ESType.Location = new System.Drawing.Point(480, 126);
+            this.txtAnalyzeLog_ESType.Name = "txtAnalyzeLog_ESType";
+            this.txtAnalyzeLog_ESType.Size = new System.Drawing.Size(263, 20);
+            this.txtAnalyzeLog_ESType.TabIndex = 53;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(422, 90);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(33, 13);
+            this.label45.TabIndex = 52;
+            this.label45.Text = "Index";
+            // 
+            // txtAnalyzeLog_ESIndex
+            // 
+            this.txtAnalyzeLog_ESIndex.Location = new System.Drawing.Point(480, 87);
+            this.txtAnalyzeLog_ESIndex.Name = "txtAnalyzeLog_ESIndex";
+            this.txtAnalyzeLog_ESIndex.Size = new System.Drawing.Size(263, 20);
+            this.txtAnalyzeLog_ESIndex.TabIndex = 51;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(422, 54);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(29, 13);
+            this.label44.TabIndex = 50;
+            this.label44.Text = "Host";
+            // 
+            // txtAnalyzeLog_ESHost
+            // 
+            this.txtAnalyzeLog_ESHost.Location = new System.Drawing.Point(478, 53);
+            this.txtAnalyzeLog_ESHost.Name = "txtAnalyzeLog_ESHost";
+            this.txtAnalyzeLog_ESHost.Size = new System.Drawing.Size(265, 20);
+            this.txtAnalyzeLog_ESHost.TabIndex = 49;
+            // 
+            // cbAnalyzeLog_PreHK
+            // 
+            this.cbAnalyzeLog_PreHK.AutoSize = true;
+            this.cbAnalyzeLog_PreHK.Location = new System.Drawing.Point(195, 43);
+            this.cbAnalyzeLog_PreHK.Name = "cbAnalyzeLog_PreHK";
+            this.cbAnalyzeLog_PreHK.Size = new System.Drawing.Size(41, 17);
+            this.cbAnalyzeLog_PreHK.TabIndex = 46;
+            this.cbAnalyzeLog_PreHK.Text = "HK";
+            this.cbAnalyzeLog_PreHK.UseVisualStyleBackColor = true;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(15, 137);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(51, 13);
+            this.label42.TabIndex = 45;
+            this.label42.Text = "Log Date";
+            // 
+            // txtAnalyzeLog_LogDate
+            // 
+            this.txtAnalyzeLog_LogDate.Location = new System.Drawing.Point(93, 134);
+            this.txtAnalyzeLog_LogDate.Name = "txtAnalyzeLog_LogDate";
+            this.txtAnalyzeLog_LogDate.Size = new System.Drawing.Size(298, 20);
+            this.txtAnalyzeLog_LogDate.TabIndex = 44;
+            this.txtAnalyzeLog_LogDate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnalyzeLog_LogDate_KeyDown);
+            // 
+            // txtAnalyzeLog_Result
+            // 
+            this.txtAnalyzeLog_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtAnalyzeLog_Result.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtAnalyzeLog_Result.Location = new System.Drawing.Point(0, 214);
+            this.txtAnalyzeLog_Result.Multiline = true;
+            this.txtAnalyzeLog_Result.Name = "txtAnalyzeLog_Result";
+            this.txtAnalyzeLog_Result.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtAnalyzeLog_Result.Size = new System.Drawing.Size(847, 207);
+            this.txtAnalyzeLog_Result.TabIndex = 43;
+            this.txtAnalyzeLog_Result.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAnalyzeLog_Result_KeyDown);
+            // 
+            // btnAnalyzeLog_Submit
+            // 
+            this.btnAnalyzeLog_Submit.Location = new System.Drawing.Point(18, 174);
+            this.btnAnalyzeLog_Submit.Name = "btnAnalyzeLog_Submit";
+            this.btnAnalyzeLog_Submit.Size = new System.Drawing.Size(75, 23);
+            this.btnAnalyzeLog_Submit.TabIndex = 42;
+            this.btnAnalyzeLog_Submit.Text = "Submit";
+            this.btnAnalyzeLog_Submit.UseVisualStyleBackColor = true;
+            this.btnAnalyzeLog_Submit.Click += new System.EventHandler(this.btnAnalyzeLog_Submit_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tc1);
@@ -3407,17 +3689,41 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // txtAddWordings_WordingKeySql
+            // label50
             // 
-            this.txtAddWordings_WordingKeySql.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtAddWordings_WordingKeySql.Location = new System.Drawing.Point(0, 0);
-            this.txtAddWordings_WordingKeySql.Multiline = true;
-            this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
-            this.txtAddWordings_WordingKeySql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(839, 84);
-            this.txtAddWordings_WordingKeySql.TabIndex = 4;
-            this.txtAddWordings_WordingKeySql.WordWrap = false;
+            this.label50.AutoSize = true;
+            this.label50.ForeColor = System.Drawing.Color.Red;
+            this.label50.Location = new System.Drawing.Point(683, 171);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(153, 13);
+            this.label50.TabIndex = 67;
+            this.label50.Text = "Note: Index is need lower case";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(422, 21);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(54, 13);
+            this.label51.TabIndex = 70;
+            this.label51.Text = "Json Path";
+            // 
+            // txtAnalyzeLog_JsonPath
+            // 
+            this.txtAnalyzeLog_JsonPath.Location = new System.Drawing.Point(478, 18);
+            this.txtAnalyzeLog_JsonPath.Name = "txtAnalyzeLog_JsonPath";
+            this.txtAnalyzeLog_JsonPath.Size = new System.Drawing.Size(265, 20);
+            this.txtAnalyzeLog_JsonPath.TabIndex = 69;
+            // 
+            // btnAnlayzeLog_JsonPath
+            // 
+            this.btnAnlayzeLog_JsonPath.Location = new System.Drawing.Point(760, 14);
+            this.btnAnlayzeLog_JsonPath.Name = "btnAnlayzeLog_JsonPath";
+            this.btnAnlayzeLog_JsonPath.Size = new System.Drawing.Size(75, 25);
+            this.btnAnlayzeLog_JsonPath.TabIndex = 68;
+            this.btnAnlayzeLog_JsonPath.Text = "Browse...";
+            this.btnAnlayzeLog_JsonPath.UseVisualStyleBackColor = true;
+            this.btnAnlayzeLog_JsonPath.Click += new System.EventHandler(this.btnAnlayzeLog_JsonPath_Click);
             // 
             // mainFrm
             // 
@@ -3516,6 +3822,8 @@
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.tp_AnalyzeLog.ResumeLayout(false);
+            this.tp_AnalyzeLog.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3811,6 +4119,33 @@
         private System.Windows.Forms.Label lbWording_SqlQueryPath;
         private System.Windows.Forms.Label lbWording_SqlQueryPathLabel;
         private System.Windows.Forms.TextBox txtAddWordings_WordingKeySql;
+        private System.Windows.Forms.TabPage tp_AnalyzeLog;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_Result;
+        private System.Windows.Forms.Button btnAnalyzeLog_Submit;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_PreHK;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_LogDate;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_ESType;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_ESIndex;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_ESHost;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_ProTH;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_ProID;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_ProHK;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_PreTH;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_PreID;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_LogType_JobApplyEx;
+        private System.Windows.Forms.CheckBox cbAnalyzeLog_LogType_UnhandledEx;
+        private System.Windows.Forms.Button btnAnalyzeLog_Import;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox txtAnalyzeLog_JsonPath;
+        private System.Windows.Forms.Button btnAnlayzeLog_JsonPath;
     }
 }
 

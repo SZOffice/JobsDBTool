@@ -27,6 +27,8 @@ using System.Threading;
 using JobsDB.Base.Security;
 using JobsDBTool.SubForms;
 using JobsDBTool.Models.Domain;
+using PlainElastic.Net;
+using PlainElastic.Net.Serialization;
 
 namespace JobsDBTool
 {
@@ -44,6 +46,7 @@ namespace JobsDBTool
             htConfig = XmlHelper.GetSections("Config/DBInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/AccountInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/SolrInfo.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/AnalyzeLog.xml", htConfig);
 
             if (htConfig.ContainsKey("BackupFolderPath"))
             {
@@ -166,6 +169,12 @@ namespace JobsDBTool
                     Size = new System.Drawing.Size(152, 22),
                     Text = "Gen Auth Info"
                 };
+                ToolStripMenuItem itemAnalyzeLog = new System.Windows.Forms.ToolStripMenuItem()
+                {
+                    Name = "tsm_View_AnalyzeLog",
+                    Size = new System.Drawing.Size(152, 22),
+                    Text = "Analyze Log"
+                };
 
                 itemTasks.Click += StripItem_Click;
                 itemAddWordings.Click += StripItem_Click;
@@ -175,6 +184,7 @@ namespace JobsDBTool
                 itemClassFieldAbbr.Click += StripItem_Click;
                 itemSendEmail.Click += StripItem_Click;
                 itemGenAuth.Click += StripItem_Click;
+                itemAnalyzeLog.Click += StripItem_Click;
 
                 item.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                     itemTasks,
@@ -184,7 +194,8 @@ namespace JobsDBTool
                 itemDB,
                 itemClassFieldAbbr,
                 itemSendEmail,
-                itemGenAuth});
+                itemGenAuth,
+                itemAnalyzeLog});
                 items[i] = item;
 
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_AddWordings"] != "true")
@@ -244,6 +255,13 @@ namespace JobsDBTool
                     itemTasks.Checked = true;
                     cbCommon_CheckedChanged(true);
                 }
+                if (ConfigurationManager.AppSettings["IsDefaultLoaded_AnalyzeLog"] != "true")
+                    this.tc1.TabPages.Remove(this.tp_AnalyzeLog);
+                else
+                {
+                    itemTasks.Checked = true;
+                    cbAnalyzeLog_CheckedChanged(true);
+                }
             }
 
             this.menuStrip1.Items.Clear();
@@ -280,6 +298,9 @@ namespace JobsDBTool
                 case "tsm_View_GenAuth":
                     cbGenAuth_CheckedChanged(item.Checked);
                     break;
+                case "tsm_View_AnalyzeLog":
+                    cbAnalyzeLog_CheckedChanged(item.Checked);
+                    break;
             }
             BaseHelper.InfoLog("click the menu strip: " + item.Name);
         }
@@ -312,7 +333,34 @@ namespace JobsDBTool
                 this.tc1.TabPages.Remove(this.tp_Common);
             }
         }
-        
+
+        private void cbAnalyzeLog_CheckedChanged(bool isChecked)
+        {
+            if (isChecked)
+            {
+                if (!this.tc1.TabPages.Contains(this.tp_AnalyzeLog))
+                    this.tc1.TabPages.Add(this.tp_AnalyzeLog);
+                this.tc1.SelectedTab = this.tp_AnalyzeLog;
+
+                if (!isLoadedAnalyzeLog)
+                {
+                    var now = DateTime.Now;
+                    this.txtAnalyzeLog_LogDate.Text = now.AddDays(-5).ToString("yyyyMMdd")
+                        + "; " + now.AddDays(-4).ToString("yyyyMMdd")
+                        +"; " + now.AddDays(-3).ToString("yyyyMMdd")
+                        +"; " + now.AddDays(-2).ToString("yyyyMMdd")
+                        +"; " + now.AddDays(-1).ToString("yyyyMMdd")
+                        + "; " + now.ToString("yyyyMMdd");
+                    this.txtAnalyzeLog_ESHost.Text = htConfig["AnalyzeLog_ES_Host"].ToString();
+                    this.txtAnalyzeLog_ESIndex.Text = htConfig["AnalyzeLog_ES_Index"].ToString();
+                    this.txtAnalyzeLog_ESType.Text = htConfig["AnalyzeLog_ES_Type"].ToString();
+                }
+            }
+            else
+            {
+                this.tc1.TabPages.Remove(this.tp_AnalyzeLog);
+            }
+        }
         private void cbAddWordings_CheckedChanged(bool isChecked)
         {
             if (isChecked)
@@ -638,6 +686,7 @@ namespace JobsDBTool
         private bool isLoadedOperateDB = false;
         private bool isLoadedSendEmail = false;
         private bool isLoadedGenAuth = false;
+        private bool isLoadedAnalyzeLog = false;
         private string backupFolderPath = string.Empty;
         private string resourceExcelPath = string.Empty;
         private string genSqlQueryPathPath = string.Empty;
@@ -3258,6 +3307,200 @@ Order by b.LastUserUpdateTime;";
                 }
             }
             this.extractdll_Result.Text = string.Join("\n", targetList.OrderBy(c => c));
+        }
+
+        private void btnAnalyzeLog_Submit_Click(object sender, EventArgs e)
+        {
+            if (!this.cbAnalyzeLog_ProHK.Checked && !this.cbAnalyzeLog_ProID.Checked && !this.cbAnalyzeLog_ProTH.Checked
+                && !this.cbAnalyzeLog_PreHK.Checked && !this.cbAnalyzeLog_PreID.Checked && !this.cbAnalyzeLog_PreTH.Checked)
+            {
+                MessageBox.Show("Please select log env & country.");
+                return;
+            }
+            if (!this.cbAnalyzeLog_LogType_UnhandledEx.Checked && !this.cbAnalyzeLog_LogType_JobApplyEx.Checked)
+            {
+                MessageBox.Show("Please select log type");
+                return;
+            }
+            if (string.IsNullOrEmpty(this.txtAnalyzeLog_LogDate.Text.Trim()))
+            {
+                MessageBox.Show("Please select log date");
+                return;
+            }
+            string esHost = this.txtAnalyzeLog_ESHost.Text.Trim();
+            string esIndex = this.txtAnalyzeLog_ESIndex.Text.Trim().ToLower();
+            string esType = this.txtAnalyzeLog_ESType.Text.Trim();
+            /*
+            if (string.IsNullOrEmpty(esHost) || string.IsNullOrEmpty(esIndex) || string.IsNullOrEmpty(esType))
+            {
+                MessageBox.Show("Please input elastic search config");
+                return;
+            }
+            */
+            IDictionary<string, object> dic = new Dictionary<string, object>();
+            string path = @"Resource\analyzelog.tm";
+            path = CommonHelper.GetAbsolutePath(path);            
+            IList<Dictionary<string, object>> serverList = new List<Dictionary<string, object>>();
+            
+            if (this.cbAnalyzeLog_ProHK.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_ProHK.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_ProHK.Text + "WEB");
+                dicServer.Add("LoginId", @"idc\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 6);
+                serverList.Add(dicServer);
+            }
+            if (this.cbAnalyzeLog_ProID.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_ProID.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_ProID.Text + "WEB");
+                dicServer.Add("LoginId", @"jobsdbid\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 6);
+                serverList.Add(dicServer);
+            }
+            if (this.cbAnalyzeLog_ProTH.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_ProTH.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_ProTH.Text + "WEB");
+                dicServer.Add("LoginId", @"jobsdbth\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 6);
+                serverList.Add(dicServer);
+            }
+
+            if (this.cbAnalyzeLog_PreHK.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_PreHK.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_PreHK.Text + "PREWEB");
+                dicServer.Add("LoginId", @"idc\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 1);
+                serverList.Add(dicServer);
+            }
+            if (this.cbAnalyzeLog_ProID.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_PreID.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_PreID.Text + "PREWEB");
+                dicServer.Add("LoginId", @"jobsdbid\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 1);
+                serverList.Add(dicServer);
+            }
+            if (this.cbAnalyzeLog_ProTH.Checked)
+            {
+                Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                dicServer.Add("Country", this.cbAnalyzeLog_PreTH.Text);
+                dicServer.Add("ServerPrefix", this.cbAnalyzeLog_PreTH.Text + "PREWEB");
+                dicServer.Add("LoginId", @"jobsdbth\agentservice");
+                dicServer.Add("LoginPWD", "JDB123jdb");
+                dicServer.Add("NumOfServer", 1);
+                serverList.Add(dicServer);
+            }
+
+            IList<string> listLogType = new List<string>();
+            if (this.cbAnalyzeLog_LogType_UnhandledEx.Checked)
+            {
+                listLogType.Add(this.cbAnalyzeLog_LogType_UnhandledEx.Text);
+            }
+            if (this.cbAnalyzeLog_LogType_JobApplyEx.Checked)
+            {
+                listLogType.Add(this.cbAnalyzeLog_LogType_JobApplyEx.Text);
+            }
+            
+            dic.Add("ServerList", serverList);
+            dic.Add("LogTypeList", listLogType);
+            dic.Add("LogDateList", this.txtAnalyzeLog_LogDate.Text.Trim().Split(';')
+                .Where(c=>!string.IsNullOrEmpty(c.Trim()))
+                .Select(c => c.Trim()).ToList());
+
+            string basePath = htConfig["AnalyzeLog_BasePath"].ToString();
+            basePath = Path.Combine(basePath, DateTime.Now.ToString("yyyyMMdd") + "_V" + CommonHelper.getNameIndex(basePath, "", "", 1));
+            string batPath = Path.Combine(basePath, "analyzelog.bat");
+            dic.Add("BasePath", basePath);
+            dic.Add("IsToJsonByPy", 1);
+            dic.Add("PyLog2JsonPath", htConfig["AnalyzeLog_PyLog2JsonPath"].ToString());
+            bool bImportToEs = false;
+            dic.Add("IsImportToEs", bImportToEs ? 1 : 0);
+            if (bImportToEs)
+            {
+                dic.Add("PyJson2ESPath", htConfig["AnalyzeLog_PyJson2ESPath"].ToString());
+                dic.Add("ESHost", esHost);
+                dic.Add("ESIndex", esIndex);
+                dic.Add("ESType", esType);
+            }
+
+            this.txtAnalyzeLog_JsonPath.Text = Path.Combine(basePath, "JsonLogs");
+
+            string batContent = TemplateHelper.GetContent(path, dic);
+            this.txtAnalyzeLog_Result.Text = batContent;
+            KernelClass.PhysicalFile.AddToFile(batContent, batPath);
+            CommonHelper.RunBat(batPath);
+        }
+
+        private void txtAnalyzeLog_LogDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            selectAllText(sender, e);
+        }
+
+        private void txtAnalyzeLog_Result_KeyDown(object sender, KeyEventArgs e)
+        {
+            selectAllText(sender, e);
+        }
+
+        private void btnAnalyzeLog_Import_Click(object sender, EventArgs e)
+        {
+            string jsonPath = this.txtAnalyzeLog_JsonPath.Text;
+            string esHost = this.txtAnalyzeLog_ESHost.Text.Trim();
+            string esIndex = this.txtAnalyzeLog_ESIndex.Text.Trim().ToLower();
+            string esType = this.txtAnalyzeLog_ESType.Text.Trim();
+            if (string.IsNullOrEmpty(jsonPath) || !KernelClass.PhysicalFile.FolderExists(jsonPath))
+            {
+                MessageBox.Show("Please input correct folder path.");
+                return;
+            }
+            if (string.IsNullOrEmpty(esHost) || string.IsNullOrEmpty(esIndex) || string.IsNullOrEmpty(esType))
+            {
+                MessageBox.Show("Please input elastic search config");
+                return;
+            }
+
+            string msg = string.Empty;
+            DirectoryInfo folder = new DirectoryInfo(jsonPath);
+            foreach (var file in folder.GetFiles())
+            {
+                string json = KernelClass.PhysicalFile.ReadFile(file.FullName);
+                IList<Dictionary<string, object>> listLog = json.FromJSON<IList<Dictionary<string, object>>>();
+                if (listLog.Count > 0)
+                {
+                    foreach (var logs in listLog.Where(c=>c.Count>0).GroupBy(c => c["Level"]).ToList())
+                    {
+                        string result = ESHelper.PostES(esHost, esIndex, esType, logs.ToList());
+                        msg = file.FullName + ":" + result;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(msg))
+            {
+                BaseHelper.ErrorLog("Import elastic search error: " + msg);
+                MessageBox.Show("Import elastic search error:" + msg);
+            }               
+
+        }
+
+        private void btnAnlayzeLog_JsonPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.txtAnalyzeLog_JsonPath.Text = openFolderDialog.SelectedPath;
+            }
         }
 
 
