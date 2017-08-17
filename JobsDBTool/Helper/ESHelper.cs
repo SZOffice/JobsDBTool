@@ -206,7 +206,13 @@ namespace JobsDBTool.Helper
             string bulkCommand = new BulkCommand(index: index, type: type);
             string bulkJson = new BulkBuilder(serializer)
                                 .BuildCollection(listLog,
-                                    (builder, log) => builder.Index(data: log, id: log["Id"].ToString())
+                                    (builder, log) => {
+                                        if (!log.ContainsKey("@timestamp"))
+                                        {
+                                            log["@timestamp"] = DateTime.Now;
+                                        }
+                                        return builder.Index(data: log, id: log["Id"].ToString());
+                                    }
                                 );
 
             string response = connection.Post(bulkCommand, bulkJson);
