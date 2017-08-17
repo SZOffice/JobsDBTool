@@ -3,7 +3,7 @@ import os, sys, re
 import shutil
 import time
 
-#re.match  match startç   re.search match anywhere
+#re.match  match start?   re.search match anywhere
 regexs = {
 	'TicketStart': '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d*),\[(\d*)\],(\D*),(.*),(\D*),"Helpdesk Ticket:(.*)',
 	'ErrorStart': '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d*),\[(\d*)\],(\D*),(.*)',

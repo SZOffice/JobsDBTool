@@ -5,6 +5,6 @@
   <add key="AnalyzeLog_PyJson2ESPath">D:\SZOffice\JobsDBTool\JobsDBTool\Resource\json2es.py</add>
   <add key="AnalyzeLog_ES_Host">10.1.9.55</add>
   <add key="AnalyzeLog_ES_Index">analyze_log_index</add>
-  <add key="AnalyzeLog_ES_Type">Web_Log_UnhandledEx</add>
+  <add key="AnalyzeLog_ES_Type">{Log_Type}_Log_UnhandledEx</add>
   
 </root>

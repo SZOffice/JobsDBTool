@@ -3477,11 +3477,13 @@ Order by b.LastUserUpdateTime;";
             {
                 string json = KernelClass.PhysicalFile.ReadFile(file.FullName);
                 IList<Dictionary<string, object>> listLog = json.FromJSON<IList<Dictionary<string, object>>>();
+                string logType = file.Name.Split('.')[0];
+                string curESType = esType.Replace("{Log_Type}", logType);
                 if (listLog.Count > 0)
                 {
                     foreach (var logs in listLog.Where(c=>c.Count>0).GroupBy(c => c["Level"]).ToList())
                     {
-                        string result = ESHelper.PostES(esHost, esIndex, esType, logs.ToList());
+                        string result = ESHelper.PostES(esHost, esIndex, curESType, logs.ToList());
                         msg = file.FullName + ":" + result;
                     }
                 }
