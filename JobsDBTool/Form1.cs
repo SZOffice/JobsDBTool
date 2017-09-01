@@ -3484,7 +3484,7 @@ Order by b.LastUserUpdateTime;";
                     foreach (var logs in listLog.Where(c=>c.Count>0).GroupBy(c => c["Level"]).ToList())
                     {
                         string result = ESHelper.PostES(esHost, esIndex, curESType, logs.ToList());
-                        msg = file.FullName + ":" + result;
+                        msg = string.IsNullOrEmpty(result)? "" : (file.FullName + ":" + result);
                     }
                 }
             }
@@ -3492,8 +3492,11 @@ Order by b.LastUserUpdateTime;";
             {
                 BaseHelper.ErrorLog("Import elastic search error: " + msg);
                 MessageBox.Show("Import elastic search error:" + msg);
-            }               
-
+            }
+            else
+            {
+                MessageBox.Show("Import Success!");
+            }
         }
 
         private void btnAnlayzeLog_JsonPath_Click(object sender, EventArgs e)
