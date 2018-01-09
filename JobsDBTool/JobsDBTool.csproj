@@ -163,6 +163,7 @@
   <ItemGroup>
     <Compile Include="GetFiledId\CamelCaseInputDataAliasMappingDictionary.cs" />
     <Compile Include="GetFiledId\InputDataKeys.cs" />
+    <Compile Include="Helper\ABTesting.cs" />
     <Compile Include="Helper\BaseHelper.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Helper\TemplateHelper.cs" />

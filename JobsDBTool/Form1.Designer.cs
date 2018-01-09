@@ -104,6 +104,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtGetString = new System.Windows.Forms.TextBox();
             this.tp_AddData = new System.Windows.Forms.TabPage();
+            this.txtAddWordings_WordingKeySql = new System.Windows.Forms.TextBox();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.tp_Result = new System.Windows.Forms.TabPage();
             this.lbWording_SqlQueryPathLabel = new System.Windows.Forms.Label();
@@ -309,6 +310,7 @@
             this.others_txtUserManagementId = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.others_txtEmployerId = new System.Windows.Forms.TextBox();
+            this.tp_ABTesting = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbSourceConnName = new System.Windows.Forms.ComboBox();
             this.txtSourceConnStr = new System.Windows.Forms.TextBox();
@@ -316,7 +318,16 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.txtAddWordings_WordingKeySql = new System.Windows.Forms.TextBox();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.rtbAB_EmployerIds = new System.Windows.Forms.RichTextBox();
+            this.btnAB_GetValue = new System.Windows.Forms.Button();
+            this.rtbAB_Result = new System.Windows.Forms.RichTextBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txtAB_GroupKey = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtAB_Proportion = new System.Windows.Forms.TextBox();
+            this.btnAB_GetGroup = new System.Windows.Forms.Button();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -368,7 +379,10 @@
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.tp_ABTesting.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -454,6 +468,7 @@
             this.tc1.Controls.Add(this.tp_SolrUpdate);
             this.tc1.Controls.Add(this.tp_SendEmail);
             this.tc1.Controls.Add(this.tp_GenAuth);
+            this.tc1.Controls.Add(this.tp_ABTesting);
             this.tc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc1.Location = new System.Drawing.Point(0, 0);
             this.tc1.Multiline = true;
@@ -1069,7 +1084,7 @@
             // 
             // lbWordingGroup
             // 
-            this.lbWordingGroup.Font = new System.Drawing.Font("SimSun", 10F);
+            this.lbWordingGroup.Font = new System.Drawing.Font("宋体", 10F);
             this.lbWordingGroup.FormattingEnabled = true;
             this.lbWordingGroup.Location = new System.Drawing.Point(160, 178);
             this.lbWordingGroup.Name = "lbWordingGroup";
@@ -1090,7 +1105,7 @@
             // txtGetData
             // 
             this.txtGetData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtGetData.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtGetData.Font = new System.Drawing.Font("宋体", 12F);
             this.txtGetData.Location = new System.Drawing.Point(3, 3);
             this.txtGetData.Multiline = true;
             this.txtGetData.Name = "txtGetData";
@@ -1132,7 +1147,7 @@
             // txtGetString
             // 
             this.txtGetString.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtGetString.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtGetString.Font = new System.Drawing.Font("宋体", 12F);
             this.txtGetString.Location = new System.Drawing.Point(186, 0);
             this.txtGetString.Multiline = true;
             this.txtGetString.Name = "txtGetString";
@@ -1152,10 +1167,22 @@
             this.tp_AddData.Text = "    Add Data To DB    ";
             this.tp_AddData.UseVisualStyleBackColor = true;
             // 
+            // txtAddWordings_WordingKeySql
+            // 
+            this.txtAddWordings_WordingKeySql.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtAddWordings_WordingKeySql.Location = new System.Drawing.Point(0, 0);
+            this.txtAddWordings_WordingKeySql.Multiline = true;
+            this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
+            this.txtAddWordings_WordingKeySql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(839, 84);
+            this.txtAddWordings_WordingKeySql.TabIndex = 4;
+            this.txtAddWordings_WordingKeySql.WordWrap = false;
+            // 
             // txtContent
             // 
             this.txtContent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtContent.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtContent.Font = new System.Drawing.Font("宋体", 12F);
             this.txtContent.Location = new System.Drawing.Point(0, 90);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
@@ -1421,7 +1448,7 @@
             // txtClassField
             // 
             this.txtClassField.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtClassField.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtClassField.Font = new System.Drawing.Font("宋体", 12F);
             this.txtClassField.Location = new System.Drawing.Point(0, 0);
             this.txtClassField.Multiline = true;
             this.txtClassField.Name = "txtClassField";
@@ -1478,7 +1505,7 @@
             // 
             // txtBackupTaskSubmitResult
             // 
-            this.txtBackupTaskSubmitResult.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtBackupTaskSubmitResult.Font = new System.Drawing.Font("宋体", 12F);
             this.txtBackupTaskSubmitResult.Location = new System.Drawing.Point(15, 263);
             this.txtBackupTaskSubmitResult.Multiline = true;
             this.txtBackupTaskSubmitResult.Name = "txtBackupTaskSubmitResult";
@@ -1594,7 +1621,7 @@
             // 
             // txtBackupTaskFileList
             // 
-            this.txtBackupTaskFileList.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtBackupTaskFileList.Font = new System.Drawing.Font("宋体", 12F);
             this.txtBackupTaskFileList.Location = new System.Drawing.Point(470, 89);
             this.txtBackupTaskFileList.Multiline = true;
             this.txtBackupTaskFileList.Name = "txtBackupTaskFileList";
@@ -2051,7 +2078,7 @@
             // txtOperateDB_List
             // 
             this.txtOperateDB_List.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_List.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtOperateDB_List.Font = new System.Drawing.Font("宋体", 12F);
             this.txtOperateDB_List.Location = new System.Drawing.Point(3, 206);
             this.txtOperateDB_List.Multiline = true;
             this.txtOperateDB_List.Name = "txtOperateDB_List";
@@ -2415,7 +2442,7 @@
             // txtOperateDB_Country_Content
             // 
             this.txtOperateDB_Country_Content.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_Country_Content.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtOperateDB_Country_Content.Font = new System.Drawing.Font("宋体", 12F);
             this.txtOperateDB_Country_Content.Location = new System.Drawing.Point(0, 78);
             this.txtOperateDB_Country_Content.Multiline = true;
             this.txtOperateDB_Country_Content.Name = "txtOperateDB_Country_Content";
@@ -2465,7 +2492,7 @@
             // txtOperateDB_Sql
             // 
             this.txtOperateDB_Sql.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_Sql.Font = new System.Drawing.Font("SimSun", 12F);
+            this.txtOperateDB_Sql.Font = new System.Drawing.Font("宋体", 12F);
             this.txtOperateDB_Sql.Location = new System.Drawing.Point(3, 100);
             this.txtOperateDB_Sql.Multiline = true;
             this.txtOperateDB_Sql.Name = "txtOperateDB_Sql";
@@ -2804,7 +2831,7 @@
             // 
             // lbPartial_QueryResult
             // 
-            this.lbPartial_QueryResult.Font = new System.Drawing.Font("SimSun", 10F);
+            this.lbPartial_QueryResult.Font = new System.Drawing.Font("宋体", 10F);
             this.lbPartial_QueryResult.FormattingEnabled = true;
             this.lbPartial_QueryResult.Location = new System.Drawing.Point(403, 8);
             this.lbPartial_QueryResult.Name = "lbPartial_QueryResult";
@@ -3357,6 +3384,19 @@
             this.others_txtEmployerId.Size = new System.Drawing.Size(188, 20);
             this.others_txtEmployerId.TabIndex = 81;
             // 
+            // tp_ABTesting
+            // 
+            this.tp_ABTesting.Controls.Add(this.btnAB_GetGroup);
+            this.tp_ABTesting.Controls.Add(this.groupBox20);
+            this.tp_ABTesting.Controls.Add(this.btnAB_GetValue);
+            this.tp_ABTesting.Controls.Add(this.groupBox19);
+            this.tp_ABTesting.Location = new System.Drawing.Point(4, 22);
+            this.tp_ABTesting.Name = "tp_ABTesting";
+            this.tp_ABTesting.Size = new System.Drawing.Size(847, 421);
+            this.tp_ABTesting.TabIndex = 13;
+            this.tp_ABTesting.Text = "A/B Testing";
+            this.tp_ABTesting.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tc1);
@@ -3407,17 +3447,101 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // txtAddWordings_WordingKeySql
+            // groupBox19
             // 
-            this.txtAddWordings_WordingKeySql.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtAddWordings_WordingKeySql.Location = new System.Drawing.Point(0, 0);
-            this.txtAddWordings_WordingKeySql.Multiline = true;
-            this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
-            this.txtAddWordings_WordingKeySql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(839, 84);
-            this.txtAddWordings_WordingKeySql.TabIndex = 4;
-            this.txtAddWordings_WordingKeySql.WordWrap = false;
+            this.groupBox19.Controls.Add(this.label44);
+            this.groupBox19.Controls.Add(this.txtAB_Proportion);
+            this.groupBox19.Controls.Add(this.label42);
+            this.groupBox19.Controls.Add(this.txtAB_GroupKey);
+            this.groupBox19.Controls.Add(this.rtbAB_EmployerIds);
+            this.groupBox19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox19.Location = new System.Drawing.Point(0, 0);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(847, 216);
+            this.groupBox19.TabIndex = 90;
+            this.groupBox19.TabStop = false;
+            // 
+            // rtbAB_EmployerIds
+            // 
+            this.rtbAB_EmployerIds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbAB_EmployerIds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbAB_EmployerIds.Location = new System.Drawing.Point(3, 62);
+            this.rtbAB_EmployerIds.Name = "rtbAB_EmployerIds";
+            this.rtbAB_EmployerIds.Size = new System.Drawing.Size(841, 151);
+            this.rtbAB_EmployerIds.TabIndex = 92;
+            this.rtbAB_EmployerIds.Text = "";
+            // 
+            // btnAB_GetValue
+            // 
+            this.btnAB_GetValue.Location = new System.Drawing.Point(208, 233);
+            this.btnAB_GetValue.Name = "btnAB_GetValue";
+            this.btnAB_GetValue.Size = new System.Drawing.Size(166, 23);
+            this.btnAB_GetValue.TabIndex = 93;
+            this.btnAB_GetValue.Text = "Get A/B Testing Value";
+            this.btnAB_GetValue.UseVisualStyleBackColor = true;
+            this.btnAB_GetValue.Click += new System.EventHandler(this.btnAB_GetValue_Click);
+            // 
+            // rtbAB_Result
+            // 
+            this.rtbAB_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbAB_Result.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbAB_Result.Location = new System.Drawing.Point(3, 10);
+            this.rtbAB_Result.Name = "rtbAB_Result";
+            this.rtbAB_Result.Size = new System.Drawing.Size(841, 146);
+            this.rtbAB_Result.TabIndex = 94;
+            this.rtbAB_Result.Text = "";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.rtbAB_Result);
+            this.groupBox20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox20.Location = new System.Drawing.Point(0, 262);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(847, 159);
+            this.groupBox20.TabIndex = 95;
+            this.groupBox20.TabStop = false;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(39, 20);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(57, 13);
+            this.label42.TabIndex = 94;
+            this.label42.Text = "Group Key";
+            // 
+            // txtAB_GroupKey
+            // 
+            this.txtAB_GroupKey.Location = new System.Drawing.Point(102, 17);
+            this.txtAB_GroupKey.Name = "txtAB_GroupKey";
+            this.txtAB_GroupKey.Size = new System.Drawing.Size(237, 20);
+            this.txtAB_GroupKey.TabIndex = 93;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(465, 20);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(55, 13);
+            this.label44.TabIndex = 96;
+            this.label44.Text = "Proportion";
+            // 
+            // txtAB_Proportion
+            // 
+            this.txtAB_Proportion.Location = new System.Drawing.Point(539, 17);
+            this.txtAB_Proportion.Name = "txtAB_Proportion";
+            this.txtAB_Proportion.Size = new System.Drawing.Size(222, 20);
+            this.txtAB_Proportion.TabIndex = 95;
+            // 
+            // btnAB_GetGroup
+            // 
+            this.btnAB_GetGroup.Location = new System.Drawing.Point(430, 233);
+            this.btnAB_GetGroup.Name = "btnAB_GetGroup";
+            this.btnAB_GetGroup.Size = new System.Drawing.Size(166, 23);
+            this.btnAB_GetGroup.TabIndex = 96;
+            this.btnAB_GetGroup.Text = "Get A/B Testing Group";
+            this.btnAB_GetGroup.UseVisualStyleBackColor = true;
+            this.btnAB_GetGroup.Click += new System.EventHandler(this.btnAB_GetGroup_Click);
             // 
             // mainFrm
             // 
@@ -3516,7 +3640,11 @@
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.tp_ABTesting.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3811,6 +3939,17 @@
         private System.Windows.Forms.Label lbWording_SqlQueryPath;
         private System.Windows.Forms.Label lbWording_SqlQueryPathLabel;
         private System.Windows.Forms.TextBox txtAddWordings_WordingKeySql;
+        private System.Windows.Forms.TabPage tp_ABTesting;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.RichTextBox rtbAB_Result;
+        private System.Windows.Forms.Button btnAB_GetValue;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.RichTextBox rtbAB_EmployerIds;
+        private System.Windows.Forms.Button btnAB_GetGroup;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox txtAB_Proportion;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TextBox txtAB_GroupKey;
     }
 }
 

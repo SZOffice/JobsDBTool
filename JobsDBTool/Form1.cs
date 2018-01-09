@@ -74,7 +74,7 @@ namespace JobsDBTool
                 string targetCode2 = textboxWrap(htConfig["TargetCode1"].ToString());
                 this.txtAddWordings_WordingKeySql.Text = targetCode2;
             }
-            
+
             if (htConfig.ContainsKey("SheetName"))
             {
                 sheetName = htConfig["SheetName"].ToString();
@@ -89,7 +89,7 @@ namespace JobsDBTool
 
             loadToolStripMenu();
             InitializeConnectionStringList();
-            
+
             //solve spring slow loading problem
             ThreadPool.QueueUserWorkItem((object obj) =>
             {
@@ -102,7 +102,7 @@ namespace JobsDBTool
 
         private string textboxWrap(string content)
         {
-            return string.IsNullOrEmpty(content)? "" : content.Replace("\r\n", "\n").Replace("\n", "\r\n");
+            return string.IsNullOrEmpty(content) ? "" : content.Replace("\r\n", "\n").Replace("\n", "\r\n");
         }
 
         #region menutrip
@@ -166,6 +166,12 @@ namespace JobsDBTool
                     Size = new System.Drawing.Size(152, 22),
                     Text = "Gen Auth Info"
                 };
+                ToolStripMenuItem itemABTesting = new System.Windows.Forms.ToolStripMenuItem()
+                {
+                    Name = "tsm_View_ABTesting",
+                    Size = new System.Drawing.Size(152, 22),
+                    Text = "A/B Testing"
+                };
 
                 itemTasks.Click += StripItem_Click;
                 itemAddWordings.Click += StripItem_Click;
@@ -175,6 +181,7 @@ namespace JobsDBTool
                 itemClassFieldAbbr.Click += StripItem_Click;
                 itemSendEmail.Click += StripItem_Click;
                 itemGenAuth.Click += StripItem_Click;
+                itemABTesting.Click += StripItem_Click;
 
                 item.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                     itemTasks,
@@ -184,7 +191,8 @@ namespace JobsDBTool
                 itemDB,
                 itemClassFieldAbbr,
                 itemSendEmail,
-                itemGenAuth});
+                itemGenAuth,
+                itemABTesting});
                 items[i] = item;
 
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_AddWordings"] != "true")
@@ -244,6 +252,13 @@ namespace JobsDBTool
                     itemTasks.Checked = true;
                     cbCommon_CheckedChanged(true);
                 }
+                if (ConfigurationManager.AppSettings["IsDefaultLoaded_ABTesting"] != "true")
+                    this.tc1.TabPages.Remove(this.tp_ABTesting);
+                else
+                {
+                    itemABTesting.Checked = true;
+                    cbABTesting_CheckedChanged(true);
+                }
             }
 
             this.menuStrip1.Items.Clear();
@@ -280,6 +295,9 @@ namespace JobsDBTool
                 case "tsm_View_GenAuth":
                     cbGenAuth_CheckedChanged(item.Checked);
                     break;
+                case "tsm_View_ABTesting":
+                    cbABTesting_CheckedChanged(item.Checked);
+                    break;
             }
             BaseHelper.InfoLog("click the menu strip: " + item.Name);
         }
@@ -296,11 +314,11 @@ namespace JobsDBTool
                 {
                     if (!KernelClass.PhysicalFile.FileExists("JobsDBTool.sqlite"))
                     {
-                    //    if (!BaseHelper.IsExistTable(dbSqlite, "Task"))
-                            BaseHelper.InitSQLiteDB(sqliteConn, 0);
+                        //    if (!BaseHelper.IsExistTable(dbSqlite, "Task"))
+                        BaseHelper.InitSQLiteDB(sqliteConn, 0);
 
-                      //  if (!BaseHelper.IsExistTable(dbSqlite, "Document"))
-                            BaseHelper.InitSQLiteDB(sqliteConn, 1);
+                        //  if (!BaseHelper.IsExistTable(dbSqlite, "Document"))
+                        BaseHelper.InitSQLiteDB(sqliteConn, 1);
                     }
 
                     loadTask();
@@ -312,7 +330,7 @@ namespace JobsDBTool
                 this.tc1.TabPages.Remove(this.tp_Common);
             }
         }
-        
+
         private void cbAddWordings_CheckedChanged(bool isChecked)
         {
             if (isChecked)
@@ -356,7 +374,7 @@ namespace JobsDBTool
                     cbLanguageTH.Items.Add(Option.Language.TH.ToString());
 
                     initLanguage_AddWordings();
-            
+
                     this.tc_AddWordings.TabPages.Remove(this.tp_AddWordings);
                 }
             }
@@ -572,7 +590,7 @@ namespace JobsDBTool
                     if (this.sendEmail_cbEmailDBInfo.Items.Count > 0)
                     {
                         this.sendEmail_cbEmailDBInfo.SelectedIndex = 0;
-                    }                    
+                    }
                 }
             }
         }
@@ -621,8 +639,28 @@ namespace JobsDBTool
             }
         }
 
+        private void cbABTesting_CheckedChanged(bool isChecked)
+        {
+            if (isChecked)
+            {
+                if (!this.tc1.TabPages.Contains(this.tp_ABTesting))
+                    this.tc1.TabPages.Add(this.tp_ABTesting);
+                this.tc1.SelectedTab = this.tp_ABTesting;
+
+                if (!isLoadedABTesting)
+                {
+                    this.txtAB_Proportion.Text = "50, 50";
+                    this.rtbAB_EmployerIds.Text = "100300128, -2147473636";
+                }
+            }
+            else
+            {
+                this.tc1.TabPages.Remove(this.tp_ABTesting);
+            }
+        }
+
         #endregion
-        
+
         private string fName;
         private Hashtable htConfig;
         private DataSet dsDB;
@@ -638,6 +676,7 @@ namespace JobsDBTool
         private bool isLoadedOperateDB = false;
         private bool isLoadedSendEmail = false;
         private bool isLoadedGenAuth = false;
+        private bool isLoadedABTesting = false;
         private string backupFolderPath = string.Empty;
         private string resourceExcelPath = string.Empty;
         private string genSqlQueryPathPath = string.Empty;
@@ -654,9 +693,9 @@ namespace JobsDBTool
         private static IList<Document> documentList;
 
         #region tasks
-        
+
         private void loadTask()
-        {        
+        {
             IList<string> statusList = new List<string>();
             if (this.tasks_cbSearchStatus_Draft.Checked)
                 statusList.Add(TaskStatus.Draft.ToString());
@@ -677,9 +716,10 @@ namespace JobsDBTool
         {
             var sql = PetaPoco.Sql.Builder;
             sql.Append("SELECT * FROM Task");
-            if(statusList != null && statusList.Count>0)
+            if (statusList != null && statusList.Count > 0)
                 sql.Where("Status in (@tags)", new { tags = statusList.ToArray() });
-            if (!string.IsNullOrEmpty(search)) {
+            if (!string.IsNullOrEmpty(search))
+            {
                 sql.Where("(Title like @0) Or (Url Like @0) Or (Summary Like @0) Or (Remark Like @0)", "%" + search + "%");
             }
             //sql.OrderBy("Status");
@@ -761,7 +801,7 @@ namespace JobsDBTool
                     loadTask();
                     MessageBox.Show("Deleted success~");
                 }
-                else{
+                else {
                     MessageBox.Show("Please select one row.");
                     return;
                 }
@@ -782,7 +822,7 @@ namespace JobsDBTool
             }
             else if (dgr.Cells["Status"].Value.ToString() == TaskStatus.Pending.ToString())
             {
-               bgColor = Color.FromArgb(171, 186, 195);
+                bgColor = Color.FromArgb(171, 186, 195);
             }
             else if (dgr.Cells["Status"].Value.ToString() == TaskStatus.Doing.ToString())
             {
@@ -802,7 +842,7 @@ namespace JobsDBTool
             }
             else if (dgr.Cells["Status"].Value.ToString() == TaskStatus.ReDo.ToString())
             {
-               bgColor = Color.FromArgb(203, 111, 215);
+                bgColor = Color.FromArgb(203, 111, 215);
             }
             dgr.DefaultCellStyle.BackColor = bgColor;
         }
@@ -816,7 +856,7 @@ namespace JobsDBTool
         private void dgv_task_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0 || dgv_task.Rows.Count <= 0) return;
-            if (!new List<string>(){"Status", "CreatedTime", "LastModifiedTime", "SubmittedTime"}.Contains(dgv_task.Columns[e.ColumnIndex].Name))
+            if (!new List<string>() { "Status", "CreatedTime", "LastModifiedTime", "SubmittedTime" }.Contains(dgv_task.Columns[e.ColumnIndex].Name))
             {
                 dgv_task.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = (dgv_task.Rows[e.RowIndex].Cells[e.ColumnIndex].Value ?? string.Empty).ToString();
             }
@@ -844,7 +884,8 @@ namespace JobsDBTool
 
         private void BindTree(IList<Document> list, int pid, TreeNode tn)
         {
-            if(pid == default(int)){
+            if (pid == default(int))
+            {
                 this.document_tvDoc.Nodes.Clear();
             }
             if (list.Count > 0)
@@ -862,10 +903,10 @@ namespace JobsDBTool
                             this.document_tvDoc.Nodes.Add(node);
                             BindTree(list, item.Id, node);
                         }
-                        else if(tn != null)
+                        else if (tn != null)
                         {
                             tn.Nodes.Add(node);
-                            BindTree(list, item.Id, node);                            
+                            BindTree(list, item.Id, node);
                         }
                     }
                 }
@@ -1329,7 +1370,7 @@ namespace JobsDBTool
 
         private void btnGoResult_Click(object sender, EventArgs e)
         {
-            this.tc_AddWordings.SelectedTab = tp_Result;            
+            this.tc_AddWordings.SelectedTab = tp_Result;
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -2346,7 +2387,7 @@ Order by b.LastUserUpdateTime;";
                         dicCandidate.Add("IndexofCandidate", indexofCandidate);
                         dicCandidate.Add("JobSeekerId", jobSeekerId);
                         dicCandidate.Add("Email", emailAddress);
-                        dicCandidate.Add("FirstName", string.IsNullOrEmpty(firstName)?"mirage":firstName);
+                        dicCandidate.Add("FirstName", string.IsNullOrEmpty(firstName) ? "mirage" : firstName);
                         dicCandidate.Add("LastName", string.IsNullOrEmpty(lastName) ? "lu" : lastName);
 
                         candidateList.Add(dicCandidate);
@@ -2789,8 +2830,8 @@ Order by b.LastUserUpdateTime;";
             SelectItem solrCore = (SelectItem)this.cbSolrName.SelectedItem;
             this.txtSolrUrl.Text = solrCore.SolrUrl;
             arrContext = new string[4]{
-                solrCore.IdString, 
-                solrCore.SolrQuery, 
+                solrCore.IdString,
+                solrCore.SolrQuery,
                 solrCore.XmlFilePath,
                 solrCore.SqlQuery
             };
@@ -2982,7 +3023,7 @@ Order by b.LastUserUpdateTime;";
                 this.btnSolrUpdate_FixDB.Visible = false;
             }
         }
-        
+
         #endregion
 
         #region send email
@@ -3028,7 +3069,7 @@ Order by b.LastUserUpdateTime;";
 
             if (!string.IsNullOrEmpty(this.sendEmail_txtCC.Text.Trim()))
             {
-                to += string.IsNullOrEmpty(to)?"":";" +this.sendEmail_txtCC.Text.Trim();
+                to += string.IsNullOrEmpty(to) ? "" : ";" + this.sendEmail_txtCC.Text.Trim();
             }
 
             if (string.IsNullOrEmpty(to))
@@ -3260,7 +3301,67 @@ Order by b.LastUserUpdateTime;";
             this.extractdll_Result.Text = string.Join("\n", targetList.OrderBy(c => c));
         }
 
+        private void btnAB_GetValue_Click(object sender, EventArgs e)
+        {
+            var sGroupKey = this.txtAB_GroupKey.Text.Trim();
+            var sProportion = this.txtAB_Proportion.Text.Trim();
+            var sEmployerIds = this.rtbAB_EmployerIds.Text.Trim();
+            StringBuilder sbResult = new StringBuilder();
 
+            if (!string.IsNullOrEmpty(sEmployerIds))
+            {
+                foreach (var employerId in sEmployerIds.Split(','))
+                {
+                    try
+                    {
+                        int val = ABTesting.getABValue(Convert.ToInt32(employerId.Trim()), sGroupKey);
+
+                        sbResult.AppendLine(employerId + ": " + val.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            else
+            {
+                sbResult.AppendLine("xiaoyang, ni de employerid ne?");
+            }
+            this.rtbAB_Result.Text = sbResult.ToString();
+        }
+
+        private void btnAB_GetGroup_Click(object sender, EventArgs e)
+        {
+            var sGroupKey = this.txtAB_GroupKey.Text.Trim();
+            var sProportion = this.txtAB_Proportion.Text.Trim();
+            var sEmployerIds = this.rtbAB_EmployerIds.Text.Trim();
+            StringBuilder sbResult = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(sProportion) && !string.IsNullOrEmpty(sEmployerIds))
+            {
+                try
+                {
+                    var list = sProportion.Split(',').Select(Int32.Parse).ToList();
+
+                    foreach (var employerId in sEmployerIds.Split(','))
+                    {
+                        string sGroupName = ABTesting.getABGroup(Convert.ToInt32(employerId.Trim()), sGroupKey, list);
+
+                        sbResult.AppendLine(employerId + ": " + sGroupName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                sbResult.AppendLine("Please input Proportion and EmployerId.");
+            }
+            this.rtbAB_Result.Text = sbResult.ToString();
+        }
     }
 
     #region public class or enum
@@ -3293,7 +3394,7 @@ Order by b.LastUserUpdateTime;";
         public string ProviderName { get; set; }
 
     }
-    
+
     public class Abbreviation
     {
         public string ClassName { get; set; }
