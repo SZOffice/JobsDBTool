@@ -3214,12 +3214,19 @@ Order by b.LastUserUpdateTime;";
             string result = string.Empty;
             if (this.others_rbAuthType_Employer.Checked)
             {
-                if (string.IsNullOrEmpty(employerId) || string.IsNullOrEmpty(userManagementId))
+                if (string.IsNullOrEmpty(employerId))
                 {
-                    MessageBox.Show("Please input EmployerId and UserManagementId first");
+                    MessageBox.Show("Please input EmployerId first");
                     return;
                 }
-                result = AuthenticationUtility.GetEmployerAccountUserLoginUrlWithAuthenticationInfo(Convert.ToInt32(employerId), Convert.ToInt32(userManagementId), baseUrl, authenTicketType);
+                if (string.IsNullOrEmpty(userManagementId))
+                {
+                    result = AuthenticationUtility.GetEmployerLoginUrlWithAuthenticationInfo(Convert.ToInt32(employerId), baseUrl, authenTicketType);
+                }
+                else
+                {
+                    result = AuthenticationUtility.GetEmployerAccountUserLoginUrlWithAuthenticationInfo(Convert.ToInt32(employerId), Convert.ToInt32(userManagementId), baseUrl, authenTicketType);
+                }
             }
             else if (this.others_rbAuthType_JobSeeker.Checked)
             {
