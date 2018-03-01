@@ -65,6 +65,9 @@
   <object id="HKTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
     <property name="TalentSearchDao" ref="HKTalentSearchDao" />
   </object>
+  <object id="SGTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
+    <property name="TalentSearchDao" ref="SGTalentSearchDao" />
+  </object>
   <object id="IDTalentSearch" type="Solr.Core.TalentSearchCoreService, Solr.Core">
     <property name="TalentSearchDao" ref="IDTalentSearchDao" />
   </object>
@@ -74,6 +77,9 @@
   
   <object id="HKTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
     <property name="TalentSearchStatusDao" ref="HKTalentSearchStatusDao" />
+  </object>
+  <object id="SGTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
+    <property name="TalentSearchStatusDao" ref="SGTalentSearchStatusDao" />
   </object>
   <object id="IDTalentSearchStatus" type="Solr.Core.TalentSearchStatusCoreService, Solr.Core">
     <property name="TalentSearchStatusDao" ref="IDTalentSearchStatusDao" />
@@ -120,6 +126,10 @@
     <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
     <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
   </object>
+  <object id="SGTalentSearchDao" type="Solr.Data.TalentSearchDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
+  </object>
   <object id="IDTalentSearchDao" type="Solr.Data.TalentSearchDao, Solr.Data">
     <!--<property name="ConnectionString" value="${JobsDB_ID.connectionString}" />
     <property name="ConnectionProviderName" value="${JobsDB_ID.providerName}" />-->
@@ -130,6 +140,10 @@
   </object>
   
   <object id="HKTalentSearchStatusDao" type="Solr.Data.TalentSearchStatusDao, Solr.Data">
+    <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
+    <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
+  </object>
+  <object id="SGTalentSearchStatusDao" type="Solr.Data.TalentSearchStatusDao, Solr.Data">
     <!--<property name="ConnectionString" value="${JobsDB_HK.connectionString}" />
     <property name="ConnectionProviderName" value="${JobsDB_HK.providerName}" />-->
   </object>
