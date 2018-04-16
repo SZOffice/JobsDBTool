@@ -2,42 +2,42 @@
 	Name: "Preview HK Web1",
 	Host: "HKPREWeb1",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 0
 },{
 	Name: "Preview HK Web2",
 	Host: "HKPREWeb2",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 0
 },{
 	Name: "Preview ID Web1",
 	Host: "IDPREWeb1",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 0
 },{
 	Name: "Preview ID Web2",
 	Host: "IDPREWeb2",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 0
 },{
 	Name: "Preview TH Web1",
 	Host: "THPREWeb1",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 0
 },{
 	Name: "Preview TH Web2",
 	Host: "THPREWeb2",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 0
 },
@@ -47,21 +47,21 @@
 	Name: "Preview HK Agent1",
 	Host: "HKPreAgent1",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 1
 },{
 	Name: "Preview ID Agent1",
 	Host: "IDPreAgent1",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 1
 },{
 	Name: "Preview TH Agent1",
 	Host: "THPreAgent1",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 1
 },
@@ -73,126 +73,126 @@
 	Name: "Product HK Web1",
 	Host: "HKWeb1",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product HK Web2",
 	Host: "HKWeb2",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product HK Web3",
 	Host: "HKWeb3",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product HK Web4",
 	Host: "HKWeb4",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product HK Web5",
 	Host: "HKWeb5",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product HK Web6",
 	Host: "HKWeb6",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 2
 },{
 	Name: "Product ID Web1",
 	Host: "IDWeb1",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product ID Web2",
 	Host: "IDWeb2",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product ID Web3",
 	Host: "IDWeb3",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product ID Web4",
 	Host: "IDWeb4",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product ID Web5",
 	Host: "IDWeb5",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product ID Web6",
 	Host: "IDWeb6",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 2
 },{
 	Name: "Product TH Web1",
 	Host: "THWeb1",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },{
 	Name: "Product TH Web2",
 	Host: "THWeb2",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },{
 	Name: "Product TH Web3",
 	Host: "THWeb3",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },{
 	Name: "Product TH Web4",
 	Host: "THWeb4",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },{
 	Name: "Product TH Web5",
 	Host: "THWeb5",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },{
 	Name: "Product TH Web6",
 	Host: "THWeb6",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 2
 },
@@ -201,21 +201,21 @@
 	Name: "Product HK Agent1",
 	Host: "HKAgent1",
 	LoginID: "idc\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 3
 },{
 	Name: "Product ID Agent1",
 	Host: "IDAgent1",
 	LoginID: "jobsdbid\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 3
 },{
 	Name: "Product TH Agent1",
 	Host: "THAgent1",
 	LoginID: "jobsdbth\\agentservice",
-	LoginPWD: "JDB123jdb",
+	LoginPWD: "******",
 	CountryCode: "TH",
 	ServerType: 3
 }]
