@@ -44,6 +44,7 @@ namespace JobsDBTool
             htConfig = XmlHelper.GetSections("Config/DBInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/AccountInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/SolrInfo.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/CommonTab.xml", htConfig);
 
             if (htConfig.ContainsKey("BackupFolderPath"))
             {
@@ -120,9 +121,9 @@ namespace JobsDBTool
 
                 ToolStripMenuItem itemTasks = new System.Windows.Forms.ToolStripMenuItem()
                 {
-                    Name = "tsm_View_Tasks",
+                    Name = "tsm_View_Common",
                     Size = new System.Drawing.Size(152, 22),
-                    Text = "Tasks"
+                    Text = "Common"
                 };
                 ToolStripMenuItem itemAddWordings = new System.Windows.Forms.ToolStripMenuItem()
                 {
@@ -323,6 +324,33 @@ namespace JobsDBTool
 
                     loadTask();
                     initDocument();
+
+                    if (dicDropDownToText.ContainsKey("Common_RunSql_Template"))
+                    {
+                        var templateInfoList = dicDropDownToText["Common_RunSql_Template"];
+                        foreach (var templateInfo in templateInfoList)
+                        {
+                            this.cbCommon_RunSql_SqlTemplate.Items.Add(templateInfo);
+                        }
+                        cbCommon_RunSql_SqlTemplate.DisplayMember = "SelectItem.Name";
+                        //cbCommon_RunSql_SqlTemplate.ValueMember = "SelectItem.EmployerId";
+                        /*
+                        if (this.cbCommon_RunSql_SqlTemplate.Items.Count > 0)
+                        {
+                            this.cbCommon_RunSql_SqlTemplate.SelectedIndex = 0;
+                        }
+                        */
+                    }
+
+                    if (dicDropDownToText.ContainsKey("Common_GenCopyBat_Template"))
+                    {
+                        var templateInfoList = dicDropDownToText["Common_GenCopyBat_Template"];
+                        foreach (var templateInfo in templateInfoList)
+                        {
+                            this.cbGenCopyBat_Template.Items.Add(templateInfo);
+                        }
+                        cbGenCopyBat_Template.DisplayMember = "SelectItem.Name";
+                    }
                 }
             }
             else
@@ -801,7 +829,8 @@ namespace JobsDBTool
                     loadTask();
                     MessageBox.Show("Deleted success~");
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Please select one row.");
                     return;
                 }
@@ -1540,12 +1569,39 @@ namespace JobsDBTool
                             selectItem.Value = column.Value;
                         }
 
-                        if (item.Attribute("name").Value == "SendEmail_EmailDBInfo")
+                        if (item.Attribute("name").Value == "SendEmail_EmailDBInfo" || item.Attribute("name").Value == "Common_RunSql_Template")
                         {
                             xe = column.Element("SqlQuery");
                             if (xe != null)
                             {
                                 selectItem.SqlQuery = xe.Value;
+                            }
+
+                            xe = column.Element("SqlParam");
+                            if (xe != null)
+                            {
+                                selectItem.SqlParam = xe.Value;
+                            }
+                        }
+
+                        if (item.Attribute("name").Value == "Common_GenCopyBat_Template")
+                        {
+                            xe = column.Element("SourcePath");
+                            if (xe != null)
+                            {
+                                selectItem.SourcePath = xe.Value;
+                            }
+
+                            xe = column.Element("TargetPath");
+                            if (xe != null)
+                            {
+                                selectItem.TargetPath = xe.Value;
+                            }
+
+                            xe = column.Element("IsToLocal");
+                            if (xe != null)
+                            {
+                                selectItem.IsToLocal = xe.Value == "1";
                             }
                         }
 
@@ -3369,6 +3425,242 @@ Order by b.LastUserUpdateTime;";
             }
             this.rtbAB_Result.Text = sbResult.ToString();
         }
+
+        #region common run sql
+        private void cbCommon_RunSql__SqlTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectItem sqlTemplate = (SelectItem)this.cbCommon_RunSql_SqlTemplate.SelectedItem;
+            this.rtbCommon_RunSql_SqlQuery.Text = sqlTemplate.SqlQuery;
+            var arrParam = sqlTemplate.SqlParam.Split(';');
+            totalFieldProperty = arrParam.Length;
+
+            Label[] lbs = new Label[totalFieldProperty];
+            TextBox[] tbs = new TextBox[totalFieldProperty];
+
+            int index_y = 0;
+            int start_x = 10;
+            for (int i = 0; i < totalFieldProperty; i++)
+            {
+                lbs[i] = new Label();
+                tbs[i] = new TextBox();
+
+                if (index_y % 3 == 0 && index_y > 1)
+                {
+                    start_x += 210;
+                    index_y = 0;
+                }
+
+                lbs[i].Name = "lbField_" + i;
+                lbs[i].Text = arrParam[i].Split(':')[0].Trim();
+                lbs[i].Width = 80;
+
+                lbs[i].Location = new System.Drawing.Point(start_x, 30 * index_y + 10);
+                tbs[i].Location = new System.Drawing.Point(start_x + 80, 30 * index_y + 10);
+                index_y++;
+
+                tbs[i].Name = "tbField_" + i;
+                tbs[i].Width = 120;
+
+                tbs[i].Text = arrParam[i].Split(':')[1].Trim();
+
+                this.plCommon_RunSql_Params.Controls.Add(lbs[i]);
+                this.plCommon_RunSql_Params.Controls.Add(tbs[i]);
+            }
+        }
+
+        private void btnCommon_RunSql_Run_Click(object sender, EventArgs e)
+        {
+            string sourceDB = ReplaceCountryCode(this.txtSourceConnStr.Text.Trim());
+            if (string.IsNullOrEmpty(sourceDB))
+            {
+                MessageBox.Show("Please input sourect DB connection string");
+                return;
+            }
+
+            try
+            {
+                KernelClass.SqlHelper sqlHelper = new KernelClass.SqlHelper(sourceDB);
+                sqlHelper.OpenConnection();
+                DataSet ds = new DataSet();
+                string sqlQuery = this.rtbCommon_RunSql_SqlQuery.Text;
+
+                for (int i = 0; i < totalFieldProperty; i++)
+                {
+                    Label lb = (Label)(this.plCommon_RunSql_Params.Controls.Find("lbField_" + i, false)[0]);
+                    string lbTxt = lb.Text.Trim();
+                    TextBox tb = (TextBox)(this.plCommon_RunSql_Params.Controls.Find("tbField_" + i, false)[0]);
+                    sqlQuery = sqlQuery.Replace("@" + lbTxt, "N'" + tb.Text.Trim().Replace("'", "''") + "'");
+                }
+
+                ds = sqlHelper.ExecuteQuery(sqlQuery);
+                gvCommon_RunSql_SqlResult.DataSource = ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+        #endregion
+
+        private List<ServerInfo> listGenCopyBat_ServerInfo = KernelClass.PhysicalFile.ReadFile(@"Resource/GenCopyBatServers.json").FromJSON<List<ServerInfo>>();
+        private void generate_server_list()
+        {
+            this.plGenCopyBat_ServerList.Controls.Clear();
+
+            bool bPreviewWeb = this.cbGenCopyBat_PreviewWeb.Checked;
+            bool bPreviewAgent = this.cbGenCopyBat_PreviewAgent.Checked;
+            bool bProductWeb = this.cbGenCopyBat_ProductWeb.Checked;
+            bool bProductAgent = this.cbGenCopyBat_ProductAgent.Checked;
+
+            CheckBox[] cbs = new CheckBox[listGenCopyBat_ServerInfo.Count];
+            int i = 0;
+            int index_x = 0;
+            int index_y = 0;
+            ServerType preServerType = ServerType.Null;
+            foreach (var serverInfo in listGenCopyBat_ServerInfo)
+            {
+                if ((bPreviewWeb && serverInfo.ServerType == ServerType.PreviewWeb) ||
+                    (bPreviewAgent && serverInfo.ServerType == ServerType.PreviewAgent) ||
+                    (bProductWeb && serverInfo.ServerType == ServerType.ProductWeb) ||
+                    (bProductAgent && serverInfo.ServerType == ServerType.ProductAgent))
+                {
+                    if (index_y % 6 == 0 && index_y > 1)
+                    {
+                        index_x++;
+                        index_y = 0;
+                    }
+                    if (index_y != 0 && preServerType != serverInfo.ServerType)
+                    {
+                        index_x++;
+                        index_y = 0;
+                    }
+                    preServerType = serverInfo.ServerType;
+
+
+                    cbs[i] = new CheckBox();
+                    cbs[i].AutoSize = true;
+                    cbs[i].Name = "cbField_" + i;
+                    cbs[i].Text = serverInfo.Name;
+                    cbs[i].Location = new System.Drawing.Point(index_x * 120 + 11, 30 * index_y + 11);
+                    this.plGenCopyBat_ServerList.Controls.Add(cbs[i]);
+                    index_y++;
+                }
+                i++;
+            }
+
+        }
+
+        private void cbGenCopyBat_PreviewWeb_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void cbGenCopyBat_PreviewAgent_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void cbGenCopyBat_ProductWeb_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void cbGenCopyBat_ProductAgent_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void btnGenCopyBat_Gen_Click(object sender, EventArgs e)
+        {
+            IDictionary<string, object> dic = new Dictionary<string, object>();
+            string path = @"Resource\GenCopyBat.tm";
+            path = CommonHelper.GetAbsolutePath(path);
+            string sourcePath = this.txtGenCopyBat_SourcePath.Text.Trim();
+            string targetPath = this.txtGenCopyBat_TargetPath.Text.Trim();
+            if (string.IsNullOrEmpty(sourcePath) || string.IsNullOrEmpty(targetPath))
+            {
+                MessageBox.Show("Please input source path and target path");
+                return;
+            }
+            try
+            {
+                IList<Dictionary<string, object>> serverList = new List<Dictionary<string, object>>();
+                
+                for (int i = 0; i < listGenCopyBat_ServerInfo.Count; i++)
+                {
+                    var findControls = this.plGenCopyBat_ServerList.Controls.Find("cbField_" + i, false);
+                    if (findControls.Count() > 0)
+                    {
+                        CheckBox cb = (CheckBox)(findControls[0]);
+                        if (cb.Checked)
+                        {
+                            Dictionary<string, object> dicServer = new Dictionary<string, object>();
+                            ServerInfo serverInfo = listGenCopyBat_ServerInfo[i];
+                            dicServer.Add("Host", serverInfo.Host);
+                            dicServer.Add("Password", serverInfo.LoginPWD);
+                            dicServer.Add("User", serverInfo.LoginID);
+                            string env = string.Empty;
+                            switch (serverInfo.ServerType)
+                            {
+                                case ServerType.PreviewWeb:
+                                case ServerType.PreviewAgent:
+                                    env = "Preview";
+                                    break;
+                                case ServerType.ProductWeb:
+                                case ServerType.ProductAgent:
+                                    env = "Product";
+                                    break;
+
+                            }
+                            dicServer.Add("Source", sourcePath.Replace("{Env}", env).Replace("{CountryCode}", serverInfo.CountryCode));
+                            dicServer.Add("Target", targetPath.Replace("{Env}", env).Replace("{CountryCode}", serverInfo.CountryCode));
+                            serverList.Add(dicServer);
+                        }
+                    }
+                } 
+                if (serverList.Count() == 0)
+                {
+                    MessageBox.Show("Please select server");
+                    return;
+                }
+
+                dic.Add("Date", DateTime.Now.ToString("yyyyMMdd"));
+                dic.Add("ServerList", serverList);
+                dic.Add("IsToLocal", this.cbGenCopyBat_IsToLocal.Checked ? 1 : 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            string batContent = TemplateHelper.GetContent(path, dic);
+            this.rtbGenCopyBat_Result.Text = batContent;
+
+            int index = CommonHelper.getNameIndex(@"Backup\", "_GenCopyBat", ".bat", 1);
+            string batPath = @"Backup\_GenCopyBat_" + DateTime.Now.ToString("yyyyMMdd") + "_V" + index + ".bat";
+            KernelClass.PhysicalFile.AddToFile(batContent, batPath);
+            this.txtGenCopyBat_BatPath.Text = CommonHelper.GetAbsolutePath(batPath);
+             
+        }
+
+        private void cbGenCopyBat_Template_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectItem template = (SelectItem)this.cbGenCopyBat_Template.SelectedItem;
+            this.txtGenCopyBat_SourcePath.Text = template.SourcePath;
+            this.txtGenCopyBat_TargetPath.Text = template.TargetPath;
+            this.cbGenCopyBat_IsToLocal.Checked = template.IsToLocal;
+        }
+
+        private void btnGenCopyBat_RunBat_Click(object sender, EventArgs e)
+        {
+            string batPath = this.txtGenCopyBat_BatPath.Text;
+            if (KernelClass.PhysicalFile.FileExists(batPath))
+            {
+                CommonHelper.RunBat(batPath);
+            }
+        }
+
     }
 
     #region public class or enum
@@ -3397,9 +3689,14 @@ Order by b.LastUserUpdateTime;";
         public string SolrQuery { get; set; }
         public string XmlFilePath { get; set; }
         public string SqlQuery { get; set; }
+        public string SqlParam { get; set; }
         public string ConnStr { get; set; }
         public string ProviderName { get; set; }
 
+        //for gen copy bat
+        public string SourcePath { get; set; }
+        public string TargetPath{get;set;}
+        public bool IsToLocal { get; set; }
     }
 
     public class Abbreviation

@@ -15,24 +15,28 @@ using System.Reflection;
 namespace JobsDBTool.Helper
 {
     public class XmlHelper
-    {        
+    {
         public static Hashtable GetSections(string path, Hashtable ht)
         {
             if (ht == null)
             {
                 ht = new Hashtable();
             }
-            XDocument xDoc = XDocument.Parse(KernelClass.PhysicalFile.ReadFile(path));
-            foreach (var ele in xDoc.Descendants("root").Descendants("add"))
+
+            if (KernelClass.PhysicalFile.FileExists(path))
             {
-                string key = (string)ele.Attribute("key");
-                if (!ht.ContainsKey(key))
+                XDocument xDoc = XDocument.Parse(KernelClass.PhysicalFile.ReadFile(path));
+                foreach (var ele in xDoc.Descendants("root").Descendants("add"))
                 {
-                    ht.Add(key, ele.Value.ToString());
-                }
-                else if (key == "DropDownToText")
-                {
-                    ht[key] = ht[key].ToString() + ele.Value.ToString();
+                    string key = (string)ele.Attribute("key");
+                    if (!ht.ContainsKey(key))
+                    {
+                        ht.Add(key, ele.Value.ToString());
+                    }
+                    else if (key == "DropDownToText")
+                    {
+                        ht[key] = ht[key].ToString() + ele.Value.ToString();
+                    }
                 }
             }
 

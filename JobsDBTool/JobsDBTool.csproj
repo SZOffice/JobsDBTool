@@ -195,6 +195,7 @@
     <Compile Include="Helper\LoadDataForWording.cs" />
     <Compile Include="Models\Database.Extend.cs" />
     <Compile Include="Models\Domain\Document.cs" />
+    <Compile Include="Models\Domain\ServerInfo.cs" />
     <Compile Include="Models\Domain\TaskLog.cs" />
     <Compile Include="Models\Domain\TaskStatus.cs" />
     <Compile Include="Models\Generated\Database.cs">
@@ -260,6 +261,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\CommonTab.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Wording.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -284,6 +289,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resource\GenCopyBat.tm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\GenCopyBatServers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resource\GenerateCountry.sql.tm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

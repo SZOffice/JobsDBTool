@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="DropDownToText">
+    <![CDATA[
+        <columns name="Common_RunSql_Template">
+          <column name="GetRCLoginInfo">
+            <SqlQuery>
+              SELECT em.EmployerID, em.AccountNum, em.SubAccount, eup.UserManagementID
+              FROM JobsDBHK.dbo.EmpMast em WITH(NOLOCK)
+              INNER JOIN JobsDBHK.dbo.Emp_UserManagement_Profile eup WITH(NOLOCK) ON em.EmployerID=eup.EmployerID AND eup.UserType=1
+              WHERE AccountNum=@AccountNum
+            </SqlQuery>
+            <SqlParam>
+              AccountNum:730;
+              EmployerId:100300085
+            </SqlParam>
+          </column>
+        </columns>   
+        
+        <columns name="Common_GenCopyBat_Template">
+          <column name="Copy Web.Config to local">
+            <SourcePath>d$\jobsDBv8\JobsDB.Web\web.config</SourcePath>
+            <TargetPath>{Env}_{CountryCode}\JobsDB.Web\</TargetPath>
+            <IsToLocal>1</IsToLocal>
+          </column>
+          <column name="Copy Web.Config from local">
+            <SourcePath>d:\jobsDBv8\JobsDB.Web\web.config</SourcePath>
+            <TargetPath>d$\jobsDBv8\JobsDB.Web\web.config</TargetPath>
+            <IsToLocal>0</IsToLocal>
+          </column>
+        </columns>
+      ]]>
+  </add>
+</root>

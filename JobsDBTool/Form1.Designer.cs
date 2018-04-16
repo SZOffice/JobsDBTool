@@ -75,6 +75,31 @@
             this.extractdll_btnReorder = new System.Windows.Forms.Button();
             this.extractdll_rtbSource = new System.Windows.Forms.RichTextBox();
             this.extractdll_Result = new System.Windows.Forms.RichTextBox();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.rtbCommon_RunSql_SqlQuery = new System.Windows.Forms.RichTextBox();
+            this.plCommon_RunSql_Params = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.cbCommon_RunSql_SqlTemplate = new System.Windows.Forms.ComboBox();
+            this.gvCommon_RunSql_SqlResult = new System.Windows.Forms.DataGridView();
+            this.btnCommon_RunSql_Run = new System.Windows.Forms.Button();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.cbGenCopyBat_IsToLocal = new System.Windows.Forms.CheckBox();
+            this.btnGenCopyBat_Gen = new System.Windows.Forms.Button();
+            this.plGenCopyBat_ServerList = new System.Windows.Forms.Panel();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.txtGenCopyBat_BatPath = new System.Windows.Forms.TextBox();
+            this.rtbGenCopyBat_Result = new System.Windows.Forms.RichTextBox();
+            this.btnGenCopyBat_RunBat = new System.Windows.Forms.Button();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.cbGenCopyBat_ProductAgent = new System.Windows.Forms.CheckBox();
+            this.cbGenCopyBat_ProductWeb = new System.Windows.Forms.CheckBox();
+            this.cbGenCopyBat_PreviewAgent = new System.Windows.Forms.CheckBox();
+            this.cbGenCopyBat_PreviewWeb = new System.Windows.Forms.CheckBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.txtGenCopyBat_TargetPath = new System.Windows.Forms.TextBox();
+            this.cbGenCopyBat_Template = new System.Windows.Forms.ComboBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.txtGenCopyBat_SourcePath = new System.Windows.Forms.TextBox();
             this.tp_AddWordings = new System.Windows.Forms.TabPage();
             this.tc_AddWordings = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -311,6 +336,16 @@
             this.label35 = new System.Windows.Forms.Label();
             this.others_txtEmployerId = new System.Windows.Forms.TextBox();
             this.tp_ABTesting = new System.Windows.Forms.TabPage();
+            this.btnAB_GetGroup = new System.Windows.Forms.Button();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.rtbAB_Result = new System.Windows.Forms.RichTextBox();
+            this.btnAB_GetValue = new System.Windows.Forms.Button();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtAB_Proportion = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txtAB_GroupKey = new System.Windows.Forms.TextBox();
+            this.rtbAB_EmployerIds = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbSourceConnName = new System.Windows.Forms.ComboBox();
             this.txtSourceConnStr = new System.Windows.Forms.TextBox();
@@ -318,16 +353,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.groupBox19 = new System.Windows.Forms.GroupBox();
-            this.rtbAB_EmployerIds = new System.Windows.Forms.RichTextBox();
-            this.btnAB_GetValue = new System.Windows.Forms.Button();
-            this.rtbAB_Result = new System.Windows.Forms.RichTextBox();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.txtAB_GroupKey = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.txtAB_Proportion = new System.Windows.Forms.TextBox();
-            this.btnAB_GetGroup = new System.Windows.Forms.Button();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -342,6 +367,11 @@
             this.document_cmsDoc.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCommon_RunSql_SqlResult)).BeginInit();
+            this.tabPage11.SuspendLayout();
+            this.groupBox22.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.tp_AddWordings.SuspendLayout();
             this.tc_AddWordings.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -380,9 +410,9 @@
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tp_ABTesting.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox19.SuspendLayout();
             this.groupBox20.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -503,6 +533,8 @@
             this.tabControl3.Controls.Add(this.tabPage6);
             this.tabControl3.Controls.Add(this.tabPage7);
             this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.Controls.Add(this.tabPage10);
+            this.tabControl3.Controls.Add(this.tabPage11);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl3.Location = new System.Drawing.Point(3, 16);
             this.tabControl3.Name = "tabControl3";
@@ -863,6 +895,259 @@
             this.extractdll_Result.TabIndex = 1;
             this.extractdll_Result.Text = "";
             // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.rtbCommon_RunSql_SqlQuery);
+            this.tabPage10.Controls.Add(this.plCommon_RunSql_Params);
+            this.tabPage10.Controls.Add(this.label45);
+            this.tabPage10.Controls.Add(this.cbCommon_RunSql_SqlTemplate);
+            this.tabPage10.Controls.Add(this.gvCommon_RunSql_SqlResult);
+            this.tabPage10.Controls.Add(this.btnCommon_RunSql_Run);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Size = new System.Drawing.Size(833, 376);
+            this.tabPage10.TabIndex = 3;
+            this.tabPage10.Text = "Run Sql";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // rtbCommon_RunSql_SqlQuery
+            // 
+            this.rtbCommon_RunSql_SqlQuery.Location = new System.Drawing.Point(3, 39);
+            this.rtbCommon_RunSql_SqlQuery.Name = "rtbCommon_RunSql_SqlQuery";
+            this.rtbCommon_RunSql_SqlQuery.Size = new System.Drawing.Size(370, 88);
+            this.rtbCommon_RunSql_SqlQuery.TabIndex = 54;
+            this.rtbCommon_RunSql_SqlQuery.Text = "";
+            // 
+            // plCommon_RunSql_Params
+            // 
+            this.plCommon_RunSql_Params.AutoScroll = true;
+            this.plCommon_RunSql_Params.BackColor = System.Drawing.Color.Transparent;
+            this.plCommon_RunSql_Params.Location = new System.Drawing.Point(399, 5);
+            this.plCommon_RunSql_Params.Name = "plCommon_RunSql_Params";
+            this.plCommon_RunSql_Params.Size = new System.Drawing.Size(434, 120);
+            this.plCommon_RunSql_Params.TabIndex = 53;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(19, 15);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(51, 13);
+            this.label45.TabIndex = 27;
+            this.label45.Text = "Template";
+            // 
+            // cbCommon_RunSql_SqlTemplate
+            // 
+            this.cbCommon_RunSql_SqlTemplate.FormattingEnabled = true;
+            this.cbCommon_RunSql_SqlTemplate.Location = new System.Drawing.Point(81, 12);
+            this.cbCommon_RunSql_SqlTemplate.Name = "cbCommon_RunSql_SqlTemplate";
+            this.cbCommon_RunSql_SqlTemplate.Size = new System.Drawing.Size(160, 21);
+            this.cbCommon_RunSql_SqlTemplate.TabIndex = 52;
+            this.cbCommon_RunSql_SqlTemplate.SelectedIndexChanged += new System.EventHandler(this.cbCommon_RunSql__SqlTemplate_SelectedIndexChanged);
+            // 
+            // gvCommon_RunSql_SqlResult
+            // 
+            this.gvCommon_RunSql_SqlResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvCommon_RunSql_SqlResult.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gvCommon_RunSql_SqlResult.Location = new System.Drawing.Point(0, 129);
+            this.gvCommon_RunSql_SqlResult.Name = "gvCommon_RunSql_SqlResult";
+            this.gvCommon_RunSql_SqlResult.Size = new System.Drawing.Size(833, 247);
+            this.gvCommon_RunSql_SqlResult.TabIndex = 51;
+            // 
+            // btnCommon_RunSql_Run
+            // 
+            this.btnCommon_RunSql_Run.Location = new System.Drawing.Point(298, 10);
+            this.btnCommon_RunSql_Run.Name = "btnCommon_RunSql_Run";
+            this.btnCommon_RunSql_Run.Size = new System.Drawing.Size(75, 23);
+            this.btnCommon_RunSql_Run.TabIndex = 50;
+            this.btnCommon_RunSql_Run.Text = "Run Sql";
+            this.btnCommon_RunSql_Run.UseVisualStyleBackColor = true;
+            this.btnCommon_RunSql_Run.Click += new System.EventHandler(this.btnCommon_RunSql_Run_Click);
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.cbGenCopyBat_IsToLocal);
+            this.tabPage11.Controls.Add(this.btnGenCopyBat_Gen);
+            this.tabPage11.Controls.Add(this.plGenCopyBat_ServerList);
+            this.tabPage11.Controls.Add(this.groupBox22);
+            this.tabPage11.Controls.Add(this.groupBox21);
+            this.tabPage11.Controls.Add(this.label48);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_TargetPath);
+            this.tabPage11.Controls.Add(this.cbGenCopyBat_Template);
+            this.tabPage11.Controls.Add(this.label47);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_SourcePath);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Size = new System.Drawing.Size(833, 376);
+            this.tabPage11.TabIndex = 4;
+            this.tabPage11.Text = "Gen Copy Bat";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // cbGenCopyBat_IsToLocal
+            // 
+            this.cbGenCopyBat_IsToLocal.AutoSize = true;
+            this.cbGenCopyBat_IsToLocal.Location = new System.Drawing.Point(72, 120);
+            this.cbGenCopyBat_IsToLocal.Name = "cbGenCopyBat_IsToLocal";
+            this.cbGenCopyBat_IsToLocal.Size = new System.Drawing.Size(75, 17);
+            this.cbGenCopyBat_IsToLocal.TabIndex = 96;
+            this.cbGenCopyBat_IsToLocal.Text = "Is to Local";
+            this.cbGenCopyBat_IsToLocal.UseVisualStyleBackColor = true;
+            // 
+            // btnGenCopyBat_Gen
+            // 
+            this.btnGenCopyBat_Gen.Location = new System.Drawing.Point(326, 116);
+            this.btnGenCopyBat_Gen.Name = "btnGenCopyBat_Gen";
+            this.btnGenCopyBat_Gen.Size = new System.Drawing.Size(105, 23);
+            this.btnGenCopyBat_Gen.TabIndex = 93;
+            this.btnGenCopyBat_Gen.Text = "Gen Bat";
+            this.btnGenCopyBat_Gen.UseVisualStyleBackColor = true;
+            this.btnGenCopyBat_Gen.Click += new System.EventHandler(this.btnGenCopyBat_Gen_Click);
+            // 
+            // plGenCopyBat_ServerList
+            // 
+            this.plGenCopyBat_ServerList.AutoScroll = true;
+            this.plGenCopyBat_ServerList.BackColor = System.Drawing.Color.Transparent;
+            this.plGenCopyBat_ServerList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.plGenCopyBat_ServerList.Location = new System.Drawing.Point(0, 195);
+            this.plGenCopyBat_ServerList.Name = "plGenCopyBat_ServerList";
+            this.plGenCopyBat_ServerList.Size = new System.Drawing.Size(488, 181);
+            this.plGenCopyBat_ServerList.TabIndex = 92;
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.txtGenCopyBat_BatPath);
+            this.groupBox22.Controls.Add(this.rtbGenCopyBat_Result);
+            this.groupBox22.Controls.Add(this.btnGenCopyBat_RunBat);
+            this.groupBox22.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox22.Location = new System.Drawing.Point(488, 0);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(345, 376);
+            this.groupBox22.TabIndex = 94;
+            this.groupBox22.TabStop = false;
+            // 
+            // txtGenCopyBat_BatPath
+            // 
+            this.txtGenCopyBat_BatPath.Location = new System.Drawing.Point(5, 17);
+            this.txtGenCopyBat_BatPath.Name = "txtGenCopyBat_BatPath";
+            this.txtGenCopyBat_BatPath.Size = new System.Drawing.Size(256, 20);
+            this.txtGenCopyBat_BatPath.TabIndex = 64;
+            // 
+            // rtbGenCopyBat_Result
+            // 
+            this.rtbGenCopyBat_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbGenCopyBat_Result.Location = new System.Drawing.Point(3, 52);
+            this.rtbGenCopyBat_Result.Name = "rtbGenCopyBat_Result";
+            this.rtbGenCopyBat_Result.Size = new System.Drawing.Size(339, 321);
+            this.rtbGenCopyBat_Result.TabIndex = 55;
+            this.rtbGenCopyBat_Result.Text = "";
+            // 
+            // btnGenCopyBat_RunBat
+            // 
+            this.btnGenCopyBat_RunBat.Location = new System.Drawing.Point(267, 15);
+            this.btnGenCopyBat_RunBat.Name = "btnGenCopyBat_RunBat";
+            this.btnGenCopyBat_RunBat.Size = new System.Drawing.Size(75, 23);
+            this.btnGenCopyBat_RunBat.TabIndex = 51;
+            this.btnGenCopyBat_RunBat.Text = "Run Bat";
+            this.btnGenCopyBat_RunBat.UseVisualStyleBackColor = true;
+            this.btnGenCopyBat_RunBat.Click += new System.EventHandler(this.btnGenCopyBat_RunBat_Click);
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_ProductAgent);
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_ProductWeb);
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_PreviewAgent);
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_PreviewWeb);
+            this.groupBox21.Location = new System.Drawing.Point(17, 145);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(465, 39);
+            this.groupBox21.TabIndex = 91;
+            this.groupBox21.TabStop = false;
+            // 
+            // cbGenCopyBat_ProductAgent
+            // 
+            this.cbGenCopyBat_ProductAgent.AutoSize = true;
+            this.cbGenCopyBat_ProductAgent.Location = new System.Drawing.Point(359, 15);
+            this.cbGenCopyBat_ProductAgent.Name = "cbGenCopyBat_ProductAgent";
+            this.cbGenCopyBat_ProductAgent.Size = new System.Drawing.Size(94, 17);
+            this.cbGenCopyBat_ProductAgent.TabIndex = 95;
+            this.cbGenCopyBat_ProductAgent.Text = "Product Agent";
+            this.cbGenCopyBat_ProductAgent.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_ProductAgent.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_ProductAgent_CheckedChanged);
+            // 
+            // cbGenCopyBat_ProductWeb
+            // 
+            this.cbGenCopyBat_ProductWeb.AutoSize = true;
+            this.cbGenCopyBat_ProductWeb.Location = new System.Drawing.Point(241, 15);
+            this.cbGenCopyBat_ProductWeb.Name = "cbGenCopyBat_ProductWeb";
+            this.cbGenCopyBat_ProductWeb.Size = new System.Drawing.Size(89, 17);
+            this.cbGenCopyBat_ProductWeb.TabIndex = 94;
+            this.cbGenCopyBat_ProductWeb.Text = "Product Web";
+            this.cbGenCopyBat_ProductWeb.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_ProductWeb.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_ProductWeb_CheckedChanged);
+            // 
+            // cbGenCopyBat_PreviewAgent
+            // 
+            this.cbGenCopyBat_PreviewAgent.AutoSize = true;
+            this.cbGenCopyBat_PreviewAgent.Location = new System.Drawing.Point(118, 15);
+            this.cbGenCopyBat_PreviewAgent.Name = "cbGenCopyBat_PreviewAgent";
+            this.cbGenCopyBat_PreviewAgent.Size = new System.Drawing.Size(95, 17);
+            this.cbGenCopyBat_PreviewAgent.TabIndex = 93;
+            this.cbGenCopyBat_PreviewAgent.Text = "Preview Agent";
+            this.cbGenCopyBat_PreviewAgent.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_PreviewAgent.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_PreviewAgent_CheckedChanged);
+            // 
+            // cbGenCopyBat_PreviewWeb
+            // 
+            this.cbGenCopyBat_PreviewWeb.AutoSize = true;
+            this.cbGenCopyBat_PreviewWeb.Location = new System.Drawing.Point(15, 15);
+            this.cbGenCopyBat_PreviewWeb.Name = "cbGenCopyBat_PreviewWeb";
+            this.cbGenCopyBat_PreviewWeb.Size = new System.Drawing.Size(90, 17);
+            this.cbGenCopyBat_PreviewWeb.TabIndex = 92;
+            this.cbGenCopyBat_PreviewWeb.Text = "Preview Web";
+            this.cbGenCopyBat_PreviewWeb.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_PreviewWeb.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_PreviewWeb_CheckedChanged);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(1, 84);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(63, 13);
+            this.label48.TabIndex = 64;
+            this.label48.Text = "Target Path";
+            // 
+            // txtGenCopyBat_TargetPath
+            // 
+            this.txtGenCopyBat_TargetPath.Location = new System.Drawing.Point(71, 84);
+            this.txtGenCopyBat_TargetPath.Name = "txtGenCopyBat_TargetPath";
+            this.txtGenCopyBat_TargetPath.Size = new System.Drawing.Size(360, 20);
+            this.txtGenCopyBat_TargetPath.TabIndex = 63;
+            // 
+            // cbGenCopyBat_Template
+            // 
+            this.cbGenCopyBat_Template.FormattingEnabled = true;
+            this.cbGenCopyBat_Template.Location = new System.Drawing.Point(72, 17);
+            this.cbGenCopyBat_Template.Name = "cbGenCopyBat_Template";
+            this.cbGenCopyBat_Template.Size = new System.Drawing.Size(185, 21);
+            this.cbGenCopyBat_Template.TabIndex = 62;
+            this.cbGenCopyBat_Template.SelectedIndexChanged += new System.EventHandler(this.cbGenCopyBat_Template_SelectedIndexChanged);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(1, 52);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(66, 13);
+            this.label47.TabIndex = 61;
+            this.label47.Text = "Source Path";
+            // 
+            // txtGenCopyBat_SourcePath
+            // 
+            this.txtGenCopyBat_SourcePath.Location = new System.Drawing.Point(71, 52);
+            this.txtGenCopyBat_SourcePath.Name = "txtGenCopyBat_SourcePath";
+            this.txtGenCopyBat_SourcePath.Size = new System.Drawing.Size(360, 20);
+            this.txtGenCopyBat_SourcePath.TabIndex = 60;
+            // 
             // tp_AddWordings
             // 
             this.tp_AddWordings.AutoScroll = true;
@@ -1084,7 +1369,7 @@
             // 
             // lbWordingGroup
             // 
-            this.lbWordingGroup.Font = new System.Drawing.Font("宋体", 10F);
+            this.lbWordingGroup.Font = new System.Drawing.Font("SimSun", 10F);
             this.lbWordingGroup.FormattingEnabled = true;
             this.lbWordingGroup.Location = new System.Drawing.Point(160, 178);
             this.lbWordingGroup.Name = "lbWordingGroup";
@@ -1105,7 +1390,7 @@
             // txtGetData
             // 
             this.txtGetData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtGetData.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtGetData.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtGetData.Location = new System.Drawing.Point(3, 3);
             this.txtGetData.Multiline = true;
             this.txtGetData.Name = "txtGetData";
@@ -1147,7 +1432,7 @@
             // txtGetString
             // 
             this.txtGetString.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtGetString.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtGetString.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtGetString.Location = new System.Drawing.Point(186, 0);
             this.txtGetString.Multiline = true;
             this.txtGetString.Name = "txtGetString";
@@ -1170,7 +1455,7 @@
             // txtAddWordings_WordingKeySql
             // 
             this.txtAddWordings_WordingKeySql.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtAddWordings_WordingKeySql.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtAddWordings_WordingKeySql.Location = new System.Drawing.Point(0, 0);
             this.txtAddWordings_WordingKeySql.Multiline = true;
             this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
@@ -1182,7 +1467,7 @@
             // txtContent
             // 
             this.txtContent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtContent.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtContent.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtContent.Location = new System.Drawing.Point(0, 90);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
@@ -1448,7 +1733,7 @@
             // txtClassField
             // 
             this.txtClassField.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtClassField.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtClassField.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtClassField.Location = new System.Drawing.Point(0, 0);
             this.txtClassField.Multiline = true;
             this.txtClassField.Name = "txtClassField";
@@ -1505,7 +1790,7 @@
             // 
             // txtBackupTaskSubmitResult
             // 
-            this.txtBackupTaskSubmitResult.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtBackupTaskSubmitResult.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtBackupTaskSubmitResult.Location = new System.Drawing.Point(15, 263);
             this.txtBackupTaskSubmitResult.Multiline = true;
             this.txtBackupTaskSubmitResult.Name = "txtBackupTaskSubmitResult";
@@ -1621,7 +1906,7 @@
             // 
             // txtBackupTaskFileList
             // 
-            this.txtBackupTaskFileList.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtBackupTaskFileList.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtBackupTaskFileList.Location = new System.Drawing.Point(470, 89);
             this.txtBackupTaskFileList.Multiline = true;
             this.txtBackupTaskFileList.Name = "txtBackupTaskFileList";
@@ -2078,7 +2363,7 @@
             // txtOperateDB_List
             // 
             this.txtOperateDB_List.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_List.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtOperateDB_List.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtOperateDB_List.Location = new System.Drawing.Point(3, 206);
             this.txtOperateDB_List.Multiline = true;
             this.txtOperateDB_List.Name = "txtOperateDB_List";
@@ -2442,7 +2727,7 @@
             // txtOperateDB_Country_Content
             // 
             this.txtOperateDB_Country_Content.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_Country_Content.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtOperateDB_Country_Content.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtOperateDB_Country_Content.Location = new System.Drawing.Point(0, 78);
             this.txtOperateDB_Country_Content.Multiline = true;
             this.txtOperateDB_Country_Content.Name = "txtOperateDB_Country_Content";
@@ -2492,7 +2777,7 @@
             // txtOperateDB_Sql
             // 
             this.txtOperateDB_Sql.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtOperateDB_Sql.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtOperateDB_Sql.Font = new System.Drawing.Font("SimSun", 12F);
             this.txtOperateDB_Sql.Location = new System.Drawing.Point(3, 100);
             this.txtOperateDB_Sql.Multiline = true;
             this.txtOperateDB_Sql.Name = "txtOperateDB_Sql";
@@ -2831,7 +3116,7 @@
             // 
             // lbPartial_QueryResult
             // 
-            this.lbPartial_QueryResult.Font = new System.Drawing.Font("宋体", 10F);
+            this.lbPartial_QueryResult.Font = new System.Drawing.Font("SimSun", 10F);
             this.lbPartial_QueryResult.FormattingEnabled = true;
             this.lbPartial_QueryResult.Location = new System.Drawing.Point(403, 8);
             this.lbPartial_QueryResult.Name = "lbPartial_QueryResult";
@@ -3397,6 +3682,102 @@
             this.tp_ABTesting.Text = "A/B Testing";
             this.tp_ABTesting.UseVisualStyleBackColor = true;
             // 
+            // btnAB_GetGroup
+            // 
+            this.btnAB_GetGroup.Location = new System.Drawing.Point(430, 233);
+            this.btnAB_GetGroup.Name = "btnAB_GetGroup";
+            this.btnAB_GetGroup.Size = new System.Drawing.Size(166, 23);
+            this.btnAB_GetGroup.TabIndex = 96;
+            this.btnAB_GetGroup.Text = "Get A/B Testing Group";
+            this.btnAB_GetGroup.UseVisualStyleBackColor = true;
+            this.btnAB_GetGroup.Click += new System.EventHandler(this.btnAB_GetGroup_Click);
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.rtbAB_Result);
+            this.groupBox20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox20.Location = new System.Drawing.Point(0, 262);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(847, 159);
+            this.groupBox20.TabIndex = 95;
+            this.groupBox20.TabStop = false;
+            // 
+            // rtbAB_Result
+            // 
+            this.rtbAB_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbAB_Result.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbAB_Result.Location = new System.Drawing.Point(3, 10);
+            this.rtbAB_Result.Name = "rtbAB_Result";
+            this.rtbAB_Result.Size = new System.Drawing.Size(841, 146);
+            this.rtbAB_Result.TabIndex = 94;
+            this.rtbAB_Result.Text = "";
+            // 
+            // btnAB_GetValue
+            // 
+            this.btnAB_GetValue.Location = new System.Drawing.Point(208, 233);
+            this.btnAB_GetValue.Name = "btnAB_GetValue";
+            this.btnAB_GetValue.Size = new System.Drawing.Size(166, 23);
+            this.btnAB_GetValue.TabIndex = 93;
+            this.btnAB_GetValue.Text = "Get A/B Testing Value";
+            this.btnAB_GetValue.UseVisualStyleBackColor = true;
+            this.btnAB_GetValue.Click += new System.EventHandler(this.btnAB_GetValue_Click);
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.label44);
+            this.groupBox19.Controls.Add(this.txtAB_Proportion);
+            this.groupBox19.Controls.Add(this.label42);
+            this.groupBox19.Controls.Add(this.txtAB_GroupKey);
+            this.groupBox19.Controls.Add(this.rtbAB_EmployerIds);
+            this.groupBox19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox19.Location = new System.Drawing.Point(0, 0);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(847, 216);
+            this.groupBox19.TabIndex = 90;
+            this.groupBox19.TabStop = false;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(465, 20);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(55, 13);
+            this.label44.TabIndex = 96;
+            this.label44.Text = "Proportion";
+            // 
+            // txtAB_Proportion
+            // 
+            this.txtAB_Proportion.Location = new System.Drawing.Point(539, 17);
+            this.txtAB_Proportion.Name = "txtAB_Proportion";
+            this.txtAB_Proportion.Size = new System.Drawing.Size(222, 20);
+            this.txtAB_Proportion.TabIndex = 95;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(39, 20);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(57, 13);
+            this.label42.TabIndex = 94;
+            this.label42.Text = "Group Key";
+            // 
+            // txtAB_GroupKey
+            // 
+            this.txtAB_GroupKey.Location = new System.Drawing.Point(102, 17);
+            this.txtAB_GroupKey.Name = "txtAB_GroupKey";
+            this.txtAB_GroupKey.Size = new System.Drawing.Size(237, 20);
+            this.txtAB_GroupKey.TabIndex = 93;
+            // 
+            // rtbAB_EmployerIds
+            // 
+            this.rtbAB_EmployerIds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbAB_EmployerIds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbAB_EmployerIds.Location = new System.Drawing.Point(3, 62);
+            this.rtbAB_EmployerIds.Name = "rtbAB_EmployerIds";
+            this.rtbAB_EmployerIds.Size = new System.Drawing.Size(841, 151);
+            this.rtbAB_EmployerIds.TabIndex = 92;
+            this.rtbAB_EmployerIds.Text = "";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tc1);
@@ -3447,102 +3828,6 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // groupBox19
-            // 
-            this.groupBox19.Controls.Add(this.label44);
-            this.groupBox19.Controls.Add(this.txtAB_Proportion);
-            this.groupBox19.Controls.Add(this.label42);
-            this.groupBox19.Controls.Add(this.txtAB_GroupKey);
-            this.groupBox19.Controls.Add(this.rtbAB_EmployerIds);
-            this.groupBox19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox19.Location = new System.Drawing.Point(0, 0);
-            this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(847, 216);
-            this.groupBox19.TabIndex = 90;
-            this.groupBox19.TabStop = false;
-            // 
-            // rtbAB_EmployerIds
-            // 
-            this.rtbAB_EmployerIds.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbAB_EmployerIds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbAB_EmployerIds.Location = new System.Drawing.Point(3, 62);
-            this.rtbAB_EmployerIds.Name = "rtbAB_EmployerIds";
-            this.rtbAB_EmployerIds.Size = new System.Drawing.Size(841, 151);
-            this.rtbAB_EmployerIds.TabIndex = 92;
-            this.rtbAB_EmployerIds.Text = "";
-            // 
-            // btnAB_GetValue
-            // 
-            this.btnAB_GetValue.Location = new System.Drawing.Point(208, 233);
-            this.btnAB_GetValue.Name = "btnAB_GetValue";
-            this.btnAB_GetValue.Size = new System.Drawing.Size(166, 23);
-            this.btnAB_GetValue.TabIndex = 93;
-            this.btnAB_GetValue.Text = "Get A/B Testing Value";
-            this.btnAB_GetValue.UseVisualStyleBackColor = true;
-            this.btnAB_GetValue.Click += new System.EventHandler(this.btnAB_GetValue_Click);
-            // 
-            // rtbAB_Result
-            // 
-            this.rtbAB_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbAB_Result.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbAB_Result.Location = new System.Drawing.Point(3, 10);
-            this.rtbAB_Result.Name = "rtbAB_Result";
-            this.rtbAB_Result.Size = new System.Drawing.Size(841, 146);
-            this.rtbAB_Result.TabIndex = 94;
-            this.rtbAB_Result.Text = "";
-            // 
-            // groupBox20
-            // 
-            this.groupBox20.Controls.Add(this.rtbAB_Result);
-            this.groupBox20.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox20.Location = new System.Drawing.Point(0, 262);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(847, 159);
-            this.groupBox20.TabIndex = 95;
-            this.groupBox20.TabStop = false;
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(39, 20);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(57, 13);
-            this.label42.TabIndex = 94;
-            this.label42.Text = "Group Key";
-            // 
-            // txtAB_GroupKey
-            // 
-            this.txtAB_GroupKey.Location = new System.Drawing.Point(102, 17);
-            this.txtAB_GroupKey.Name = "txtAB_GroupKey";
-            this.txtAB_GroupKey.Size = new System.Drawing.Size(237, 20);
-            this.txtAB_GroupKey.TabIndex = 93;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(465, 20);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(55, 13);
-            this.label44.TabIndex = 96;
-            this.label44.Text = "Proportion";
-            // 
-            // txtAB_Proportion
-            // 
-            this.txtAB_Proportion.Location = new System.Drawing.Point(539, 17);
-            this.txtAB_Proportion.Name = "txtAB_Proportion";
-            this.txtAB_Proportion.Size = new System.Drawing.Size(222, 20);
-            this.txtAB_Proportion.TabIndex = 95;
-            // 
-            // btnAB_GetGroup
-            // 
-            this.btnAB_GetGroup.Location = new System.Drawing.Point(430, 233);
-            this.btnAB_GetGroup.Name = "btnAB_GetGroup";
-            this.btnAB_GetGroup.Size = new System.Drawing.Size(166, 23);
-            this.btnAB_GetGroup.TabIndex = 96;
-            this.btnAB_GetGroup.Text = "Get A/B Testing Group";
-            this.btnAB_GetGroup.UseVisualStyleBackColor = true;
-            this.btnAB_GetGroup.Click += new System.EventHandler(this.btnAB_GetGroup_Click);
-            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3577,6 +3862,15 @@
             this.document_cmsDoc.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.groupBox18.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCommon_RunSql_SqlResult)).EndInit();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            this.groupBox22.ResumeLayout(false);
+            this.groupBox22.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.tp_AddWordings.ResumeLayout(false);
             this.tp_AddWordings.PerformLayout();
             this.tc_AddWordings.ResumeLayout(false);
@@ -3641,10 +3935,10 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.tp_ABTesting.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
-            this.groupBox20.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3950,6 +4244,31 @@
         private System.Windows.Forms.TextBox txtAB_Proportion;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox txtAB_GroupKey;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.DataGridView gvCommon_RunSql_SqlResult;
+        private System.Windows.Forms.Button btnCommon_RunSql_Run;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.ComboBox cbCommon_RunSql_SqlTemplate;
+        private System.Windows.Forms.Panel plCommon_RunSql_Params;
+        private System.Windows.Forms.RichTextBox rtbCommon_RunSql_SqlQuery;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.ComboBox cbGenCopyBat_Template;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox txtGenCopyBat_SourcePath;
+        private System.Windows.Forms.RichTextBox rtbGenCopyBat_Result;
+        private System.Windows.Forms.Button btnGenCopyBat_RunBat;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox txtGenCopyBat_TargetPath;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_ProductAgent;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_ProductWeb;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_PreviewAgent;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_PreviewWeb;
+        private System.Windows.Forms.Panel plGenCopyBat_ServerList;
+        private System.Windows.Forms.Button btnGenCopyBat_Gen;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.TextBox txtGenCopyBat_BatPath;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_IsToLocal;
     }
 }
 
