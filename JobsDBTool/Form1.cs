@@ -1207,12 +1207,20 @@ namespace JobsDBTool
                 }
                 else
                 {
+                    StringBuilder sbSqlScriptComment = new StringBuilder();
+                    string sSqlScriptComment = this.txtAddWordings_Result_SqlScriptComment.Text.Trim();
+                    if (!string.IsNullOrEmpty(sSqlScriptComment))
+                    {
+                        sbSqlScriptComment.AppendLine("/****").AppendLine();
+                        sbSqlScriptComment.AppendLine(sSqlScriptComment).AppendLine();
+                        sbSqlScriptComment.AppendLine("****/").AppendLine();
+                    }
+
                     string filePath = string.Format(genSqlQueryPathPath, DateTime.Now.ToString("yyyyMMdd"));
-                    KernelClass.PhysicalFile.SaveFile(sbWholeSqlQuery.ToString(), filePath, false, Encoding.UTF8);
+                    KernelClass.PhysicalFile.SaveFile(sbSqlScriptComment.ToString() + sbWholeSqlQuery.ToString(), filePath, false, Encoding.UTF8);
                     this.lbWording_SqlQueryPath.Text = filePath;
                     this.lbWording_SqlQueryPath.Click += lbWording_SqlQueryPath_Click;
                     this.lbWording_SqlQueryPath.Visible = true;
-                    this.lbWording_SqlQueryPathLabel.Visible = true;
                 }
 
                 MessageBox.Show("Successed.");
