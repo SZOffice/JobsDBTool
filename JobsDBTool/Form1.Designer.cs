@@ -132,7 +132,6 @@
             this.txtAddWordings_WordingKeySql = new System.Windows.Forms.TextBox();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.tp_Result = new System.Windows.Forms.TabPage();
-            this.lbWording_SqlQueryPathLabel = new System.Windows.Forms.Label();
             this.lbWording_SqlQueryPath = new System.Windows.Forms.Label();
             this.btnWording_GenSqlQuery = new System.Windows.Forms.Button();
             this.cbHelpColumns = new System.Windows.Forms.CheckBox();
@@ -353,6 +352,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.txtAddWordings_Result_SqlScriptComment = new System.Windows.Forms.TextBox();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -1478,7 +1478,7 @@
             // 
             // tp_Result
             // 
-            this.tp_Result.Controls.Add(this.lbWording_SqlQueryPathLabel);
+            this.tp_Result.Controls.Add(this.txtAddWordings_Result_SqlScriptComment);
             this.tp_Result.Controls.Add(this.lbWording_SqlQueryPath);
             this.tp_Result.Controls.Add(this.btnWording_GenSqlQuery);
             this.tp_Result.Controls.Add(this.cbHelpColumns);
@@ -1495,23 +1495,12 @@
             this.tp_Result.Text = "    Result    ";
             this.tp_Result.UseVisualStyleBackColor = true;
             // 
-            // lbWording_SqlQueryPathLabel
-            // 
-            this.lbWording_SqlQueryPathLabel.AutoSize = true;
-            this.lbWording_SqlQueryPathLabel.ForeColor = System.Drawing.Color.Red;
-            this.lbWording_SqlQueryPathLabel.Location = new System.Drawing.Point(84, 35);
-            this.lbWording_SqlQueryPathLabel.Name = "lbWording_SqlQueryPathLabel";
-            this.lbWording_SqlQueryPathLabel.Size = new System.Drawing.Size(81, 13);
-            this.lbWording_SqlQueryPathLabel.TabIndex = 57;
-            this.lbWording_SqlQueryPathLabel.Text = "Sql Query Path:";
-            this.lbWording_SqlQueryPathLabel.Visible = false;
-            // 
             // lbWording_SqlQueryPath
             // 
             this.lbWording_SqlQueryPath.AutoSize = true;
             this.lbWording_SqlQueryPath.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbWording_SqlQueryPath.ForeColor = System.Drawing.Color.Red;
-            this.lbWording_SqlQueryPath.Location = new System.Drawing.Point(163, 36);
+            this.lbWording_SqlQueryPath.Location = new System.Drawing.Point(417, 43);
             this.lbWording_SqlQueryPath.Name = "lbWording_SqlQueryPath";
             this.lbWording_SqlQueryPath.Size = new System.Drawing.Size(29, 13);
             this.lbWording_SqlQueryPath.TabIndex = 56;
@@ -1520,18 +1509,18 @@
             // 
             // btnWording_GenSqlQuery
             // 
-            this.btnWording_GenSqlQuery.Location = new System.Drawing.Point(532, 11);
+            this.btnWording_GenSqlQuery.Location = new System.Drawing.Point(317, 37);
             this.btnWording_GenSqlQuery.Name = "btnWording_GenSqlQuery";
             this.btnWording_GenSqlQuery.Size = new System.Drawing.Size(94, 23);
             this.btnWording_GenSqlQuery.TabIndex = 28;
-            this.btnWording_GenSqlQuery.Text = "Gen Sql Query";
+            this.btnWording_GenSqlQuery.Text = "Gen Sql Script";
             this.btnWording_GenSqlQuery.UseVisualStyleBackColor = true;
             this.btnWording_GenSqlQuery.Click += new System.EventHandler(this.btnWording_GenSqlQuery_Click);
             // 
             // cbHelpColumns
             // 
             this.cbHelpColumns.AutoSize = true;
-            this.cbHelpColumns.Location = new System.Drawing.Point(717, 40);
+            this.cbHelpColumns.Location = new System.Drawing.Point(711, 39);
             this.cbHelpColumns.Name = "cbHelpColumns";
             this.cbHelpColumns.Size = new System.Drawing.Size(119, 17);
             this.cbHelpColumns.TabIndex = 27;
@@ -1563,9 +1552,9 @@
             // 
             this.gv_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gv_Result.Location = new System.Drawing.Point(0, 51);
+            this.gv_Result.Location = new System.Drawing.Point(0, 63);
             this.gv_Result.Name = "gv_Result";
-            this.gv_Result.Size = new System.Drawing.Size(839, 294);
+            this.gv_Result.Size = new System.Drawing.Size(839, 282);
             this.gv_Result.TabIndex = 21;
             // 
             // btnWipe
@@ -3828,6 +3817,14 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // txtAddWordings_Result_SqlScriptComment
+            // 
+            this.txtAddWordings_Result_SqlScriptComment.Location = new System.Drawing.Point(8, 38);
+            this.txtAddWordings_Result_SqlScriptComment.Name = "txtAddWordings_Result_SqlScriptComment";
+            this.txtAddWordings_Result_SqlScriptComment.Size = new System.Drawing.Size(297, 20);
+            this.txtAddWordings_Result_SqlScriptComment.TabIndex = 58;
+            this.txtAddWordings_Result_SqlScriptComment.Text = "Jira: http://agile.seekasia.com/jira/browse/HIRER-7330 ";
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4231,7 +4228,6 @@
         private System.Windows.Forms.RichTextBox extractdll_Result;
         private System.Windows.Forms.Button btnWording_GenSqlQuery;
         private System.Windows.Forms.Label lbWording_SqlQueryPath;
-        private System.Windows.Forms.Label lbWording_SqlQueryPathLabel;
         private System.Windows.Forms.TextBox txtAddWordings_WordingKeySql;
         private System.Windows.Forms.TabPage tp_ABTesting;
         private System.Windows.Forms.GroupBox groupBox20;
@@ -4269,6 +4265,7 @@
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.TextBox txtGenCopyBat_BatPath;
         private System.Windows.Forms.CheckBox cbGenCopyBat_IsToLocal;
+        private System.Windows.Forms.TextBox txtAddWordings_Result_SqlScriptComment;
     }
 }
 
