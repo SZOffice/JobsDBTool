@@ -83,6 +83,9 @@
     <Reference Include="JobsDB.Base">
       <HintPath>..\SupportDLL\JobsDB\JobsDB.Base.dll</HintPath>
     </Reference>
+    <Reference Include="JobsDB.Resources">
+      <HintPath>E:\JobsDB.Resources.dll</HintPath>
+    </Reference>
     <Reference Include="KernelClass2008">
       <HintPath>..\SupportDLL\KernelClass2008.dll</HintPath>
     </Reference>

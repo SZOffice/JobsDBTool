@@ -20,6 +20,8 @@ namespace JobsDBTool.Models.Domain
         public string LoginID { get; set; }
         public string LoginPWD { get; set; }
         public string CountryCode { get; set; }
+        public string Env { get; set; }
+        public string Index { get; set; }
         public ServerType ServerType { get; set; }
     }
 }

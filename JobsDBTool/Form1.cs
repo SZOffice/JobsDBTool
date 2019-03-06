@@ -342,6 +342,10 @@ namespace JobsDBTool
                         */
                     }
 
+                    if (KernelClass.PhysicalFile.FileExists(@"Resource/GenCopyBatServers.json"))
+                    {
+                        listGenCopyBat_ServerInfo = KernelClass.PhysicalFile.ReadFile(@"Resource/GenCopyBatServers.json").FromJSON<List<ServerInfo>>();
+                    }
                     if (dicDropDownToText.ContainsKey("Common_GenCopyBat_Template"))
                     {
                         var templateInfoList = dicDropDownToText["Common_GenCopyBat_Template"];
@@ -804,7 +808,6 @@ namespace JobsDBTool
             var taskFrm = new TaskForm();
             taskFrm.reloadTask += new TaskForm.ReLoadTask(loadTask);
             taskFrm.Show();
-
         }
 
         private void tasks_btnDelData_Click(object sender, EventArgs e)
@@ -1598,10 +1601,16 @@ namespace JobsDBTool
                                 selectItem.TargetPath = xe.Value;
                             }
 
-                            xe = column.Element("IsToLocal");
+                            xe = column.Element("BatType");
                             if (xe != null)
                             {
-                                selectItem.IsToLocal = xe.Value == "1";
+                                selectItem.BatType = xe.Value;
+                            }
+
+                            xe = column.Element("BackupParam");
+                            if (xe != null)
+                            {
+                                selectItem.BackupParam = xe.Value;
                             }
                         }
 
@@ -3503,7 +3512,8 @@ Order by b.LastUserUpdateTime;";
         }
         #endregion
 
-        private List<ServerInfo> listGenCopyBat_ServerInfo = KernelClass.PhysicalFile.ReadFile(@"Resource/GenCopyBatServers.json").FromJSON<List<ServerInfo>>();
+        #region gen copy bat
+        private List<ServerInfo> listGenCopyBat_ServerInfo = new List<ServerInfo>();
         private void generate_server_list()
         {
             this.plGenCopyBat_ServerList.Controls.Clear();
@@ -3586,7 +3596,7 @@ Order by b.LastUserUpdateTime;";
             try
             {
                 IList<Dictionary<string, object>> serverList = new List<Dictionary<string, object>>();
-                
+
                 for (int i = 0; i < listGenCopyBat_ServerInfo.Count; i++)
                 {
                     var findControls = this.plGenCopyBat_ServerList.Controls.Find("cbField_" + i, false);
@@ -3600,48 +3610,38 @@ Order by b.LastUserUpdateTime;";
                             dicServer.Add("Host", serverInfo.Host);
                             dicServer.Add("Password", serverInfo.LoginPWD);
                             dicServer.Add("User", serverInfo.LoginID);
-                            string env = string.Empty;
-                            switch (serverInfo.ServerType)
-                            {
-                                case ServerType.PreviewWeb:
-                                case ServerType.PreviewAgent:
-                                    env = "Preview";
-                                    break;
-                                case ServerType.ProductWeb:
-                                case ServerType.ProductAgent:
-                                    env = "Product";
-                                    break;
-
-                            }
-                            dicServer.Add("Source", sourcePath.Replace("{Env}", env).Replace("{CountryCode}", serverInfo.CountryCode));
-                            dicServer.Add("Target", targetPath.Replace("{Env}", env).Replace("{CountryCode}", serverInfo.CountryCode));
+                            dicServer.Add("Source", sourcePath.Replace("{Env}", serverInfo.Env).Replace("{Index}", serverInfo.Index).Replace("{CountryCode}", serverInfo.CountryCode));
+                            dicServer.Add("Target", targetPath.Replace("{Env}", serverInfo.Env).Replace("{Index}", serverInfo.Index).Replace("{CountryCode}", serverInfo.CountryCode));
                             serverList.Add(dicServer);
                         }
                     }
-                } 
+                }
                 if (serverList.Count() == 0)
                 {
                     MessageBox.Show("Please select server");
                     return;
                 }
 
+                int index = CommonHelper.getNameIndex(@"Backup\", "_GenCopyBat", ".bat", 1);
+                string batPath = @"Backup\_GenCopyBat_" + DateTime.Now.ToString("yyyyMMdd") + "_V" + index + ".bat";
+
                 dic.Add("Date", DateTime.Now.ToString("yyyyMMdd"));
                 dic.Add("ServerList", serverList);
-                dic.Add("IsToLocal", this.cbGenCopyBat_IsToLocal.Checked ? 1 : 0);
+                dic.Add("BatType", this.txtGenCopyBat_BatType.Text.Trim());
+                dic.Add("BatPath", CommonHelper.GetAbsolutePath(batPath));
+                dic.Add("Params", this.txtGenCopyBat_BackupParam.Text.Trim().Split(','));
+
+                string batContent = TemplateHelper.GetContent(path, dic);
+                this.rtbGenCopyBat_Result.Text = batContent;
+                KernelClass.PhysicalFile.AddToFile(batContent, batPath);
+                this.txtGenCopyBat_BatPath.Text = CommonHelper.GetAbsolutePath(batPath);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
 
-            string batContent = TemplateHelper.GetContent(path, dic);
-            this.rtbGenCopyBat_Result.Text = batContent;
 
-            int index = CommonHelper.getNameIndex(@"Backup\", "_GenCopyBat", ".bat", 1);
-            string batPath = @"Backup\_GenCopyBat_" + DateTime.Now.ToString("yyyyMMdd") + "_V" + index + ".bat";
-            KernelClass.PhysicalFile.AddToFile(batContent, batPath);
-            this.txtGenCopyBat_BatPath.Text = CommonHelper.GetAbsolutePath(batPath);
-             
         }
 
         private void cbGenCopyBat_Template_SelectedIndexChanged(object sender, EventArgs e)
@@ -3649,7 +3649,8 @@ Order by b.LastUserUpdateTime;";
             SelectItem template = (SelectItem)this.cbGenCopyBat_Template.SelectedItem;
             this.txtGenCopyBat_SourcePath.Text = template.SourcePath;
             this.txtGenCopyBat_TargetPath.Text = template.TargetPath;
-            this.cbGenCopyBat_IsToLocal.Checked = template.IsToLocal;
+            this.txtGenCopyBat_BatType.Text = template.BatType;
+            this.txtGenCopyBat_BackupParam.Text = template.BackupParam;
         }
 
         private void btnGenCopyBat_RunBat_Click(object sender, EventArgs e)
@@ -3660,6 +3661,7 @@ Order by b.LastUserUpdateTime;";
                 CommonHelper.RunBat(batPath);
             }
         }
+        #endregion
 
     }
 
@@ -3695,8 +3697,9 @@ Order by b.LastUserUpdateTime;";
 
         //for gen copy bat
         public string SourcePath { get; set; }
-        public string TargetPath{get;set;}
-        public bool IsToLocal { get; set; }
+        public string TargetPath { get; set; }
+        public string BatType { get; set; }
+        public string BackupParam { get; set; }
     }
 
     public class Abbreviation

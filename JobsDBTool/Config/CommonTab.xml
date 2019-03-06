@@ -20,13 +20,24 @@
         <columns name="Common_GenCopyBat_Template">
           <column name="Copy Web.Config to local">
             <SourcePath>d$\jobsDBv8\JobsDB.Web\web.config</SourcePath>
-            <TargetPath>{Env}_{CountryCode}\JobsDB.Web\</TargetPath>
-            <IsToLocal>1</IsToLocal>
+            <TargetPath>{Env}_{CountryCode}_{Index}\JobsDB.Web\</TargetPath>
+            <BatType>1</BatType>
+            <BackupParam>1,2</BackupParam>
+          </column>
+          <column name="Copy Global Web.Config to local">
+            <SourcePath>d$\jobsDBv8\JobsDB.Web.Global\web.config</SourcePath>
+            <TargetPath>{Env}_{CountryCode}_{Index}\JobsDB.Web.Global\</TargetPath>
+            <BatType>1</BatType>
+          </column>
+          <column name="Copy FileSystemProperty.Config to local">
+            <SourcePath>d$\jobsDBv8\JobsDB.Web\Config\FileSystemProperty.config</SourcePath>
+            <TargetPath>{Env}_{CountryCode}_{Index}\JobsDB.Web\Config\</TargetPath>
+            <BatType>1</BatType>
           </column>
           <column name="Copy Web.Config from local">
             <SourcePath>d:\jobsDBv8\JobsDB.Web\web.config</SourcePath>
             <TargetPath>d$\jobsDBv8\JobsDB.Web\web.config</TargetPath>
-            <IsToLocal>0</IsToLocal>
+            <BatType>2</BatType>
           </column>
         </columns>
       ]]>

@@ -83,7 +83,10 @@
             this.gvCommon_RunSql_SqlResult = new System.Windows.Forms.DataGridView();
             this.btnCommon_RunSql_Run = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.cbGenCopyBat_IsToLocal = new System.Windows.Forms.CheckBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.txtGenCopyBat_BatType = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.txtGenCopyBat_BackupParam = new System.Windows.Forms.TextBox();
             this.btnGenCopyBat_Gen = new System.Windows.Forms.Button();
             this.plGenCopyBat_ServerList = new System.Windows.Forms.Panel();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
@@ -966,7 +969,10 @@
             // 
             // tabPage11
             // 
-            this.tabPage11.Controls.Add(this.cbGenCopyBat_IsToLocal);
+            this.tabPage11.Controls.Add(this.label49);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_BatType);
+            this.tabPage11.Controls.Add(this.label46);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_BackupParam);
             this.tabPage11.Controls.Add(this.btnGenCopyBat_Gen);
             this.tabPage11.Controls.Add(this.plGenCopyBat_ServerList);
             this.tabPage11.Controls.Add(this.groupBox22);
@@ -983,19 +989,41 @@
             this.tabPage11.Text = "Gen Copy Bat";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // cbGenCopyBat_IsToLocal
+            // label49
             // 
-            this.cbGenCopyBat_IsToLocal.AutoSize = true;
-            this.cbGenCopyBat_IsToLocal.Location = new System.Drawing.Point(72, 120);
-            this.cbGenCopyBat_IsToLocal.Name = "cbGenCopyBat_IsToLocal";
-            this.cbGenCopyBat_IsToLocal.Size = new System.Drawing.Size(75, 17);
-            this.cbGenCopyBat_IsToLocal.TabIndex = 96;
-            this.cbGenCopyBat_IsToLocal.Text = "Is to Local";
-            this.cbGenCopyBat_IsToLocal.UseVisualStyleBackColor = true;
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(301, 23);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(47, 13);
+            this.label49.TabIndex = 98;
+            this.label49.Text = "BatType";
+            // 
+            // txtGenCopyBat_BatType
+            // 
+            this.txtGenCopyBat_BatType.Location = new System.Drawing.Point(352, 20);
+            this.txtGenCopyBat_BatType.Name = "txtGenCopyBat_BatType";
+            this.txtGenCopyBat_BatType.Size = new System.Drawing.Size(86, 20);
+            this.txtGenCopyBat_BatType.TabIndex = 97;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(1, 118);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(74, 13);
+            this.label46.TabIndex = 96;
+            this.label46.Text = "BackupParam";
+            // 
+            // txtGenCopyBat_BackupParam
+            // 
+            this.txtGenCopyBat_BackupParam.Location = new System.Drawing.Point(78, 116);
+            this.txtGenCopyBat_BackupParam.Name = "txtGenCopyBat_BackupParam";
+            this.txtGenCopyBat_BackupParam.Size = new System.Drawing.Size(216, 20);
+            this.txtGenCopyBat_BackupParam.TabIndex = 95;
             // 
             // btnGenCopyBat_Gen
             // 
-            this.btnGenCopyBat_Gen.Location = new System.Drawing.Point(326, 116);
+            this.btnGenCopyBat_Gen.Location = new System.Drawing.Point(334, 115);
             this.btnGenCopyBat_Gen.Name = "btnGenCopyBat_Gen";
             this.btnGenCopyBat_Gen.Size = new System.Drawing.Size(105, 23);
             this.btnGenCopyBat_Gen.TabIndex = 93;
@@ -1118,7 +1146,7 @@
             // 
             // txtGenCopyBat_TargetPath
             // 
-            this.txtGenCopyBat_TargetPath.Location = new System.Drawing.Point(71, 84);
+            this.txtGenCopyBat_TargetPath.Location = new System.Drawing.Point(79, 84);
             this.txtGenCopyBat_TargetPath.Name = "txtGenCopyBat_TargetPath";
             this.txtGenCopyBat_TargetPath.Size = new System.Drawing.Size(360, 20);
             this.txtGenCopyBat_TargetPath.TabIndex = 63;
@@ -1126,7 +1154,7 @@
             // cbGenCopyBat_Template
             // 
             this.cbGenCopyBat_Template.FormattingEnabled = true;
-            this.cbGenCopyBat_Template.Location = new System.Drawing.Point(72, 17);
+            this.cbGenCopyBat_Template.Location = new System.Drawing.Point(79, 17);
             this.cbGenCopyBat_Template.Name = "cbGenCopyBat_Template";
             this.cbGenCopyBat_Template.Size = new System.Drawing.Size(185, 21);
             this.cbGenCopyBat_Template.TabIndex = 62;
@@ -1143,7 +1171,7 @@
             // 
             // txtGenCopyBat_SourcePath
             // 
-            this.txtGenCopyBat_SourcePath.Location = new System.Drawing.Point(71, 52);
+            this.txtGenCopyBat_SourcePath.Location = new System.Drawing.Point(79, 52);
             this.txtGenCopyBat_SourcePath.Name = "txtGenCopyBat_SourcePath";
             this.txtGenCopyBat_SourcePath.Size = new System.Drawing.Size(360, 20);
             this.txtGenCopyBat_SourcePath.TabIndex = 60;
@@ -1520,11 +1548,11 @@
             // 
             // btnWording_GenSqlQuery
             // 
-            this.btnWording_GenSqlQuery.Location = new System.Drawing.Point(532, 11);
+            this.btnWording_GenSqlQuery.Location = new System.Drawing.Point(522, 11);
             this.btnWording_GenSqlQuery.Name = "btnWording_GenSqlQuery";
             this.btnWording_GenSqlQuery.Size = new System.Drawing.Size(94, 23);
             this.btnWording_GenSqlQuery.TabIndex = 28;
-            this.btnWording_GenSqlQuery.Text = "Gen Sql Query";
+            this.btnWording_GenSqlQuery.Text = "Gen Sql Script";
             this.btnWording_GenSqlQuery.UseVisualStyleBackColor = true;
             this.btnWording_GenSqlQuery.Click += new System.EventHandler(this.btnWording_GenSqlQuery_Click);
             // 
@@ -1551,7 +1579,7 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(451, 11);
+            this.btnSubmit.Location = new System.Drawing.Point(434, 11);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 22;
@@ -1582,7 +1610,7 @@
             // 
             this.txtTargetConnStr.Location = new System.Drawing.Point(165, 13);
             this.txtTargetConnStr.Name = "txtTargetConnStr";
-            this.txtTargetConnStr.Size = new System.Drawing.Size(277, 20);
+            this.txtTargetConnStr.Size = new System.Drawing.Size(264, 20);
             this.txtTargetConnStr.TabIndex = 25;
             this.txtTargetConnStr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTargetConnStr_KeyDown);
             // 
@@ -4268,7 +4296,10 @@
         private System.Windows.Forms.Button btnGenCopyBat_Gen;
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.TextBox txtGenCopyBat_BatPath;
-        private System.Windows.Forms.CheckBox cbGenCopyBat_IsToLocal;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox txtGenCopyBat_BatType;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txtGenCopyBat_BackupParam;
     }
 }
 
