@@ -161,8 +161,10 @@ namespace JobsDBTool.Helper
 
                     if (!isAdd)
                     {
-                        sbWholeKeySqlQuery.AppendLine("USE [JobsDB_System]");
-                        sbWholeKeySqlQuery.AppendLine("GO");
+                        if (sbWholeKeySqlQuery.Length > 0 && !string.IsNullOrEmpty(sKeySqlCopy))
+                        {
+                            sbWholeKeySqlQuery.AppendLine("Go");
+                        }
 
                         if (!string.IsNullOrEmpty(sKeySqlCopy))
                         {
