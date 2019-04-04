@@ -3428,6 +3428,7 @@
             this.authinfo_tab_login.SelectedIndex = 0;
             this.authinfo_tab_login.Size = new System.Drawing.Size(363, 104);
             this.authinfo_tab_login.TabIndex = 106;
+            this.authinfo_tab_login.Click += new System.EventHandler(this.authinfo_tab_login_Click);
             // 
             // autinfo_tab_account
             // 

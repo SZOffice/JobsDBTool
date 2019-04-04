@@ -3235,6 +3235,31 @@ Order by b.LastUserUpdateTime;";
             }
             catch { }
         }
+        
+        private void authinfo_tab_login_Click(object sender, EventArgs e)
+        {
+            if (this.authinfo_tab_login.SelectedTab == this.autinfo_tab_account)
+            {
+                if (!this.others_rbAuthType_Account.Checked)
+                {
+                    this.others_rbAuthType_Account.Checked = true;
+                }
+            }
+            else if (this.authinfo_tab_login.SelectedTab == autinfo_tab_employer)
+            {
+                if (!this.others_rbAuthType_Employer.Checked)
+                {
+                    this.others_rbAuthType_Employer.Checked = true;
+                }
+            }
+            else if (this.authinfo_tab_login.SelectedTab == autinfo_tab_jobseeker)
+            {
+                if (!this.others_rbAuthType_JobSeeker.Checked)
+                {
+                    this.others_rbAuthType_JobSeeker.Checked = true;
+                }
+            }
+        }
 
         private void others_cbAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3327,6 +3352,9 @@ Order by b.LastUserUpdateTime;";
                         {
                             employerId = ds.Tables[0].Rows[0]["EmployerID"].ToString();
                             userManagementId = ds.Tables[0].Rows[0]["UserManagementID"].ToString();
+
+                            this.others_txtEmployerId.Text = employerId;
+                            this.others_txtUserManagementId.Text = userManagementId;
                         }
                         else
                         {
