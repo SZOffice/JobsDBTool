@@ -648,7 +648,7 @@ namespace JobsDBTool
                         this.others_cbAccount.SelectedIndex = 0;
                     }
 
-                    others_rbAuthType_Change(true);
+                    others_rbAuthType_Change(0);
 
                     this.others_cbCountryCode.Items.Add(Option.Country.HK.ToString());
                     this.others_cbCountryCode.Items.Add(Option.Country.ID.ToString());
@@ -3214,22 +3214,24 @@ Order by b.LastUserUpdateTime;";
 
         private void others_rbAuthType_Employer_CheckedChanged(object sender, EventArgs e)
         {
-            others_rbAuthType_Change(true);
+            others_rbAuthType_Change(1);
         }
 
         private void others_rbAuthType_JobSeeker_CheckedChanged(object sender, EventArgs e)
         {
-            others_rbAuthType_Change(false);
+            others_rbAuthType_Change(2);
+        }
+        
+        private void others_rbAuthType_Account_CheckedChanged(object sender, EventArgs e)
+        {
+            others_rbAuthType_Change(0);
         }
 
-        private void others_rbAuthType_Change(bool isEmployer)
+        private void others_rbAuthType_Change(int type)
         {
             try
             {
-                this.others_cbAccount.Enabled = isEmployer;
-                this.others_txtEmployerId.Enabled = isEmployer;
-                this.others_txtUserManagementId.Enabled = isEmployer;
-                this.others_txtJobSeekerId.Enabled = !isEmployer;
+                this.authinfo_tab_login.SelectTab(type);
             }
             catch { }
         }
@@ -3239,6 +3241,8 @@ Order by b.LastUserUpdateTime;";
             SelectItem accountInfo = (SelectItem)this.others_cbAccount.SelectedItem;
             if (accountInfo == null)
                 return;
+            this.others_txtAccountNum.Text = accountInfo.AccountNum;
+            this.others_txtSubAccount.Text = accountInfo.SubAccount;
             this.others_txtEmployerId.Text = accountInfo.EmployerId;
             this.others_txtUserManagementId.Text = accountInfo.UserManagementId;
             this.others_cbCountryCode.Text = accountInfo.CountryCode;
@@ -3272,12 +3276,71 @@ Order by b.LastUserUpdateTime;";
                 authenTicketType = AuthenTicketType.SIS;
             }
             string baseUrl = string.Empty;
+            string accountNum = this.others_txtAccountNum.Text.Trim();
+            string subAccount = this.others_txtSubAccount.Text.Trim();
             string employerId = this.others_txtEmployerId.Text.Trim();
             string userManagementId = this.others_txtUserManagementId.Text.Trim();
             string jobSeekerId = this.others_txtJobSeekerId.Text.Trim();
             string result = string.Empty;
-            if (this.others_rbAuthType_Employer.Checked)
+            if (this.others_rbAuthType_Account.Checked || this.others_rbAuthType_Employer.Checked)
             {
+                if (this.others_rbAuthType_Account.Checked) { 
+                    if (string.IsNullOrEmpty(accountNum) || string.IsNullOrEmpty(subAccount))
+                    {
+                        MessageBox.Show("Please input AccountNum & SubAccount first");
+                        return;
+                    }
+
+                    if (htConfig.ContainsKey("GenAuth_QueryRMS"))
+                    {
+                        string countryCode = this.others_cbCountryCode.Text.Trim();
+                        countryCode = string.IsNullOrEmpty(countryCode) ? Option.Country.HK.ToString() : countryCode;
+                        string env = Option.EnvironmentType.Dev.ToString();
+                        if (this.others_rbEnv_Test.Checked)
+                        {
+                            env = Option.EnvironmentType.Test.ToString();
+                        }
+                        else if (this.others_rbEnv_Preview.Checked)
+                        {
+                            env = Option.EnvironmentType.Preview.ToString();
+                        }
+                        else if (this.others_rbEnv_Production.Checked)
+                        {
+                            env = Option.EnvironmentType.Production.ToString();
+                        }
+                        string connName = string.Format("{0}_{1}", env.ToLower(), countryCode.ToLower());
+                        var connSetting = ConfigurationManager.ConnectionStrings[connName];
+                        if (connSetting == null)
+                        {
+                            MessageBox.Show("Please setting " + connName + " database conn in config");
+                            return;
+                        }
+                        string connectionstring = connSetting.ConnectionString;
+                        string queryEmployerUser = htConfig["GenAuth_QueryRMS"].ToString();
+
+                        KernelClass.SqlHelper sqlHelper = new KernelClass.SqlHelper(connectionstring);
+                        sqlHelper.OpenConnection();
+                        DataSet ds = new DataSet();
+                        ds = sqlHelper.ExecuteQuery(string.Format(queryEmployerUser, accountNum, subAccount));
+                        sqlHelper.CloseConnection();
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            employerId = ds.Tables[0].Rows[0]["EmployerID"].ToString();
+                            userManagementId = ds.Tables[0].Rows[0]["UserManagementID"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show(string.Format("Can not find user use Account:{0}-SubAccount:{1} on {2}-{3}", accountNum, subAccount, env, countryCode));
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please input setting GenAuth_QueryRMS in config");
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(employerId))
                 {
                     MessageBox.Show("Please input EmployerId first");
