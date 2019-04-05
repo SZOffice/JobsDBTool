@@ -3,6 +3,12 @@
   <add key="DropDownToText">
     <![CDATA[
         <columns name="Others_AccountInfo">
+          <column name="Empty" itemType="Auth">
+            <Environment>Production</Environment>
+            <EmployerId></EmployerId>
+            <CountryCode>HK</CountryCode>
+            <UserManagementId></UserManagementId>
+          </column>
           <column name="Dev_HK.Dev">
             <AccountNum>730</AccountNum>
             <SubAccount>0</SubAccount>
