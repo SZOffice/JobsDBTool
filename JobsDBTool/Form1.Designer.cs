@@ -310,17 +310,17 @@
             this.sendEmail_txtContent = new System.Windows.Forms.RichTextBox();
             this.tp_GenAuth = new System.Windows.Forms.TabPage();
             this.authinfo_tab_login = new System.Windows.Forms.TabControl();
-            this.autinfo_tab_account = new System.Windows.Forms.TabPage();
+            this.authinfo_tab_account = new System.Windows.Forms.TabPage();
             this.label50 = new System.Windows.Forms.Label();
             this.others_txtSubAccount = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.others_txtAccountNum = new System.Windows.Forms.TextBox();
-            this.autinfo_tab_employer = new System.Windows.Forms.TabPage();
+            this.authinfo_tab_employer = new System.Windows.Forms.TabPage();
             this.label35 = new System.Windows.Forms.Label();
             this.others_txtEmployerId = new System.Windows.Forms.TextBox();
             this.others_txtUserManagementId = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
-            this.autinfo_tab_jobseeker = new System.Windows.Forms.TabPage();
+            this.authinfo_tab_jobseeker = new System.Windows.Forms.TabPage();
             this.label37 = new System.Windows.Forms.Label();
             this.others_txtJobSeekerId = new System.Windows.Forms.TextBox();
             this.others_lbSqlQuery = new System.Windows.Forms.Label();
@@ -338,10 +338,6 @@
             this.others_rbAuthenTicketType_Unknow = new System.Windows.Forms.RadioButton();
             this.others_btnGetAuthInfo = new System.Windows.Forms.Button();
             this.others_rtbResult = new System.Windows.Forms.RichTextBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.others_rbAuthType_Account = new System.Windows.Forms.RadioButton();
-            this.others_rbAuthType_JobSeeker = new System.Windows.Forms.RadioButton();
-            this.others_rbAuthType_Employer = new System.Windows.Forms.RadioButton();
             this.label41 = new System.Windows.Forms.Label();
             this.others_cbAccount = new System.Windows.Forms.ComboBox();
             this.tp_ABTesting = new System.Windows.Forms.TabPage();
@@ -416,12 +412,11 @@
             this.groupBox13.SuspendLayout();
             this.tp_GenAuth.SuspendLayout();
             this.authinfo_tab_login.SuspendLayout();
-            this.autinfo_tab_account.SuspendLayout();
-            this.autinfo_tab_employer.SuspendLayout();
-            this.autinfo_tab_jobseeker.SuspendLayout();
+            this.authinfo_tab_account.SuspendLayout();
+            this.authinfo_tab_employer.SuspendLayout();
+            this.authinfo_tab_jobseeker.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.tp_ABTesting.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -3408,7 +3403,6 @@
             this.tp_GenAuth.Controls.Add(this.groupBox11);
             this.tp_GenAuth.Controls.Add(this.others_btnGetAuthInfo);
             this.tp_GenAuth.Controls.Add(this.others_rtbResult);
-            this.tp_GenAuth.Controls.Add(this.groupBox10);
             this.tp_GenAuth.Controls.Add(this.label41);
             this.tp_GenAuth.Controls.Add(this.others_cbAccount);
             this.tp_GenAuth.Location = new System.Drawing.Point(4, 22);
@@ -3420,34 +3414,33 @@
             // 
             // authinfo_tab_login
             // 
-            this.authinfo_tab_login.Controls.Add(this.autinfo_tab_account);
-            this.authinfo_tab_login.Controls.Add(this.autinfo_tab_employer);
-            this.authinfo_tab_login.Controls.Add(this.autinfo_tab_jobseeker);
-            this.authinfo_tab_login.Location = new System.Drawing.Point(27, 97);
+            this.authinfo_tab_login.Controls.Add(this.authinfo_tab_account);
+            this.authinfo_tab_login.Controls.Add(this.authinfo_tab_employer);
+            this.authinfo_tab_login.Controls.Add(this.authinfo_tab_jobseeker);
+            this.authinfo_tab_login.Location = new System.Drawing.Point(27, 62);
             this.authinfo_tab_login.Name = "authinfo_tab_login";
             this.authinfo_tab_login.SelectedIndex = 0;
-            this.authinfo_tab_login.Size = new System.Drawing.Size(363, 104);
+            this.authinfo_tab_login.Size = new System.Drawing.Size(368, 139);
             this.authinfo_tab_login.TabIndex = 106;
-            this.authinfo_tab_login.Click += new System.EventHandler(this.authinfo_tab_login_Click);
             // 
-            // autinfo_tab_account
+            // authinfo_tab_account
             // 
-            this.autinfo_tab_account.Controls.Add(this.label50);
-            this.autinfo_tab_account.Controls.Add(this.others_txtSubAccount);
-            this.autinfo_tab_account.Controls.Add(this.label46);
-            this.autinfo_tab_account.Controls.Add(this.others_txtAccountNum);
-            this.autinfo_tab_account.Location = new System.Drawing.Point(4, 22);
-            this.autinfo_tab_account.Name = "autinfo_tab_account";
-            this.autinfo_tab_account.Padding = new System.Windows.Forms.Padding(3);
-            this.autinfo_tab_account.Size = new System.Drawing.Size(355, 78);
-            this.autinfo_tab_account.TabIndex = 0;
-            this.autinfo_tab_account.Text = "Account Login";
-            this.autinfo_tab_account.UseVisualStyleBackColor = true;
+            this.authinfo_tab_account.Controls.Add(this.label50);
+            this.authinfo_tab_account.Controls.Add(this.others_txtSubAccount);
+            this.authinfo_tab_account.Controls.Add(this.label46);
+            this.authinfo_tab_account.Controls.Add(this.others_txtAccountNum);
+            this.authinfo_tab_account.Location = new System.Drawing.Point(4, 22);
+            this.authinfo_tab_account.Name = "authinfo_tab_account";
+            this.authinfo_tab_account.Padding = new System.Windows.Forms.Padding(3);
+            this.authinfo_tab_account.Size = new System.Drawing.Size(360, 113);
+            this.authinfo_tab_account.TabIndex = 0;
+            this.authinfo_tab_account.Text = "Account Login";
+            this.authinfo_tab_account.UseVisualStyleBackColor = true;
             // 
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(20, 43);
+            this.label50.Location = new System.Drawing.Point(20, 49);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(69, 13);
             this.label50.TabIndex = 90;
@@ -3455,7 +3448,7 @@
             // 
             // others_txtSubAccount
             // 
-            this.others_txtSubAccount.Location = new System.Drawing.Point(148, 40);
+            this.others_txtSubAccount.Location = new System.Drawing.Point(148, 46);
             this.others_txtSubAccount.Name = "others_txtSubAccount";
             this.others_txtSubAccount.Size = new System.Drawing.Size(188, 20);
             this.others_txtSubAccount.TabIndex = 89;
@@ -3463,7 +3456,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(20, 15);
+            this.label46.Location = new System.Drawing.Point(20, 18);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(72, 13);
             this.label46.TabIndex = 88;
@@ -3471,29 +3464,29 @@
             // 
             // others_txtAccountNum
             // 
-            this.others_txtAccountNum.Location = new System.Drawing.Point(148, 12);
+            this.others_txtAccountNum.Location = new System.Drawing.Point(148, 15);
             this.others_txtAccountNum.Name = "others_txtAccountNum";
             this.others_txtAccountNum.Size = new System.Drawing.Size(188, 20);
             this.others_txtAccountNum.TabIndex = 87;
             // 
-            // autinfo_tab_employer
+            // authinfo_tab_employer
             // 
-            this.autinfo_tab_employer.Controls.Add(this.label35);
-            this.autinfo_tab_employer.Controls.Add(this.others_txtEmployerId);
-            this.autinfo_tab_employer.Controls.Add(this.others_txtUserManagementId);
-            this.autinfo_tab_employer.Controls.Add(this.label36);
-            this.autinfo_tab_employer.Location = new System.Drawing.Point(4, 22);
-            this.autinfo_tab_employer.Name = "autinfo_tab_employer";
-            this.autinfo_tab_employer.Padding = new System.Windows.Forms.Padding(3);
-            this.autinfo_tab_employer.Size = new System.Drawing.Size(355, 78);
-            this.autinfo_tab_employer.TabIndex = 1;
-            this.autinfo_tab_employer.Text = "Employer Login";
-            this.autinfo_tab_employer.UseVisualStyleBackColor = true;
+            this.authinfo_tab_employer.Controls.Add(this.label35);
+            this.authinfo_tab_employer.Controls.Add(this.others_txtEmployerId);
+            this.authinfo_tab_employer.Controls.Add(this.others_txtUserManagementId);
+            this.authinfo_tab_employer.Controls.Add(this.label36);
+            this.authinfo_tab_employer.Location = new System.Drawing.Point(4, 22);
+            this.authinfo_tab_employer.Name = "authinfo_tab_employer";
+            this.authinfo_tab_employer.Padding = new System.Windows.Forms.Padding(3);
+            this.authinfo_tab_employer.Size = new System.Drawing.Size(360, 113);
+            this.authinfo_tab_employer.TabIndex = 1;
+            this.authinfo_tab_employer.Text = "Employer Login";
+            this.authinfo_tab_employer.UseVisualStyleBackColor = true;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(12, 18);
+            this.label35.Location = new System.Drawing.Point(17, 20);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(59, 13);
             this.label35.TabIndex = 82;
@@ -3501,14 +3494,14 @@
             // 
             // others_txtEmployerId
             // 
-            this.others_txtEmployerId.Location = new System.Drawing.Point(140, 15);
+            this.others_txtEmployerId.Location = new System.Drawing.Point(145, 17);
             this.others_txtEmployerId.Name = "others_txtEmployerId";
             this.others_txtEmployerId.Size = new System.Drawing.Size(188, 20);
             this.others_txtEmployerId.TabIndex = 81;
             // 
             // others_txtUserManagementId
             // 
-            this.others_txtUserManagementId.Location = new System.Drawing.Point(140, 49);
+            this.others_txtUserManagementId.Location = new System.Drawing.Point(144, 52);
             this.others_txtUserManagementId.Name = "others_txtUserManagementId";
             this.others_txtUserManagementId.Size = new System.Drawing.Size(188, 20);
             this.others_txtUserManagementId.TabIndex = 83;
@@ -3516,22 +3509,22 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(12, 52);
+            this.label36.Location = new System.Drawing.Point(16, 55);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(100, 13);
             this.label36.TabIndex = 84;
             this.label36.Text = "UserManagementId";
             // 
-            // autinfo_tab_jobseeker
+            // authinfo_tab_jobseeker
             // 
-            this.autinfo_tab_jobseeker.Controls.Add(this.label37);
-            this.autinfo_tab_jobseeker.Controls.Add(this.others_txtJobSeekerId);
-            this.autinfo_tab_jobseeker.Location = new System.Drawing.Point(4, 22);
-            this.autinfo_tab_jobseeker.Name = "autinfo_tab_jobseeker";
-            this.autinfo_tab_jobseeker.Size = new System.Drawing.Size(355, 78);
-            this.autinfo_tab_jobseeker.TabIndex = 2;
-            this.autinfo_tab_jobseeker.Text = "JobSeeker Login";
-            this.autinfo_tab_jobseeker.UseVisualStyleBackColor = true;
+            this.authinfo_tab_jobseeker.Controls.Add(this.label37);
+            this.authinfo_tab_jobseeker.Controls.Add(this.others_txtJobSeekerId);
+            this.authinfo_tab_jobseeker.Location = new System.Drawing.Point(4, 22);
+            this.authinfo_tab_jobseeker.Name = "authinfo_tab_jobseeker";
+            this.authinfo_tab_jobseeker.Size = new System.Drawing.Size(360, 113);
+            this.authinfo_tab_jobseeker.TabIndex = 2;
+            this.authinfo_tab_jobseeker.Text = "JobSeeker Login";
+            this.authinfo_tab_jobseeker.UseVisualStyleBackColor = true;
             // 
             // label37
             // 
@@ -3704,56 +3697,10 @@
             this.others_rtbResult.TabIndex = 91;
             this.others_rtbResult.Text = "";
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.others_rbAuthType_Account);
-            this.groupBox10.Controls.Add(this.others_rbAuthType_JobSeeker);
-            this.groupBox10.Controls.Add(this.others_rbAuthType_Employer);
-            this.groupBox10.Location = new System.Drawing.Point(28, 17);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(348, 41);
-            this.groupBox10.TabIndex = 89;
-            this.groupBox10.TabStop = false;
-            // 
-            // others_rbAuthType_Account
-            // 
-            this.others_rbAuthType_Account.AutoSize = true;
-            this.others_rbAuthType_Account.Checked = true;
-            this.others_rbAuthType_Account.Location = new System.Drawing.Point(6, 14);
-            this.others_rbAuthType_Account.Name = "others_rbAuthType_Account";
-            this.others_rbAuthType_Account.Size = new System.Drawing.Size(94, 17);
-            this.others_rbAuthType_Account.TabIndex = 9;
-            this.others_rbAuthType_Account.TabStop = true;
-            this.others_rbAuthType_Account.Text = "Account Login";
-            this.others_rbAuthType_Account.UseVisualStyleBackColor = true;
-            this.others_rbAuthType_Account.CheckedChanged += new System.EventHandler(this.others_rbAuthType_Account_CheckedChanged);
-            // 
-            // others_rbAuthType_JobSeeker
-            // 
-            this.others_rbAuthType_JobSeeker.AutoSize = true;
-            this.others_rbAuthType_JobSeeker.Location = new System.Drawing.Point(229, 14);
-            this.others_rbAuthType_JobSeeker.Name = "others_rbAuthType_JobSeeker";
-            this.others_rbAuthType_JobSeeker.Size = new System.Drawing.Size(105, 17);
-            this.others_rbAuthType_JobSeeker.TabIndex = 8;
-            this.others_rbAuthType_JobSeeker.Text = "JobSeeker Login";
-            this.others_rbAuthType_JobSeeker.UseVisualStyleBackColor = true;
-            this.others_rbAuthType_JobSeeker.CheckedChanged += new System.EventHandler(this.others_rbAuthType_JobSeeker_CheckedChanged);
-            // 
-            // others_rbAuthType_Employer
-            // 
-            this.others_rbAuthType_Employer.AutoSize = true;
-            this.others_rbAuthType_Employer.Location = new System.Drawing.Point(117, 14);
-            this.others_rbAuthType_Employer.Name = "others_rbAuthType_Employer";
-            this.others_rbAuthType_Employer.Size = new System.Drawing.Size(97, 17);
-            this.others_rbAuthType_Employer.TabIndex = 7;
-            this.others_rbAuthType_Employer.Text = "Employer Login";
-            this.others_rbAuthType_Employer.UseVisualStyleBackColor = true;
-            this.others_rbAuthType_Employer.Click += new System.EventHandler(this.others_rbAuthType_Employer_CheckedChanged);
-            // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(52, 68);
+            this.label41.Location = new System.Drawing.Point(28, 27);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(47, 13);
             this.label41.TabIndex = 88;
@@ -3762,7 +3709,7 @@
             // others_cbAccount
             // 
             this.others_cbAccount.FormattingEnabled = true;
-            this.others_cbAccount.Location = new System.Drawing.Point(180, 66);
+            this.others_cbAccount.Location = new System.Drawing.Point(95, 24);
             this.others_cbAccount.Name = "others_cbAccount";
             this.others_cbAccount.Size = new System.Drawing.Size(188, 21);
             this.others_cbAccount.TabIndex = 87;
@@ -4029,18 +3976,16 @@
             this.tp_GenAuth.ResumeLayout(false);
             this.tp_GenAuth.PerformLayout();
             this.authinfo_tab_login.ResumeLayout(false);
-            this.autinfo_tab_account.ResumeLayout(false);
-            this.autinfo_tab_account.PerformLayout();
-            this.autinfo_tab_employer.ResumeLayout(false);
-            this.autinfo_tab_employer.PerformLayout();
-            this.autinfo_tab_jobseeker.ResumeLayout(false);
-            this.autinfo_tab_jobseeker.PerformLayout();
+            this.authinfo_tab_account.ResumeLayout(false);
+            this.authinfo_tab_account.PerformLayout();
+            this.authinfo_tab_employer.ResumeLayout(false);
+            this.authinfo_tab_employer.PerformLayout();
+            this.authinfo_tab_jobseeker.ResumeLayout(false);
+            this.authinfo_tab_jobseeker.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.tp_ABTesting.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
             this.groupBox19.ResumeLayout(false);
@@ -4315,9 +4260,6 @@
         private System.Windows.Forms.RadioButton others_rbAuthenTicketType_Unknow;
         private System.Windows.Forms.Button others_btnGetAuthInfo;
         private System.Windows.Forms.RichTextBox others_rtbResult;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.RadioButton others_rbAuthType_JobSeeker;
-        private System.Windows.Forms.RadioButton others_rbAuthType_Employer;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.ComboBox others_cbAccount;
         private System.Windows.Forms.Label label37;
@@ -4376,15 +4318,14 @@
         private System.Windows.Forms.TextBox txtGenCopyBat_BatPath;
         private System.Windows.Forms.CheckBox cbGenCopyBat_IsToLocal;
         private System.Windows.Forms.TextBox txtAddWordings_Result_SqlScriptComment;
-        private System.Windows.Forms.RadioButton others_rbAuthType_Account;
         private System.Windows.Forms.TabControl authinfo_tab_login;
-        private System.Windows.Forms.TabPage autinfo_tab_account;
+        private System.Windows.Forms.TabPage authinfo_tab_account;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.TextBox others_txtSubAccount;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.TextBox others_txtAccountNum;
-        private System.Windows.Forms.TabPage autinfo_tab_employer;
-        private System.Windows.Forms.TabPage autinfo_tab_jobseeker;
+        private System.Windows.Forms.TabPage authinfo_tab_employer;
+        private System.Windows.Forms.TabPage authinfo_tab_jobseeker;
     }
 }
 

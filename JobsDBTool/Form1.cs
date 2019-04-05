@@ -3236,31 +3236,6 @@ Order by b.LastUserUpdateTime;";
             catch { }
         }
         
-        private void authinfo_tab_login_Click(object sender, EventArgs e)
-        {
-            if (this.authinfo_tab_login.SelectedTab == this.autinfo_tab_account)
-            {
-                if (!this.others_rbAuthType_Account.Checked)
-                {
-                    this.others_rbAuthType_Account.Checked = true;
-                }
-            }
-            else if (this.authinfo_tab_login.SelectedTab == autinfo_tab_employer)
-            {
-                if (!this.others_rbAuthType_Employer.Checked)
-                {
-                    this.others_rbAuthType_Employer.Checked = true;
-                }
-            }
-            else if (this.authinfo_tab_login.SelectedTab == autinfo_tab_jobseeker)
-            {
-                if (!this.others_rbAuthType_JobSeeker.Checked)
-                {
-                    this.others_rbAuthType_JobSeeker.Checked = true;
-                }
-            }
-        }
-
         private void others_cbAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectItem accountInfo = (SelectItem)this.others_cbAccount.SelectedItem;
@@ -3271,6 +3246,14 @@ Order by b.LastUserUpdateTime;";
             this.others_txtEmployerId.Text = accountInfo.EmployerId;
             this.others_txtUserManagementId.Text = accountInfo.UserManagementId;
             this.others_cbCountryCode.Text = accountInfo.CountryCode;
+            if (!string.IsNullOrEmpty(accountInfo.EmployerId) && !string.IsNullOrEmpty(accountInfo.UserManagementId))
+            {
+                this.authinfo_tab_login.SelectTab(this.authinfo_tab_employer);
+            }
+            else
+            {
+                this.authinfo_tab_login.SelectTab(this.authinfo_tab_account);
+            }
             if (accountInfo.Environment == Option.EnvironmentType.Dev.ToString())
             {
                 this.others_rbEnv_Dev.Checked = true;
@@ -3307,9 +3290,10 @@ Order by b.LastUserUpdateTime;";
             string userManagementId = this.others_txtUserManagementId.Text.Trim();
             string jobSeekerId = this.others_txtJobSeekerId.Text.Trim();
             string result = string.Empty;
-            if (this.others_rbAuthType_Account.Checked || this.others_rbAuthType_Employer.Checked)
+            if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_account || this.authinfo_tab_login.SelectedTab == this.authinfo_tab_employer)
             {
-                if (this.others_rbAuthType_Account.Checked) { 
+                if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_account)
+                { 
                     if (string.IsNullOrEmpty(accountNum) || string.IsNullOrEmpty(subAccount))
                     {
                         MessageBox.Show("Please input AccountNum & SubAccount first");
@@ -3362,11 +3346,11 @@ Order by b.LastUserUpdateTime;";
                             return;
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please input setting GenAuth_QueryRMS in config");
-                    return;
+                    else
+                    {
+                        MessageBox.Show("Please input setting GenAuth_QueryRMS in config");
+                        return;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(employerId))
@@ -3383,7 +3367,7 @@ Order by b.LastUserUpdateTime;";
                     result = AuthenticationUtility.GetEmployerAccountUserLoginUrlWithAuthenticationInfo(Convert.ToInt32(employerId), Convert.ToInt32(userManagementId), baseUrl, authenTicketType);
                 }
             }
-            else if (this.others_rbAuthType_JobSeeker.Checked)
+            else if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_jobseeker)
             {
                 if (string.IsNullOrEmpty(jobSeekerId))
                 {
@@ -3419,7 +3403,7 @@ Order by b.LastUserUpdateTime;";
                 env = Option.EnvironmentType.Production.ToString();
             }
             string loginType = "RMS";
-            if (this.others_rbAuthType_JobSeeker.Checked)
+            if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_jobseeker)
             {
                 loginType = "JobSeeker";
             }
