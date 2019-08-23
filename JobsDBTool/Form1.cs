@@ -45,6 +45,7 @@ namespace JobsDBTool
             htConfig = XmlHelper.GetSections("Config/AccountInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/SolrInfo.xml", htConfig);
             htConfig = XmlHelper.GetSections("Config/CommonTab.xml", htConfig);
+            htConfig = XmlHelper.GetSections("Config/ElasticSearch.xml", htConfig);
 
             if (htConfig.ContainsKey("BackupFolderPath"))
             {
@@ -173,6 +174,12 @@ namespace JobsDBTool
                     Size = new System.Drawing.Size(152, 22),
                     Text = "A/B Testing"
                 };
+                ToolStripMenuItem itemELK = new System.Windows.Forms.ToolStripMenuItem()
+                {
+                    Name = "tsm_View_ELK",
+                    Size = new System.Drawing.Size(152, 22),
+                    Text = "Elastic Search"
+                };
 
                 itemTasks.Click += StripItem_Click;
                 itemAddWordings.Click += StripItem_Click;
@@ -183,6 +190,7 @@ namespace JobsDBTool
                 itemSendEmail.Click += StripItem_Click;
                 itemGenAuth.Click += StripItem_Click;
                 itemABTesting.Click += StripItem_Click;
+                itemELK.Click += StripItem_Click;
 
                 item.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                     itemTasks,
@@ -193,7 +201,8 @@ namespace JobsDBTool
                 itemClassFieldAbbr,
                 itemSendEmail,
                 itemGenAuth,
-                itemABTesting});
+                itemABTesting,
+                itemELK});
                 items[i] = item;
 
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_AddWordings"] != "true")
@@ -238,14 +247,6 @@ namespace JobsDBTool
                     itemSendEmail.Checked = true;
                     cbSendEmail_CheckedChanged(true);
                 }
-                if (ConfigurationManager.AppSettings["IsDefaultLoaded_GenAuth"] != "true")
-                    this.tc1.TabPages.Remove(this.tp_GenAuth);
-                else
-                {
-                    itemGenAuth.Checked = true;
-                    cbGenAuth_CheckedChanged(true);
-                }
-                //the lastest one will be selected
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_Common"] != "true")
                     this.tc1.TabPages.Remove(this.tp_Common);
                 else
@@ -259,6 +260,22 @@ namespace JobsDBTool
                 {
                     itemABTesting.Checked = true;
                     cbABTesting_CheckedChanged(true);
+                }
+                if (ConfigurationManager.AppSettings["IsDefaultLoaded_ELK"] != "true")
+                    this.tc1.TabPages.Remove(this.tp_ELK);
+                else
+                {
+                    itemELK.Checked = true;
+                    cbELK_CheckedChanged(true);
+                }
+
+                //the lastest one will be selected
+                if (ConfigurationManager.AppSettings["IsDefaultLoaded_GenAuth"] != "true")
+                    this.tc1.TabPages.Remove(this.tp_GenAuth);
+                else
+                {
+                    itemGenAuth.Checked = true;
+                    cbGenAuth_CheckedChanged(true);
                 }
             }
 
@@ -298,6 +315,9 @@ namespace JobsDBTool
                     break;
                 case "tsm_View_ABTesting":
                     cbABTesting_CheckedChanged(item.Checked);
+                    break;
+                case "tsm_View_ELK":
+                    cbELK_CheckedChanged(item.Checked);
                     break;
             }
             BaseHelper.InfoLog("click the menu strip: " + item.Name);
@@ -687,6 +707,38 @@ namespace JobsDBTool
             }
         }
 
+        private void cbELK_CheckedChanged(bool isChecked)
+        {
+            if (isChecked)
+            {
+                if (!this.tc1.TabPages.Contains(this.tp_ELK))
+                    this.tc1.TabPages.Add(this.tp_ELK);
+                this.tc1.SelectedTab = this.tp_ELK;
+
+                if (!isLoadedELK)
+                {
+                    this.btnELK_Open.Enabled = false;
+
+                    var elkInfoList = dicDropDownToText["ELK_Info"];
+                    cbELK_Url.Items.Clear();
+                    foreach (var elkInfo in elkInfoList)
+                    {
+                        cbELK_Url.Items.Add(elkInfo);
+                    }
+                    cbELK_Url.DisplayMember = "SelectItem.Name";
+                    cbELK_Url.ValueMember = "SelectItem.Name";
+                    if (this.cbELK_Url.Items.Count > 0)
+                    {
+                        this.cbELK_Url.SelectedIndex = 0;
+                    }
+                }
+            }
+            else
+            {
+                this.tc1.TabPages.Remove(this.tp_ELK);
+            }
+        }
+
         #endregion
 
         private string fName;
@@ -705,6 +757,7 @@ namespace JobsDBTool
         private bool isLoadedSendEmail = false;
         private bool isLoadedGenAuth = false;
         private bool isLoadedABTesting = false;
+        private bool isLoadedELK = false;
         private string backupFolderPath = string.Empty;
         private string resourceExcelPath = string.Empty;
         private string genSqlQueryPathPath = string.Empty;
@@ -1613,6 +1666,21 @@ namespace JobsDBTool
                             }
                         }
 
+                        if (item.Attribute("name").Value == "ELK_Info")
+                        {
+                            xe = column.Element("Url");
+                            if (xe != null)
+                            {
+                                selectItem.Url = xe.Value;
+                            }
+
+                            xe = column.Element("Payload");
+                            if (xe != null)
+                            {
+                                selectItem.Payload = xe.Value;
+                            }
+                        }
+                        
                         ls.Add(selectItem);
                     }
                     dic.Add(item.Attribute("name").Value, ls);
@@ -3744,6 +3812,47 @@ Order by b.LastUserUpdateTime;";
             }
         }
 
+        private void cbELK_Url_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectItem elkInfo = (SelectItem)this.cbELK_Url.SelectedItem;
+            this.txtELK_Url.Text = elkInfo.Url;
+            this.rtbELK_Payload.Text = elkInfo.Payload;
+        }
+
+        private void btnELK_Submit_Click(object sender, EventArgs e)
+        {
+            string url = this.txtELK_Url.Text.Trim();
+            string payload = this.rtbELK_Payload.Text.Trim();
+            if (string.IsNullOrEmpty(url))
+            {
+                MessageBox.Show("Please input url");
+                return;
+            }
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("kbn-name", "kbn-name");
+            headers.Add("kbn-version", "5.3.2");
+            string sPostResult = HttpWebRequestHelper.doPost(null, url, payload, headers);
+            this.rtbELK_Result.Text = JsonConvertHelper.ConvertJsonString(sPostResult);
+            this.btnELK_Open.Enabled = true;
+        }
+
+        private void btnELK_Open_Click(object sender, EventArgs e)
+        {
+            string result = this.rtbELK_Result.Text.Trim();
+            if (string.IsNullOrEmpty(result))
+            {
+                MessageBox.Show("The Result is empty");
+                return;
+            }
+            string resultPath = htConfig["ELKResultPath"].ToString();
+            string batPath = htConfig["OpenNoteBatPath"].ToString();
+            if (KernelClass.PhysicalFile.SaveFile(result, resultPath))
+            {
+                CommonHelper.RunBat(batPath);
+            }            
+        }
+
     }
 
     #region public class or enum
@@ -3780,6 +3889,10 @@ Order by b.LastUserUpdateTime;";
         public string SourcePath { get; set; }
         public string TargetPath{get;set;}
         public bool IsToLocal { get; set; }
+
+        //for ELK
+        public string Url { get; set; }
+        public string Payload { get; set; }
     }
 
     public class Abbreviation

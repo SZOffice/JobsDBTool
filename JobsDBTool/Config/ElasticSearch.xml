@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <add key="ELKResultPath">D:\Tools\JobsDBTool\Backup\ELK_Result.json</add>
+  <add key="OpenNoteBatPath">D:\Tools\JobsDBTool\Resource\OpenNote.bat</add>
+  <add key="DropDownToText">
+    <![CDATA[
+<columns name="ELK_Info">
+  <column name="DB_RC_Logs">
+    <Url>http://kibana.jobsdb.com/_plugin/kibana/api/console/proxy?uri=logstash-*/_search</Url>
+    <Payload>{
+    "query": {
+        "bool": {
+            "must" : {
+                "match": {
+                    "helpdeskID": "0540ad4e46d8"
+                }
+            },
+            "filter": {
+                "range" : {
+                    "expDate": {
+                        "gte": "now-1d"
+                    }
+                }
+            }
+        }
+    },
+    "_source" : ["expDate", "loggingCountry", "helpdeskID","path","hostName", "URL", "expType", "expLogType", "expTargetSiteName", "expTargetSiteStackTrace", "expMessage"],
+    "from": 0,
+    "size": 10
+}
+    </Payload>
+  </column>
+</columns>
+      ]]>
+  </add>
+</root>

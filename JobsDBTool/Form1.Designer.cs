@@ -351,6 +351,16 @@
             this.label42 = new System.Windows.Forms.Label();
             this.txtAB_GroupKey = new System.Windows.Forms.TextBox();
             this.rtbAB_EmployerIds = new System.Windows.Forms.RichTextBox();
+            this.tp_ELK = new System.Windows.Forms.TabPage();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.rtbELK_Result = new System.Windows.Forms.RichTextBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rtbELK_Payload = new System.Windows.Forms.RichTextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.btnELK_Submit = new System.Windows.Forms.Button();
+            this.cbELK_Url = new System.Windows.Forms.ComboBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.txtELK_Url = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbSourceConnName = new System.Windows.Forms.ComboBox();
             this.txtSourceConnStr = new System.Windows.Forms.TextBox();
@@ -358,6 +368,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.btnELK_Open = new System.Windows.Forms.Button();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -420,6 +431,9 @@
             this.tp_ABTesting.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox19.SuspendLayout();
+            this.tp_ELK.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -507,6 +521,7 @@
             this.tc1.Controls.Add(this.tp_SendEmail);
             this.tc1.Controls.Add(this.tp_GenAuth);
             this.tc1.Controls.Add(this.tp_ABTesting);
+            this.tc1.Controls.Add(this.tp_ELK);
             this.tc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc1.Location = new System.Drawing.Point(0, 0);
             this.tc1.Multiline = true;
@@ -519,9 +534,9 @@
             // tp_Common
             // 
             this.tp_Common.Controls.Add(this.groupBox14);
-            this.tp_Common.Location = new System.Drawing.Point(4, 22);
+            this.tp_Common.Location = new System.Drawing.Point(4, 40);
             this.tp_Common.Name = "tp_Common";
-            this.tp_Common.Size = new System.Drawing.Size(847, 421);
+            this.tp_Common.Size = new System.Drawing.Size(847, 403);
             this.tp_Common.TabIndex = 11;
             this.tp_Common.Text = "   Common   ";
             this.tp_Common.UseVisualStyleBackColor = true;
@@ -532,7 +547,7 @@
             this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox14.Location = new System.Drawing.Point(0, 0);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(847, 421);
+            this.groupBox14.Size = new System.Drawing.Size(847, 403);
             this.groupBox14.TabIndex = 4;
             this.groupBox14.TabStop = false;
             // 
@@ -547,7 +562,7 @@
             this.tabControl3.Location = new System.Drawing.Point(3, 16);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(841, 402);
+            this.tabControl3.Size = new System.Drawing.Size(841, 384);
             this.tabControl3.TabIndex = 29;
             // 
             // tabPage6
@@ -556,7 +571,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(833, 376);
+            this.tabPage6.Size = new System.Drawing.Size(833, 358);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "    Tasks    ";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -574,7 +589,7 @@
             this.groupBox15.Location = new System.Drawing.Point(3, 3);
             this.groupBox15.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(827, 370);
+            this.groupBox15.Size = new System.Drawing.Size(827, 352);
             this.groupBox15.TabIndex = 28;
             this.groupBox15.TabStop = false;
             // 
@@ -693,7 +708,7 @@
             // 
             this.dgv_task.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_task.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgv_task.Location = new System.Drawing.Point(3, 59);
+            this.dgv_task.Location = new System.Drawing.Point(3, 41);
             this.dgv_task.Name = "dgv_task";
             this.dgv_task.RowTemplate.Height = 30;
             this.dgv_task.Size = new System.Drawing.Size(821, 308);
@@ -731,7 +746,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(833, 376);
+            this.tabPage7.Size = new System.Drawing.Size(833, 358);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "    Document    ";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -777,7 +792,7 @@
             this.groupBox17.Controls.Add(this.document_tvDoc);
             this.groupBox17.Controls.Add(this.document_rtbContent);
             this.groupBox17.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox17.Location = new System.Drawing.Point(3, 43);
+            this.groupBox17.Location = new System.Drawing.Point(3, 25);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Size = new System.Drawing.Size(827, 330);
             this.groupBox17.TabIndex = 2;
@@ -845,7 +860,7 @@
             this.tabPage9.Controls.Add(this.groupBox18);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(833, 376);
+            this.tabPage9.Size = new System.Drawing.Size(833, 358);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "Extract DLL";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -859,7 +874,7 @@
             this.groupBox18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox18.Location = new System.Drawing.Point(0, 0);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(833, 376);
+            this.groupBox18.Size = new System.Drawing.Size(833, 358);
             this.groupBox18.TabIndex = 3;
             this.groupBox18.TabStop = false;
             // 
@@ -889,7 +904,7 @@
             this.extractdll_rtbSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.extractdll_rtbSource.Location = new System.Drawing.Point(3, 16);
             this.extractdll_rtbSource.Name = "extractdll_rtbSource";
-            this.extractdll_rtbSource.Size = new System.Drawing.Size(338, 357);
+            this.extractdll_rtbSource.Size = new System.Drawing.Size(338, 339);
             this.extractdll_rtbSource.TabIndex = 2;
             this.extractdll_rtbSource.Text = "";
             // 
@@ -899,7 +914,7 @@
             this.extractdll_Result.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.extractdll_Result.Location = new System.Drawing.Point(451, 16);
             this.extractdll_Result.Name = "extractdll_Result";
-            this.extractdll_Result.Size = new System.Drawing.Size(379, 357);
+            this.extractdll_Result.Size = new System.Drawing.Size(379, 339);
             this.extractdll_Result.TabIndex = 1;
             this.extractdll_Result.Text = "";
             // 
@@ -913,7 +928,7 @@
             this.tabPage10.Controls.Add(this.btnCommon_RunSql_Run);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(833, 376);
+            this.tabPage10.Size = new System.Drawing.Size(833, 358);
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Run Sql";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -957,7 +972,7 @@
             // 
             this.gvCommon_RunSql_SqlResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvCommon_RunSql_SqlResult.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gvCommon_RunSql_SqlResult.Location = new System.Drawing.Point(0, 129);
+            this.gvCommon_RunSql_SqlResult.Location = new System.Drawing.Point(0, 111);
             this.gvCommon_RunSql_SqlResult.Name = "gvCommon_RunSql_SqlResult";
             this.gvCommon_RunSql_SqlResult.Size = new System.Drawing.Size(833, 247);
             this.gvCommon_RunSql_SqlResult.TabIndex = 51;
@@ -986,7 +1001,7 @@
             this.tabPage11.Controls.Add(this.txtGenCopyBat_SourcePath);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(833, 376);
+            this.tabPage11.Size = new System.Drawing.Size(833, 358);
             this.tabPage11.TabIndex = 4;
             this.tabPage11.Text = "Gen Copy Bat";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1016,7 +1031,7 @@
             this.plGenCopyBat_ServerList.AutoScroll = true;
             this.plGenCopyBat_ServerList.BackColor = System.Drawing.Color.Transparent;
             this.plGenCopyBat_ServerList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plGenCopyBat_ServerList.Location = new System.Drawing.Point(0, 195);
+            this.plGenCopyBat_ServerList.Location = new System.Drawing.Point(0, 177);
             this.plGenCopyBat_ServerList.Name = "plGenCopyBat_ServerList";
             this.plGenCopyBat_ServerList.Size = new System.Drawing.Size(488, 181);
             this.plGenCopyBat_ServerList.TabIndex = 92;
@@ -1029,7 +1044,7 @@
             this.groupBox22.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox22.Location = new System.Drawing.Point(488, 0);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(345, 376);
+            this.groupBox22.Size = new System.Drawing.Size(345, 358);
             this.groupBox22.TabIndex = 94;
             this.groupBox22.TabStop = false;
             // 
@@ -1043,7 +1058,7 @@
             // rtbGenCopyBat_Result
             // 
             this.rtbGenCopyBat_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtbGenCopyBat_Result.Location = new System.Drawing.Point(3, 52);
+            this.rtbGenCopyBat_Result.Location = new System.Drawing.Point(3, 34);
             this.rtbGenCopyBat_Result.Name = "rtbGenCopyBat_Result";
             this.rtbGenCopyBat_Result.Size = new System.Drawing.Size(339, 321);
             this.rtbGenCopyBat_Result.TabIndex = 55;
@@ -1165,9 +1180,9 @@
             this.tp_AddWordings.Controls.Add(this.txtFilePath);
             this.tp_AddWordings.Controls.Add(this.btnExport);
             this.tp_AddWordings.Controls.Add(this.btnGetData);
-            this.tp_AddWordings.Location = new System.Drawing.Point(4, 22);
+            this.tp_AddWordings.Location = new System.Drawing.Point(4, 40);
             this.tp_AddWordings.Name = "tp_AddWordings";
-            this.tp_AddWordings.Size = new System.Drawing.Size(847, 421);
+            this.tp_AddWordings.Size = new System.Drawing.Size(847, 403);
             this.tp_AddWordings.TabIndex = 4;
             this.tp_AddWordings.Text = "    Add Wordings    ";
             this.tp_AddWordings.UseVisualStyleBackColor = true;
@@ -1181,10 +1196,10 @@
             this.tc_AddWordings.Controls.Add(this.tp_Result);
             this.tc_AddWordings.Controls.Add(this.tp_WordingSearch);
             this.tc_AddWordings.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tc_AddWordings.Location = new System.Drawing.Point(0, 50);
+            this.tc_AddWordings.Location = new System.Drawing.Point(0, 43);
             this.tc_AddWordings.Name = "tc_AddWordings";
             this.tc_AddWordings.SelectedIndex = 0;
-            this.tc_AddWordings.Size = new System.Drawing.Size(847, 371);
+            this.tc_AddWordings.Size = new System.Drawing.Size(830, 371);
             this.tc_AddWordings.TabIndex = 40;
             this.tc_AddWordings.Click += new System.EventHandler(this.tc_AddWordings_Click);
             // 
@@ -1212,7 +1227,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(839, 345);
+            this.tabPage8.Size = new System.Drawing.Size(822, 345);
             this.tabPage8.TabIndex = 0;
             this.tabPage8.Text = "    Custom    ";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1390,7 +1405,7 @@
             this.tp_GetData.Location = new System.Drawing.Point(4, 22);
             this.tp_GetData.Name = "tp_GetData";
             this.tp_GetData.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_GetData.Size = new System.Drawing.Size(839, 345);
+            this.tp_GetData.Size = new System.Drawing.Size(822, 345);
             this.tp_GetData.TabIndex = 1;
             this.tp_GetData.Text = "    Get Data From DB    ";
             this.tp_GetData.UseVisualStyleBackColor = true;
@@ -1403,7 +1418,7 @@
             this.txtGetData.Multiline = true;
             this.txtGetData.Name = "txtGetData";
             this.txtGetData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtGetData.Size = new System.Drawing.Size(833, 339);
+            this.txtGetData.Size = new System.Drawing.Size(816, 339);
             this.txtGetData.TabIndex = 4;
             this.txtGetData.WordWrap = false;
             // 
@@ -1414,7 +1429,7 @@
             this.tp_GetString.Controls.Add(this.txtGetString);
             this.tp_GetString.Location = new System.Drawing.Point(4, 22);
             this.tp_GetString.Name = "tp_GetString";
-            this.tp_GetString.Size = new System.Drawing.Size(839, 345);
+            this.tp_GetString.Size = new System.Drawing.Size(822, 345);
             this.tp_GetString.TabIndex = 2;
             this.tp_GetString.Text = "    Get Data From String    ";
             this.tp_GetString.UseVisualStyleBackColor = true;
@@ -1441,7 +1456,7 @@
             // 
             this.txtGetString.Dock = System.Windows.Forms.DockStyle.Right;
             this.txtGetString.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtGetString.Location = new System.Drawing.Point(186, 0);
+            this.txtGetString.Location = new System.Drawing.Point(169, 0);
             this.txtGetString.Multiline = true;
             this.txtGetString.Name = "txtGetString";
             this.txtGetString.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -1455,7 +1470,7 @@
             this.tp_AddData.Controls.Add(this.txtContent);
             this.tp_AddData.Location = new System.Drawing.Point(4, 22);
             this.tp_AddData.Name = "tp_AddData";
-            this.tp_AddData.Size = new System.Drawing.Size(839, 345);
+            this.tp_AddData.Size = new System.Drawing.Size(822, 345);
             this.tp_AddData.TabIndex = 3;
             this.tp_AddData.Text = "    Add Data To DB    ";
             this.tp_AddData.UseVisualStyleBackColor = true;
@@ -1468,7 +1483,7 @@
             this.txtAddWordings_WordingKeySql.Multiline = true;
             this.txtAddWordings_WordingKeySql.Name = "txtAddWordings_WordingKeySql";
             this.txtAddWordings_WordingKeySql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(839, 84);
+            this.txtAddWordings_WordingKeySql.Size = new System.Drawing.Size(822, 84);
             this.txtAddWordings_WordingKeySql.TabIndex = 4;
             this.txtAddWordings_WordingKeySql.WordWrap = false;
             // 
@@ -1480,7 +1495,7 @@
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
             this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtContent.Size = new System.Drawing.Size(839, 255);
+            this.txtContent.Size = new System.Drawing.Size(822, 255);
             this.txtContent.TabIndex = 3;
             this.txtContent.WordWrap = false;
             // 
@@ -1498,7 +1513,7 @@
             this.tp_Result.Controls.Add(this.cbTargetConnName);
             this.tp_Result.Location = new System.Drawing.Point(4, 22);
             this.tp_Result.Name = "tp_Result";
-            this.tp_Result.Size = new System.Drawing.Size(839, 345);
+            this.tp_Result.Size = new System.Drawing.Size(822, 345);
             this.tp_Result.TabIndex = 4;
             this.tp_Result.Text = "    Result    ";
             this.tp_Result.UseVisualStyleBackColor = true;
@@ -1570,7 +1585,7 @@
             this.gv_Result.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gv_Result.Location = new System.Drawing.Point(0, 63);
             this.gv_Result.Name = "gv_Result";
-            this.gv_Result.Size = new System.Drawing.Size(839, 282);
+            this.gv_Result.Size = new System.Drawing.Size(822, 282);
             this.gv_Result.TabIndex = 21;
             // 
             // btnWipe
@@ -1612,7 +1627,7 @@
             this.tp_WordingSearch.Controls.Add(this.gv_SearchResult);
             this.tp_WordingSearch.Location = new System.Drawing.Point(4, 22);
             this.tp_WordingSearch.Name = "tp_WordingSearch";
-            this.tp_WordingSearch.Size = new System.Drawing.Size(839, 345);
+            this.tp_WordingSearch.Size = new System.Drawing.Size(822, 345);
             this.tp_WordingSearch.TabIndex = 5;
             this.tp_WordingSearch.Text = "    Search    ";
             this.tp_WordingSearch.UseVisualStyleBackColor = true;
@@ -1691,7 +1706,7 @@
             this.gv_SearchResult.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gv_SearchResult.Location = new System.Drawing.Point(0, 85);
             this.gv_SearchResult.Name = "gv_SearchResult";
-            this.gv_SearchResult.Size = new System.Drawing.Size(839, 260);
+            this.gv_SearchResult.Size = new System.Drawing.Size(822, 260);
             this.gv_SearchResult.TabIndex = 9;
             // 
             // btnExport
@@ -1709,9 +1724,9 @@
             this.tp_ClassFieldAbbr.Controls.Add(this.gvClassFieldResult);
             this.tp_ClassFieldAbbr.Controls.Add(this.btnGetAbbr);
             this.tp_ClassFieldAbbr.Controls.Add(this.txtClassField);
-            this.tp_ClassFieldAbbr.Location = new System.Drawing.Point(4, 22);
+            this.tp_ClassFieldAbbr.Location = new System.Drawing.Point(4, 40);
             this.tp_ClassFieldAbbr.Name = "tp_ClassFieldAbbr";
-            this.tp_ClassFieldAbbr.Size = new System.Drawing.Size(847, 421);
+            this.tp_ClassFieldAbbr.Size = new System.Drawing.Size(847, 403);
             this.tp_ClassFieldAbbr.TabIndex = 6;
             this.tp_ClassFieldAbbr.Text = "    Class/Field Abbr    ";
             this.tp_ClassFieldAbbr.UseVisualStyleBackColor = true;
@@ -1720,7 +1735,7 @@
             // 
             this.gvClassFieldResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvClassFieldResult.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gvClassFieldResult.Location = new System.Drawing.Point(0, 226);
+            this.gvClassFieldResult.Location = new System.Drawing.Point(0, 208);
             this.gvClassFieldResult.Name = "gvClassFieldResult";
             this.gvClassFieldResult.Size = new System.Drawing.Size(847, 195);
             this.gvClassFieldResult.TabIndex = 14;
@@ -1768,9 +1783,9 @@
             this.tp_BackupTask.Controls.Add(this.label13);
             this.tp_BackupTask.Controls.Add(this.btnBackupSubmit);
             this.tp_BackupTask.Controls.Add(this.txtBackupTaskName);
-            this.tp_BackupTask.Location = new System.Drawing.Point(4, 22);
+            this.tp_BackupTask.Location = new System.Drawing.Point(4, 40);
             this.tp_BackupTask.Name = "tp_BackupTask";
-            this.tp_BackupTask.Size = new System.Drawing.Size(847, 421);
+            this.tp_BackupTask.Size = new System.Drawing.Size(847, 403);
             this.tp_BackupTask.TabIndex = 7;
             this.tp_BackupTask.Text = "    Backup Task    ";
             this.tp_BackupTask.UseVisualStyleBackColor = true;
@@ -1951,9 +1966,9 @@
             // 
             this.tp_OperateDB.Controls.Add(this.tabControl1);
             this.tp_OperateDB.Controls.Add(this.groupBox6);
-            this.tp_OperateDB.Location = new System.Drawing.Point(4, 22);
+            this.tp_OperateDB.Location = new System.Drawing.Point(4, 40);
             this.tp_OperateDB.Name = "tp_OperateDB";
-            this.tp_OperateDB.Size = new System.Drawing.Size(847, 421);
+            this.tp_OperateDB.Size = new System.Drawing.Size(847, 403);
             this.tp_OperateDB.TabIndex = 8;
             this.tp_OperateDB.Text = "    Operate DB    ";
             this.tp_OperateDB.UseVisualStyleBackColor = true;
@@ -1967,7 +1982,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(384, 421);
+            this.tabControl1.Size = new System.Drawing.Size(384, 403);
             this.tabControl1.TabIndex = 51;
             // 
             // tabPage1
@@ -1976,7 +1991,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(376, 395);
+            this.tabPage1.Size = new System.Drawing.Size(376, 377);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "    Add Job & JobSeeker    ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -2020,7 +2035,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(370, 389);
+            this.groupBox4.Size = new System.Drawing.Size(370, 371);
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             // 
@@ -2341,7 +2356,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(376, 395);
+            this.tabPage2.Size = new System.Drawing.Size(376, 377);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "    Operate DB    ";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -2361,7 +2376,7 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(3, 3);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(370, 389);
+            this.groupBox7.Size = new System.Drawing.Size(370, 371);
             this.groupBox7.TabIndex = 51;
             this.groupBox7.TabStop = false;
             // 
@@ -2369,7 +2384,7 @@
             // 
             this.txtOperateDB_List.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtOperateDB_List.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtOperateDB_List.Location = new System.Drawing.Point(3, 206);
+            this.txtOperateDB_List.Location = new System.Drawing.Point(3, 188);
             this.txtOperateDB_List.Multiline = true;
             this.txtOperateDB_List.Name = "txtOperateDB_List";
             this.txtOperateDB_List.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -2563,7 +2578,7 @@
             this.tabPage5.Controls.Add(this.txtOperateDB_Country_Content);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(376, 395);
+            this.tabPage5.Size = new System.Drawing.Size(376, 377);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "    Generate Country Sql    ";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -2733,7 +2748,7 @@
             // 
             this.txtOperateDB_Country_Content.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtOperateDB_Country_Content.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtOperateDB_Country_Content.Location = new System.Drawing.Point(0, 78);
+            this.txtOperateDB_Country_Content.Location = new System.Drawing.Point(0, 60);
             this.txtOperateDB_Country_Content.Multiline = true;
             this.txtOperateDB_Country_Content.Name = "txtOperateDB_Country_Content";
             this.txtOperateDB_Country_Content.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -2754,7 +2769,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox6.Location = new System.Drawing.Point(387, 0);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(460, 421);
+            this.groupBox6.Size = new System.Drawing.Size(460, 403);
             this.groupBox6.TabIndex = 49;
             this.groupBox6.TabStop = false;
             // 
@@ -2783,7 +2798,7 @@
             // 
             this.txtOperateDB_Sql.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtOperateDB_Sql.Font = new System.Drawing.Font("SimSun", 12F);
-            this.txtOperateDB_Sql.Location = new System.Drawing.Point(3, 100);
+            this.txtOperateDB_Sql.Location = new System.Drawing.Point(3, 82);
             this.txtOperateDB_Sql.Multiline = true;
             this.txtOperateDB_Sql.Name = "txtOperateDB_Sql";
             this.txtOperateDB_Sql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -2832,9 +2847,9 @@
             // tp_SolrUpdate
             // 
             this.tp_SolrUpdate.Controls.Add(this.tabControl2);
-            this.tp_SolrUpdate.Location = new System.Drawing.Point(4, 22);
+            this.tp_SolrUpdate.Location = new System.Drawing.Point(4, 40);
             this.tp_SolrUpdate.Name = "tp_SolrUpdate";
-            this.tp_SolrUpdate.Size = new System.Drawing.Size(847, 421);
+            this.tp_SolrUpdate.Size = new System.Drawing.Size(847, 403);
             this.tp_SolrUpdate.TabIndex = 9;
             this.tp_SolrUpdate.Text = "    Solr Update    ";
             this.tp_SolrUpdate.UseVisualStyleBackColor = true;
@@ -2847,7 +2862,7 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(847, 421);
+            this.tabControl2.Size = new System.Drawing.Size(847, 403);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage3
@@ -2857,7 +2872,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(839, 395);
+            this.tabPage3.Size = new System.Drawing.Size(839, 377);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "    Solr Update    ";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -2866,7 +2881,7 @@
             // 
             this.rtbQuery.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbQuery.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbQuery.Location = new System.Drawing.Point(3, 114);
+            this.rtbQuery.Location = new System.Drawing.Point(3, 96);
             this.rtbQuery.Name = "rtbQuery";
             this.rtbQuery.Size = new System.Drawing.Size(833, 278);
             this.rtbQuery.TabIndex = 6;
@@ -3072,7 +3087,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(839, 395);
+            this.tabPage4.Size = new System.Drawing.Size(839, 377);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "    Solr Partial Update    ";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -3232,10 +3247,10 @@
             this.tp_SendEmail.Controls.Add(this.label33);
             this.tp_SendEmail.Controls.Add(this.sendEmail_clbTo);
             this.tp_SendEmail.Controls.Add(this.sendEmail_txtContent);
-            this.tp_SendEmail.Location = new System.Drawing.Point(4, 22);
+            this.tp_SendEmail.Location = new System.Drawing.Point(4, 40);
             this.tp_SendEmail.Name = "tp_SendEmail";
             this.tp_SendEmail.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_SendEmail.Size = new System.Drawing.Size(847, 421);
+            this.tp_SendEmail.Size = new System.Drawing.Size(847, 403);
             this.tp_SendEmail.TabIndex = 10;
             this.tp_SendEmail.Text = "    Send Email    ";
             this.tp_SendEmail.UseVisualStyleBackColor = true;
@@ -3386,7 +3401,7 @@
             // 
             this.sendEmail_txtContent.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.sendEmail_txtContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendEmail_txtContent.Location = new System.Drawing.Point(3, 278);
+            this.sendEmail_txtContent.Location = new System.Drawing.Point(3, 260);
             this.sendEmail_txtContent.Name = "sendEmail_txtContent";
             this.sendEmail_txtContent.Size = new System.Drawing.Size(841, 140);
             this.sendEmail_txtContent.TabIndex = 80;
@@ -3405,9 +3420,9 @@
             this.tp_GenAuth.Controls.Add(this.others_rtbResult);
             this.tp_GenAuth.Controls.Add(this.label41);
             this.tp_GenAuth.Controls.Add(this.others_cbAccount);
-            this.tp_GenAuth.Location = new System.Drawing.Point(4, 22);
+            this.tp_GenAuth.Location = new System.Drawing.Point(4, 40);
             this.tp_GenAuth.Name = "tp_GenAuth";
-            this.tp_GenAuth.Size = new System.Drawing.Size(847, 421);
+            this.tp_GenAuth.Size = new System.Drawing.Size(847, 403);
             this.tp_GenAuth.TabIndex = 12;
             this.tp_GenAuth.Text = "    Gen Auth Info    ";
             this.tp_GenAuth.UseVisualStyleBackColor = true;
@@ -3691,7 +3706,7 @@
             // 
             this.others_rtbResult.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.others_rtbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.others_rtbResult.Location = new System.Drawing.Point(0, 227);
+            this.others_rtbResult.Location = new System.Drawing.Point(0, 209);
             this.others_rtbResult.Name = "others_rtbResult";
             this.others_rtbResult.Size = new System.Drawing.Size(847, 194);
             this.others_rtbResult.TabIndex = 91;
@@ -3722,9 +3737,9 @@
             this.tp_ABTesting.Controls.Add(this.groupBox20);
             this.tp_ABTesting.Controls.Add(this.btnAB_GetValue);
             this.tp_ABTesting.Controls.Add(this.groupBox19);
-            this.tp_ABTesting.Location = new System.Drawing.Point(4, 22);
+            this.tp_ABTesting.Location = new System.Drawing.Point(4, 40);
             this.tp_ABTesting.Name = "tp_ABTesting";
-            this.tp_ABTesting.Size = new System.Drawing.Size(847, 421);
+            this.tp_ABTesting.Size = new System.Drawing.Size(847, 403);
             this.tp_ABTesting.TabIndex = 13;
             this.tp_ABTesting.Text = "A/B Testing";
             this.tp_ABTesting.UseVisualStyleBackColor = true;
@@ -3743,7 +3758,7 @@
             // 
             this.groupBox20.Controls.Add(this.rtbAB_Result);
             this.groupBox20.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox20.Location = new System.Drawing.Point(0, 262);
+            this.groupBox20.Location = new System.Drawing.Point(0, 244);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(847, 159);
             this.groupBox20.TabIndex = 95;
@@ -3825,6 +3840,106 @@
             this.rtbAB_EmployerIds.TabIndex = 92;
             this.rtbAB_EmployerIds.Text = "";
             // 
+            // tp_ELK
+            // 
+            this.tp_ELK.Controls.Add(this.groupBox23);
+            this.tp_ELK.Controls.Add(this.groupBox10);
+            this.tp_ELK.Location = new System.Drawing.Point(4, 40);
+            this.tp_ELK.Name = "tp_ELK";
+            this.tp_ELK.Size = new System.Drawing.Size(847, 403);
+            this.tp_ELK.TabIndex = 14;
+            this.tp_ELK.Text = "ElasticSearch";
+            this.tp_ELK.UseVisualStyleBackColor = true;
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.rtbELK_Result);
+            this.groupBox23.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox23.Location = new System.Drawing.Point(393, 0);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(454, 403);
+            this.groupBox23.TabIndex = 98;
+            this.groupBox23.TabStop = false;
+            // 
+            // rtbELK_Result
+            // 
+            this.rtbELK_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbELK_Result.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbELK_Result.Location = new System.Drawing.Point(3, 16);
+            this.rtbELK_Result.Name = "rtbELK_Result";
+            this.rtbELK_Result.Size = new System.Drawing.Size(448, 384);
+            this.rtbELK_Result.TabIndex = 92;
+            this.rtbELK_Result.Text = "";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.btnELK_Open);
+            this.groupBox10.Controls.Add(this.rtbELK_Payload);
+            this.groupBox10.Controls.Add(this.label51);
+            this.groupBox10.Controls.Add(this.btnELK_Submit);
+            this.groupBox10.Controls.Add(this.cbELK_Url);
+            this.groupBox10.Controls.Add(this.label49);
+            this.groupBox10.Controls.Add(this.txtELK_Url);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox10.Location = new System.Drawing.Point(0, 0);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(387, 403);
+            this.groupBox10.TabIndex = 97;
+            this.groupBox10.TabStop = false;
+            // 
+            // rtbELK_Payload
+            // 
+            this.rtbELK_Payload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbELK_Payload.Location = new System.Drawing.Point(59, 58);
+            this.rtbELK_Payload.Name = "rtbELK_Payload";
+            this.rtbELK_Payload.Size = new System.Drawing.Size(318, 294);
+            this.rtbELK_Payload.TabIndex = 100;
+            this.rtbELK_Payload.Text = "";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(8, 58);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(45, 13);
+            this.label51.TabIndex = 99;
+            this.label51.Text = "Payload";
+            // 
+            // btnELK_Submit
+            // 
+            this.btnELK_Submit.Location = new System.Drawing.Point(64, 363);
+            this.btnELK_Submit.Name = "btnELK_Submit";
+            this.btnELK_Submit.Size = new System.Drawing.Size(112, 23);
+            this.btnELK_Submit.TabIndex = 98;
+            this.btnELK_Submit.Text = "Submit";
+            this.btnELK_Submit.UseVisualStyleBackColor = true;
+            this.btnELK_Submit.Click += new System.EventHandler(this.btnELK_Submit_Click);
+            // 
+            // cbELK_Url
+            // 
+            this.cbELK_Url.FormattingEnabled = true;
+            this.cbELK_Url.Location = new System.Drawing.Point(59, 22);
+            this.cbELK_Url.Name = "cbELK_Url";
+            this.cbELK_Url.Size = new System.Drawing.Size(98, 21);
+            this.cbELK_Url.TabIndex = 97;
+            this.cbELK_Url.SelectedIndexChanged += new System.EventHandler(this.cbELK_Url_SelectedIndexChanged);
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(8, 26);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(20, 13);
+            this.label49.TabIndex = 96;
+            this.label49.Text = "Url";
+            // 
+            // txtELK_Url
+            // 
+            this.txtELK_Url.Location = new System.Drawing.Point(163, 23);
+            this.txtELK_Url.Name = "txtELK_Url";
+            this.txtELK_Url.Size = new System.Drawing.Size(214, 20);
+            this.txtELK_Url.TabIndex = 95;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tc1);
@@ -3874,6 +3989,16 @@
             this.menuStrip1.Size = new System.Drawing.Size(879, 24);
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // btnELK_Open
+            // 
+            this.btnELK_Open.Location = new System.Drawing.Point(255, 363);
+            this.btnELK_Open.Name = "btnELK_Open";
+            this.btnELK_Open.Size = new System.Drawing.Size(112, 23);
+            this.btnELK_Open.TabIndex = 101;
+            this.btnELK_Open.Text = "Open in notepad";
+            this.btnELK_Open.UseVisualStyleBackColor = true;
+            this.btnELK_Open.Click += new System.EventHandler(this.btnELK_Open_Click);
             // 
             // mainFrm
             // 
@@ -3990,6 +4115,10 @@
             this.groupBox20.ResumeLayout(false);
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
+            this.tp_ELK.ResumeLayout(false);
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -4326,6 +4455,17 @@
         private System.Windows.Forms.TextBox others_txtAccountNum;
         private System.Windows.Forms.TabPage authinfo_tab_employer;
         private System.Windows.Forms.TabPage authinfo_tab_jobseeker;
+        private System.Windows.Forms.TabPage tp_ELK;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.ComboBox cbELK_Url;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox txtELK_Url;
+        private System.Windows.Forms.RichTextBox rtbELK_Result;
+        private System.Windows.Forms.Button btnELK_Submit;
+        private System.Windows.Forms.RichTextBox rtbELK_Payload;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Button btnELK_Open;
     }
 }
 
