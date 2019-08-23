@@ -3833,7 +3833,7 @@ Order by b.LastUserUpdateTime;";
             headers.Add("kbn-name", "kbn-name");
             headers.Add("kbn-version", "5.3.2");
             string sPostResult = HttpWebRequestHelper.doPost(null, url, payload, headers);
-            this.rtbELK_Result.Text = JsonConvertHelper.ConvertJsonString(sPostResult);
+            this.rtbELK_Result.Text = JsonConvertHelper.ConvertJsonString(sPostResult).Replace(@"\r\n", System.Environment.NewLine);
             this.btnELK_Open.Enabled = true;
         }
 
@@ -3847,7 +3847,7 @@ Order by b.LastUserUpdateTime;";
             }
             string resultPath = htConfig["ELKResultPath"].ToString();
             string batPath = htConfig["OpenNoteBatPath"].ToString();
-            if (KernelClass.PhysicalFile.SaveFile(result, resultPath))
+            if (KernelClass.PhysicalFile.SaveFile(result, resultPath, false))
             {
                 CommonHelper.RunBat(batPath);
             }            
