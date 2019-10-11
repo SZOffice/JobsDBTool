@@ -247,13 +247,6 @@ namespace JobsDBTool
                     itemSendEmail.Checked = true;
                     cbSendEmail_CheckedChanged(true);
                 }
-                if (ConfigurationManager.AppSettings["IsDefaultLoaded_Common"] != "true")
-                    this.tc1.TabPages.Remove(this.tp_Common);
-                else
-                {
-                    itemTasks.Checked = true;
-                    cbCommon_CheckedChanged(true);
-                }
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_ABTesting"] != "true")
                     this.tc1.TabPages.Remove(this.tp_ABTesting);
                 else
@@ -269,13 +262,21 @@ namespace JobsDBTool
                     cbELK_CheckedChanged(true);
                 }
 
-                //the lastest one will be selected
                 if (ConfigurationManager.AppSettings["IsDefaultLoaded_GenAuth"] != "true")
                     this.tc1.TabPages.Remove(this.tp_GenAuth);
                 else
                 {
                     itemGenAuth.Checked = true;
                     cbGenAuth_CheckedChanged(true);
+                }
+
+                //the lastest one will be selected
+                if (ConfigurationManager.AppSettings["IsDefaultLoaded_Common"] != "true")
+                    this.tc1.TabPages.Remove(this.tp_Common);
+                else
+                {
+                    itemTasks.Checked = true;
+                    cbCommon_CheckedChanged(true);
                 }
             }
 
@@ -1659,10 +1660,16 @@ namespace JobsDBTool
                                 selectItem.TargetPath = xe.Value;
                             }
 
-                            xe = column.Element("IsToLocal");
+                            xe = column.Element("BatType");
                             if (xe != null)
                             {
-                                selectItem.IsToLocal = xe.Value == "1";
+                                selectItem.BatType = xe.Value;
+                            }
+
+                            xe = column.Element("DateRange");
+                            if (xe != null)
+                            {
+                                selectItem.DateRange = xe.Value;
                             }
                         }
 
@@ -3661,6 +3668,8 @@ Order by b.LastUserUpdateTime;";
 
             bool bPreviewWeb = this.cbGenCopyBat_PreviewWeb.Checked;
             bool bPreviewAgent = this.cbGenCopyBat_PreviewAgent.Checked;
+            bool bPreviewNgnix = this.cbGenCopyBat_PreviewNginx.Checked;
+            bool bProductNginx = this.cbGenCopyBat_ProductNginx.Checked;
             bool bProductWeb = this.cbGenCopyBat_ProductWeb.Checked;
             bool bProductAgent = this.cbGenCopyBat_ProductAgent.Checked;
 
@@ -3673,8 +3682,10 @@ Order by b.LastUserUpdateTime;";
             {
                 if ((bPreviewWeb && serverInfo.ServerType == ServerType.PreviewWeb) ||
                     (bPreviewAgent && serverInfo.ServerType == ServerType.PreviewAgent) ||
+                    (bPreviewNgnix && serverInfo.ServerType == ServerType.PreviewNginx) ||
                     (bProductWeb && serverInfo.ServerType == ServerType.ProductWeb) ||
-                    (bProductAgent && serverInfo.ServerType == ServerType.ProductAgent))
+                    (bProductAgent && serverInfo.ServerType == ServerType.ProductAgent) ||
+                    (bProductNginx && serverInfo.ServerType == ServerType.ProductNginx))
                 {
                     if (index_y % 6 == 0 && index_y > 1)
                     {
@@ -3708,6 +3719,16 @@ Order by b.LastUserUpdateTime;";
         }
 
         private void cbGenCopyBat_PreviewAgent_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void cbGenCopyBat_PreviewNginx_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_server_list();
+        }
+
+        private void cbGenCopyBat_ProductNginx_CheckedChanged(object sender, EventArgs e)
         {
             generate_server_list();
         }
@@ -3756,10 +3777,12 @@ Order by b.LastUserUpdateTime;";
                             {
                                 case ServerType.PreviewWeb:
                                 case ServerType.PreviewAgent:
+                                case ServerType.PreviewNginx:
                                     env = "Preview";
                                     break;
                                 case ServerType.ProductWeb:
                                 case ServerType.ProductAgent:
+                                case ServerType.ProductNginx:
                                     env = "Product";
                                     break;
 
@@ -3776,9 +3799,9 @@ Order by b.LastUserUpdateTime;";
                     return;
                 }
 
-                dic.Add("Date", DateTime.Now.ToString("yyyyMMdd"));
+                dic.Add("DateList", this.txtGenCopyBat_DateRange.Text.Trim().Split(','));
                 dic.Add("ServerList", serverList);
-                dic.Add("IsToLocal", this.cbGenCopyBat_IsToLocal.Checked ? 1 : 0);
+                dic.Add("BatType", this.txtGenCopyBat_BatType.Text.Trim());
             }
             catch (Exception ex)
             {
@@ -3800,7 +3823,8 @@ Order by b.LastUserUpdateTime;";
             SelectItem template = (SelectItem)this.cbGenCopyBat_Template.SelectedItem;
             this.txtGenCopyBat_SourcePath.Text = template.SourcePath;
             this.txtGenCopyBat_TargetPath.Text = template.TargetPath;
-            this.cbGenCopyBat_IsToLocal.Checked = template.IsToLocal;
+            this.txtGenCopyBat_BatType.Text = template.BatType;
+            this.txtGenCopyBat_DateRange.Text = DateTime.Now.ToString("yyyyMMdd");
         }
 
         private void btnGenCopyBat_RunBat_Click(object sender, EventArgs e)
@@ -3853,6 +3877,12 @@ Order by b.LastUserUpdateTime;";
             }            
         }
 
+        private void btnGenCopyBat_OpenFolder_Click(object sender, EventArgs e)
+        {
+            string batPath = htConfig["OpenBackupPath"].ToString();
+            CommonHelper.RunBat(batPath);
+        }
+
     }
 
     #region public class or enum
@@ -3886,9 +3916,10 @@ Order by b.LastUserUpdateTime;";
         public string ProviderName { get; set; }
 
         //for gen copy bat
+        public string DateRange { get; set; }
         public string SourcePath { get; set; }
         public string TargetPath{get;set;}
-        public bool IsToLocal { get; set; }
+        public string BatType { get; set; }
 
         //for ELK
         public string Url { get; set; }

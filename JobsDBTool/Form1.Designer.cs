@@ -83,7 +83,6 @@
             this.gvCommon_RunSql_SqlResult = new System.Windows.Forms.DataGridView();
             this.btnCommon_RunSql_Run = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.cbGenCopyBat_IsToLocal = new System.Windows.Forms.CheckBox();
             this.btnGenCopyBat_Gen = new System.Windows.Forms.Button();
             this.plGenCopyBat_ServerList = new System.Windows.Forms.Panel();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
@@ -355,6 +354,7 @@
             this.groupBox23 = new System.Windows.Forms.GroupBox();
             this.rtbELK_Result = new System.Windows.Forms.RichTextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btnELK_Open = new System.Windows.Forms.Button();
             this.rtbELK_Payload = new System.Windows.Forms.RichTextBox();
             this.label51 = new System.Windows.Forms.Label();
             this.btnELK_Submit = new System.Windows.Forms.Button();
@@ -368,7 +368,13 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.btnELK_Open = new System.Windows.Forms.Button();
+            this.cbGenCopyBat_PreviewNginx = new System.Windows.Forms.CheckBox();
+            this.cbGenCopyBat_ProductNginx = new System.Windows.Forms.CheckBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.txtGenCopyBat_BatType = new System.Windows.Forms.TextBox();
+            this.txtGenCopyBat_DateRange = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.btnGenCopyBat_OpenFolder = new System.Windows.Forms.Button();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -989,7 +995,10 @@
             // 
             // tabPage11
             // 
-            this.tabPage11.Controls.Add(this.cbGenCopyBat_IsToLocal);
+            this.tabPage11.Controls.Add(this.label53);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_DateRange);
+            this.tabPage11.Controls.Add(this.txtGenCopyBat_BatType);
+            this.tabPage11.Controls.Add(this.label52);
             this.tabPage11.Controls.Add(this.btnGenCopyBat_Gen);
             this.tabPage11.Controls.Add(this.plGenCopyBat_ServerList);
             this.tabPage11.Controls.Add(this.groupBox22);
@@ -1006,19 +1015,9 @@
             this.tabPage11.Text = "Gen Copy Bat";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // cbGenCopyBat_IsToLocal
-            // 
-            this.cbGenCopyBat_IsToLocal.AutoSize = true;
-            this.cbGenCopyBat_IsToLocal.Location = new System.Drawing.Point(72, 120);
-            this.cbGenCopyBat_IsToLocal.Name = "cbGenCopyBat_IsToLocal";
-            this.cbGenCopyBat_IsToLocal.Size = new System.Drawing.Size(75, 17);
-            this.cbGenCopyBat_IsToLocal.TabIndex = 96;
-            this.cbGenCopyBat_IsToLocal.Text = "Is to Local";
-            this.cbGenCopyBat_IsToLocal.UseVisualStyleBackColor = true;
-            // 
             // btnGenCopyBat_Gen
             // 
-            this.btnGenCopyBat_Gen.Location = new System.Drawing.Point(326, 116);
+            this.btnGenCopyBat_Gen.Location = new System.Drawing.Point(326, 112);
             this.btnGenCopyBat_Gen.Name = "btnGenCopyBat_Gen";
             this.btnGenCopyBat_Gen.Size = new System.Drawing.Size(105, 23);
             this.btnGenCopyBat_Gen.TabIndex = 93;
@@ -1038,6 +1037,7 @@
             // 
             // groupBox22
             // 
+            this.groupBox22.Controls.Add(this.btnGenCopyBat_OpenFolder);
             this.groupBox22.Controls.Add(this.txtGenCopyBat_BatPath);
             this.groupBox22.Controls.Add(this.rtbGenCopyBat_Result);
             this.groupBox22.Controls.Add(this.btnGenCopyBat_RunBat);
@@ -1050,9 +1050,9 @@
             // 
             // txtGenCopyBat_BatPath
             // 
-            this.txtGenCopyBat_BatPath.Location = new System.Drawing.Point(5, 17);
+            this.txtGenCopyBat_BatPath.Location = new System.Drawing.Point(5, 11);
             this.txtGenCopyBat_BatPath.Name = "txtGenCopyBat_BatPath";
-            this.txtGenCopyBat_BatPath.Size = new System.Drawing.Size(256, 20);
+            this.txtGenCopyBat_BatPath.Size = new System.Drawing.Size(173, 20);
             this.txtGenCopyBat_BatPath.TabIndex = 64;
             // 
             // rtbGenCopyBat_Result
@@ -1066,7 +1066,7 @@
             // 
             // btnGenCopyBat_RunBat
             // 
-            this.btnGenCopyBat_RunBat.Location = new System.Drawing.Point(267, 15);
+            this.btnGenCopyBat_RunBat.Location = new System.Drawing.Point(184, 9);
             this.btnGenCopyBat_RunBat.Name = "btnGenCopyBat_RunBat";
             this.btnGenCopyBat_RunBat.Size = new System.Drawing.Size(75, 23);
             this.btnGenCopyBat_RunBat.TabIndex = 51;
@@ -1076,57 +1076,59 @@
             // 
             // groupBox21
             // 
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_ProductNginx);
+            this.groupBox21.Controls.Add(this.cbGenCopyBat_PreviewNginx);
             this.groupBox21.Controls.Add(this.cbGenCopyBat_ProductAgent);
             this.groupBox21.Controls.Add(this.cbGenCopyBat_ProductWeb);
             this.groupBox21.Controls.Add(this.cbGenCopyBat_PreviewAgent);
             this.groupBox21.Controls.Add(this.cbGenCopyBat_PreviewWeb);
-            this.groupBox21.Location = new System.Drawing.Point(17, 145);
+            this.groupBox21.Location = new System.Drawing.Point(4, 135);
             this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(465, 39);
+            this.groupBox21.Size = new System.Drawing.Size(478, 39);
             this.groupBox21.TabIndex = 91;
             this.groupBox21.TabStop = false;
             // 
             // cbGenCopyBat_ProductAgent
             // 
             this.cbGenCopyBat_ProductAgent.AutoSize = true;
-            this.cbGenCopyBat_ProductAgent.Location = new System.Drawing.Point(359, 15);
+            this.cbGenCopyBat_ProductAgent.Location = new System.Drawing.Point(321, 15);
             this.cbGenCopyBat_ProductAgent.Name = "cbGenCopyBat_ProductAgent";
-            this.cbGenCopyBat_ProductAgent.Size = new System.Drawing.Size(94, 17);
+            this.cbGenCopyBat_ProductAgent.Size = new System.Drawing.Size(79, 17);
             this.cbGenCopyBat_ProductAgent.TabIndex = 95;
-            this.cbGenCopyBat_ProductAgent.Text = "Product Agent";
+            this.cbGenCopyBat_ProductAgent.Text = "Prod Agent";
             this.cbGenCopyBat_ProductAgent.UseVisualStyleBackColor = true;
             this.cbGenCopyBat_ProductAgent.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_ProductAgent_CheckedChanged);
             // 
             // cbGenCopyBat_ProductWeb
             // 
             this.cbGenCopyBat_ProductWeb.AutoSize = true;
-            this.cbGenCopyBat_ProductWeb.Location = new System.Drawing.Point(241, 15);
+            this.cbGenCopyBat_ProductWeb.Location = new System.Drawing.Point(245, 15);
             this.cbGenCopyBat_ProductWeb.Name = "cbGenCopyBat_ProductWeb";
-            this.cbGenCopyBat_ProductWeb.Size = new System.Drawing.Size(89, 17);
+            this.cbGenCopyBat_ProductWeb.Size = new System.Drawing.Size(74, 17);
             this.cbGenCopyBat_ProductWeb.TabIndex = 94;
-            this.cbGenCopyBat_ProductWeb.Text = "Product Web";
+            this.cbGenCopyBat_ProductWeb.Text = "Prod Web";
             this.cbGenCopyBat_ProductWeb.UseVisualStyleBackColor = true;
             this.cbGenCopyBat_ProductWeb.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_ProductWeb_CheckedChanged);
             // 
             // cbGenCopyBat_PreviewAgent
             // 
             this.cbGenCopyBat_PreviewAgent.AutoSize = true;
-            this.cbGenCopyBat_PreviewAgent.Location = new System.Drawing.Point(118, 15);
+            this.cbGenCopyBat_PreviewAgent.Location = new System.Drawing.Point(79, 15);
             this.cbGenCopyBat_PreviewAgent.Name = "cbGenCopyBat_PreviewAgent";
-            this.cbGenCopyBat_PreviewAgent.Size = new System.Drawing.Size(95, 17);
+            this.cbGenCopyBat_PreviewAgent.Size = new System.Drawing.Size(73, 17);
             this.cbGenCopyBat_PreviewAgent.TabIndex = 93;
-            this.cbGenCopyBat_PreviewAgent.Text = "Preview Agent";
+            this.cbGenCopyBat_PreviewAgent.Text = "Pre Agent";
             this.cbGenCopyBat_PreviewAgent.UseVisualStyleBackColor = true;
             this.cbGenCopyBat_PreviewAgent.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_PreviewAgent_CheckedChanged);
             // 
             // cbGenCopyBat_PreviewWeb
             // 
             this.cbGenCopyBat_PreviewWeb.AutoSize = true;
-            this.cbGenCopyBat_PreviewWeb.Location = new System.Drawing.Point(15, 15);
+            this.cbGenCopyBat_PreviewWeb.Location = new System.Drawing.Point(9, 15);
             this.cbGenCopyBat_PreviewWeb.Name = "cbGenCopyBat_PreviewWeb";
-            this.cbGenCopyBat_PreviewWeb.Size = new System.Drawing.Size(90, 17);
+            this.cbGenCopyBat_PreviewWeb.Size = new System.Drawing.Size(68, 17);
             this.cbGenCopyBat_PreviewWeb.TabIndex = 92;
-            this.cbGenCopyBat_PreviewWeb.Text = "Preview Web";
+            this.cbGenCopyBat_PreviewWeb.Text = "Pre Web";
             this.cbGenCopyBat_PreviewWeb.UseVisualStyleBackColor = true;
             this.cbGenCopyBat_PreviewWeb.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_PreviewWeb_CheckedChanged);
             // 
@@ -1149,9 +1151,9 @@
             // cbGenCopyBat_Template
             // 
             this.cbGenCopyBat_Template.FormattingEnabled = true;
-            this.cbGenCopyBat_Template.Location = new System.Drawing.Point(72, 17);
+            this.cbGenCopyBat_Template.Location = new System.Drawing.Point(13, 17);
             this.cbGenCopyBat_Template.Name = "cbGenCopyBat_Template";
-            this.cbGenCopyBat_Template.Size = new System.Drawing.Size(185, 21);
+            this.cbGenCopyBat_Template.Size = new System.Drawing.Size(244, 21);
             this.cbGenCopyBat_Template.TabIndex = 62;
             this.cbGenCopyBat_Template.SelectedIndexChanged += new System.EventHandler(this.cbGenCopyBat_Template_SelectedIndexChanged);
             // 
@@ -3887,6 +3889,16 @@
             this.groupBox10.TabIndex = 97;
             this.groupBox10.TabStop = false;
             // 
+            // btnELK_Open
+            // 
+            this.btnELK_Open.Location = new System.Drawing.Point(255, 363);
+            this.btnELK_Open.Name = "btnELK_Open";
+            this.btnELK_Open.Size = new System.Drawing.Size(112, 23);
+            this.btnELK_Open.TabIndex = 101;
+            this.btnELK_Open.Text = "Open in notepad";
+            this.btnELK_Open.UseVisualStyleBackColor = true;
+            this.btnELK_Open.Click += new System.EventHandler(this.btnELK_Open_Click);
+            // 
             // rtbELK_Payload
             // 
             this.rtbELK_Payload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3990,15 +4002,69 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // btnELK_Open
+            // cbGenCopyBat_PreviewNginx
             // 
-            this.btnELK_Open.Location = new System.Drawing.Point(255, 363);
-            this.btnELK_Open.Name = "btnELK_Open";
-            this.btnELK_Open.Size = new System.Drawing.Size(112, 23);
-            this.btnELK_Open.TabIndex = 101;
-            this.btnELK_Open.Text = "Open in notepad";
-            this.btnELK_Open.UseVisualStyleBackColor = true;
-            this.btnELK_Open.Click += new System.EventHandler(this.btnELK_Open_Click);
+            this.cbGenCopyBat_PreviewNginx.AutoSize = true;
+            this.cbGenCopyBat_PreviewNginx.Location = new System.Drawing.Point(153, 15);
+            this.cbGenCopyBat_PreviewNginx.Name = "cbGenCopyBat_PreviewNginx";
+            this.cbGenCopyBat_PreviewNginx.Size = new System.Drawing.Size(72, 17);
+            this.cbGenCopyBat_PreviewNginx.TabIndex = 96;
+            this.cbGenCopyBat_PreviewNginx.Text = "Pre Nginx";
+            this.cbGenCopyBat_PreviewNginx.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_PreviewNginx.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_PreviewNginx_CheckedChanged);
+            // 
+            // cbGenCopyBat_ProductNginx
+            // 
+            this.cbGenCopyBat_ProductNginx.AutoSize = true;
+            this.cbGenCopyBat_ProductNginx.Location = new System.Drawing.Point(400, 15);
+            this.cbGenCopyBat_ProductNginx.Name = "cbGenCopyBat_ProductNginx";
+            this.cbGenCopyBat_ProductNginx.Size = new System.Drawing.Size(78, 17);
+            this.cbGenCopyBat_ProductNginx.TabIndex = 97;
+            this.cbGenCopyBat_ProductNginx.Text = "Prod Nginx";
+            this.cbGenCopyBat_ProductNginx.UseVisualStyleBackColor = true;
+            this.cbGenCopyBat_ProductNginx.CheckedChanged += new System.EventHandler(this.cbGenCopyBat_ProductNginx_CheckedChanged);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(273, 22);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(50, 13);
+            this.label52.TabIndex = 95;
+            this.label52.Text = "Bat Type";
+            // 
+            // txtGenCopyBat_BatType
+            // 
+            this.txtGenCopyBat_BatType.Location = new System.Drawing.Point(332, 19);
+            this.txtGenCopyBat_BatType.Name = "txtGenCopyBat_BatType";
+            this.txtGenCopyBat_BatType.Size = new System.Drawing.Size(99, 20);
+            this.txtGenCopyBat_BatType.TabIndex = 96;
+            // 
+            // txtGenCopyBat_DateRange
+            // 
+            this.txtGenCopyBat_DateRange.Location = new System.Drawing.Point(71, 114);
+            this.txtGenCopyBat_DateRange.Name = "txtGenCopyBat_DateRange";
+            this.txtGenCopyBat_DateRange.Size = new System.Drawing.Size(186, 20);
+            this.txtGenCopyBat_DateRange.TabIndex = 97;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(3, 117);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(65, 13);
+            this.label53.TabIndex = 98;
+            this.label53.Text = "Date Range";
+            // 
+            // btnGenCopyBat_OpenFolder
+            // 
+            this.btnGenCopyBat_OpenFolder.Location = new System.Drawing.Point(264, 9);
+            this.btnGenCopyBat_OpenFolder.Name = "btnGenCopyBat_OpenFolder";
+            this.btnGenCopyBat_OpenFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnGenCopyBat_OpenFolder.TabIndex = 65;
+            this.btnGenCopyBat_OpenFolder.Text = "Open Folder";
+            this.btnGenCopyBat_OpenFolder.UseVisualStyleBackColor = true;
+            this.btnGenCopyBat_OpenFolder.Click += new System.EventHandler(this.btnGenCopyBat_OpenFolder_Click);
             // 
             // mainFrm
             // 
@@ -4445,7 +4511,6 @@
         private System.Windows.Forms.Button btnGenCopyBat_Gen;
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.TextBox txtGenCopyBat_BatPath;
-        private System.Windows.Forms.CheckBox cbGenCopyBat_IsToLocal;
         private System.Windows.Forms.TextBox txtAddWordings_Result_SqlScriptComment;
         private System.Windows.Forms.TabControl authinfo_tab_login;
         private System.Windows.Forms.TabPage authinfo_tab_account;
@@ -4466,6 +4531,13 @@
         private System.Windows.Forms.RichTextBox rtbELK_Payload;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Button btnELK_Open;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_PreviewNginx;
+        private System.Windows.Forms.CheckBox cbGenCopyBat_ProductNginx;
+        private System.Windows.Forms.TextBox txtGenCopyBat_BatType;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox txtGenCopyBat_DateRange;
+        private System.Windows.Forms.Button btnGenCopyBat_OpenFolder;
     }
 }
 

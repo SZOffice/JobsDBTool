@@ -10,8 +10,10 @@ namespace JobsDBTool.Models.Domain
         Null = -1,
         PreviewWeb = 0,
         PreviewAgent = 1,
-        ProductWeb = 2,
-        ProductAgent = 3
+        PreviewNginx = 2,
+        ProductWeb = 3,
+        ProductAgent = 4,
+        ProductNginx = 5
     }
     public class ServerInfo
     {
