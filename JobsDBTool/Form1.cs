@@ -3680,6 +3680,13 @@ Order by b.LastUserUpdateTime;";
             ServerType preServerType = ServerType.Null;
             foreach (var serverInfo in listGenCopyBat_ServerInfo)
             {
+                if (serverInfo.ServerType == ServerType.Null && index_y > 0)
+                {
+                    index_x++;
+                    index_y = 0;
+                    continue;
+                }
+
                 if ((bPreviewWeb && serverInfo.ServerType == ServerType.PreviewWeb) ||
                     (bPreviewAgent && serverInfo.ServerType == ServerType.PreviewAgent) ||
                     (bPreviewNgnix && serverInfo.ServerType == ServerType.PreviewNginx) ||

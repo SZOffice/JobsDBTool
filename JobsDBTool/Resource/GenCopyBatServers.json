@@ -12,7 +12,14 @@
 	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 0
-},{
+},
+
+{
+	Name: "",
+	ServerType: -1
+},
+
+{
 	Name: "Preview ID Web1",
 	Host: "IDPREWeb1",
 	LoginID: "jobsdbid\\agentservice",
@@ -26,7 +33,14 @@
 	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 0
-},{
+},
+
+{
+	Name: "",
+	ServerType: -1
+},
+
+{
 	Name: "Preview TH Web1",
 	Host: "THPREWeb1",
 	LoginID: "jobsdbth\\agentservice",
@@ -263,7 +277,14 @@
 	LoginPWD: "******",
 	CountryCode: "HK",
 	ServerType: 5
-},{
+},
+
+{
+	Name: "",
+	ServerType: -1
+},
+
+{
 	Name: "Product ID Nginx3",
 	Host: "IDNginx3",
 	LoginID: "jobsdbid\\agentservice",
@@ -277,7 +298,14 @@
 	LoginPWD: "******",
 	CountryCode: "ID",
 	ServerType: 5
-},{
+},
+
+{
+	Name: "",
+	ServerType: -1
+},
+
+{
 	Name: "Product TH Nginx3",
 	Host: "THNginx3",
 	LoginID: "jobsdbth\\agentservice",
