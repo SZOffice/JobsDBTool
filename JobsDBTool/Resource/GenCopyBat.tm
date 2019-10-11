@@ -30,12 +30,13 @@ $end
 $end
 
 $if(BatType==3)
-$foreach(server in ServerList)
-set server=$server.Host
-
 set pscp="D:\Program Files\PuTTY\pscp.exe"
 set base=D:\Tools\JobsDBTool\Resource\
 set confirm="%base%confirm.txt"
+
+$foreach(server in ServerList)
+set server=$server.Host
+
 set target=%date%\${server.Target}
 
 if not exist %target% ( 
