@@ -33,34 +33,34 @@
         </columns>   
         
         <columns name="Common_GenCopyBat_Template">
-          <column name="To Local: Copy Web.Config">
+          <column name="To Local: Web: Web.Config">
             <SourcePath>d$\jobsDBv8\JobsDB.Web\web.config</SourcePath>
             <TargetPath>{Env}_{CountryCode}\JobsDB.Web\%server%\</TargetPath>
             <BatType>1</BatType>
           </column>
-          <column name="To Server: Copy Web.Config">
+          <column name="To Server: Web: Web.Config">
             <SourcePath>d:\jobsDBv8\JobsDB.Web\web.config</SourcePath>
             <TargetPath>d$\jobsDBv8\JobsDB.Web\web.config</TargetPath>
             <BatType>2</BatType>
           </column>
           
-          <column name="To Local: Copy UnhandledEx.**.log">
+          <column name="To Local: Web: UnhandledEx.**.log">
             <SourcePath>e$\Jobsdb\Log\{CountryCode}\%date%\UnhandledEx.%date%.log</SourcePath>
             <TargetPath>{Env}_{CountryCode}\Log\%server%\</TargetPath>
             <BatType>1</BatType>
           </column>
-          <column name="To Local: Copy Web PaymentGateway.**.log">
+          <column name="To Local: Web: PaymentGateway.**.log">
             <SourcePath>e$\Jobsdb\Log\{CountryCode}\%date%\PaymentGateway.%date%.log</SourcePath>
             <TargetPath>{Env}_{CountryCode}\Log\%server%\</TargetPath>
             <BatType>1</BatType>
           </column>
-          <column name="To Local: Copy Nginx PaymentGateway.**.log">
+          <column name="To Local: Nginx: PaymentGateway.**.log">
             <SourcePath>/var/log/nginx/paymentgateway.access.log</SourcePath>
             <TargetPath>{Env}_{CountryCode}\Nginx\%server%\</TargetPath>
             <BatType>3</BatType>
           </column>
           
-          <column name="To Local: Copy FileSystemProperty.Config">
+          <column name="To Local: Web: FileSystemProperty.Config">
             <SourcePath>d$\jobsDBv8\JobsDB.Web\Config\FileSystemProperty.config</SourcePath>
             <TargetPath>{Env}_{CountryCode}\JobsDB.Web\%server%\</TargetPath>
             <BatType>1</BatType>

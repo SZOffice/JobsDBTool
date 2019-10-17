@@ -8,12 +8,14 @@ $foreach(date in DateList)
 set date=$date
 
 $if(BatType==1)
+set base=D:\Tools\JobsDBTool\Resource\
+set all="%base%all.txt"
 $foreach(server in ServerList)
 set server=$server.Host
 net use /delete \\%server%\c$ /Y
 net use \\%server%\d$ $server.Password /user:$server.User
 
-xcopy \\%server%\$server.Source %date%\${server.Target}
+xcopy \\%server%\$server.Source %date%\${server.Target}  < %all%
 $end
 $end
 
@@ -36,7 +38,6 @@ set confirm="%base%confirm.txt"
 
 $foreach(server in ServerList)
 set server=$server.Host
-
 set target=%date%\${server.Target}
 
 if not exist %target% ( 
