@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace JobsDBTool
 {
@@ -103,5 +105,31 @@ namespace JobsDBTool
             }
             return ds;
         }
+
+        public static void AsyncAppendResult(RichTextBox rtb, ResultType type, string text)
+        {
+            if (rtb.InvokeRequired)//不同线程访问了
+                rtb.Invoke(new Action<RichTextBox, ResultType, string>(AppendResult), rtb, type, text);//跨线程了
+            else//同线程直接赋值
+                AppendResult(rtb, type, text);
+        }
+        private static void AppendResult(RichTextBox rtb, ResultType type, string text)
+        {
+            rtb.Select(rtb.Text.Length, 0);
+            rtb.Focus();
+            switch (type)
+            {
+                case ResultType.Failure:
+                    rtb.SelectionColor = Color.Red;
+                    break;
+                case ResultType.Success:
+                    rtb.SelectionColor = Color.Green;
+                    break;
+
+            }
+            bool isSwitchline = string.IsNullOrEmpty(text) || text == Environment.NewLine;
+            rtb.AppendText(isSwitchline ? text : DateTime.Now.ToString("[yyyy-MM-dd HH:mm:ss] ") + text);
+        }
+
     }
 }

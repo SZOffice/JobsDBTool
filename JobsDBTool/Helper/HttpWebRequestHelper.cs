@@ -164,5 +164,30 @@ namespace JobsDBTool.Helper
                 }
             }
         }
+
+        public static bool CheckAccessWebSite(string url, int timeout)
+        {
+            HttpWebResponse myRes = null;
+
+            try
+            {
+                HttpWebRequest myReq = WebRequest.Create(url) as HttpWebRequest;
+                myReq.Method = "HEAD";
+                myReq.Timeout = timeout;
+
+                myRes = myReq.GetResponse() as HttpWebResponse;
+
+                return (myRes != null && myRes.StatusCode == HttpStatusCode.OK);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (myRes != null) myRes.Close();
+            }
+        }
+
     }
 }

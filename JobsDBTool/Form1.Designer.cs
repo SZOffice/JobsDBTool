@@ -106,6 +106,9 @@
             this.cbGenCopyBat_Template = new System.Windows.Forms.ComboBox();
             this.label47 = new System.Windows.Forms.Label();
             this.txtGenCopyBat_SourcePath = new System.Windows.Forms.TextBox();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.btnWarmUp_Check = new System.Windows.Forms.Button();
+            this.rtbWarmUp_RequestUrl = new System.Windows.Forms.RichTextBox();
             this.tp_AddWordings = new System.Windows.Forms.TabPage();
             this.tc_AddWordings = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -375,6 +378,13 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.rtbWarmUp_Result = new System.Windows.Forms.RichTextBox();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.cbWarmUp_CountryTH = new System.Windows.Forms.CheckBox();
+            this.cbWarmUp_CountryID = new System.Windows.Forms.CheckBox();
+            this.cbWarmUp_CountryHK = new System.Windows.Forms.CheckBox();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -394,6 +404,7 @@
             this.tabPage11.SuspendLayout();
             this.groupBox22.SuspendLayout();
             this.groupBox21.SuspendLayout();
+            this.tabPage12.SuspendLayout();
             this.tp_AddWordings.SuspendLayout();
             this.tc_AddWordings.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -441,6 +452,9 @@
             this.groupBox23.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox24.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox26.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -564,6 +578,7 @@
             this.tabControl3.Controls.Add(this.tabPage9);
             this.tabControl3.Controls.Add(this.tabPage10);
             this.tabControl3.Controls.Add(this.tabPage11);
+            this.tabControl3.Controls.Add(this.tabPage12);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl3.Location = new System.Drawing.Point(3, 16);
             this.tabControl3.Name = "tabControl3";
@@ -1236,6 +1251,38 @@
             this.txtGenCopyBat_SourcePath.Name = "txtGenCopyBat_SourcePath";
             this.txtGenCopyBat_SourcePath.Size = new System.Drawing.Size(360, 20);
             this.txtGenCopyBat_SourcePath.TabIndex = 60;
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.groupBox26);
+            this.tabPage12.Controls.Add(this.groupBox25);
+            this.tabPage12.Controls.Add(this.groupBox24);
+            this.tabPage12.Controls.Add(this.btnWarmUp_Check);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Size = new System.Drawing.Size(833, 358);
+            this.tabPage12.TabIndex = 5;
+            this.tabPage12.Text = "WarmUp";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // btnWarmUp_Check
+            // 
+            this.btnWarmUp_Check.Location = new System.Drawing.Point(348, 33);
+            this.btnWarmUp_Check.Name = "btnWarmUp_Check";
+            this.btnWarmUp_Check.Size = new System.Drawing.Size(105, 23);
+            this.btnWarmUp_Check.TabIndex = 94;
+            this.btnWarmUp_Check.Text = "Check Web";
+            this.btnWarmUp_Check.UseVisualStyleBackColor = true;
+            this.btnWarmUp_Check.Click += new System.EventHandler(this.btnWarmUp_Check_Click);
+            // 
+            // rtbWarmUp_RequestUrl
+            // 
+            this.rtbWarmUp_RequestUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbWarmUp_RequestUrl.Location = new System.Drawing.Point(3, 16);
+            this.rtbWarmUp_RequestUrl.Name = "rtbWarmUp_RequestUrl";
+            this.rtbWarmUp_RequestUrl.Size = new System.Drawing.Size(472, 261);
+            this.rtbWarmUp_RequestUrl.TabIndex = 64;
+            this.rtbWarmUp_RequestUrl.Text = "";
             // 
             // tp_AddWordings
             // 
@@ -4066,6 +4113,78 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.rtbWarmUp_RequestUrl);
+            this.groupBox24.Location = new System.Drawing.Point(3, 75);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(478, 280);
+            this.groupBox24.TabIndex = 95;
+            this.groupBox24.TabStop = false;
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.rtbWarmUp_Result);
+            this.groupBox25.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox25.Location = new System.Drawing.Point(487, 0);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(346, 358);
+            this.groupBox25.TabIndex = 96;
+            this.groupBox25.TabStop = false;
+            // 
+            // rtbWarmUp_Result
+            // 
+            this.rtbWarmUp_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbWarmUp_Result.Location = new System.Drawing.Point(3, 16);
+            this.rtbWarmUp_Result.Name = "rtbWarmUp_Result";
+            this.rtbWarmUp_Result.Size = new System.Drawing.Size(340, 339);
+            this.rtbWarmUp_Result.TabIndex = 64;
+            this.rtbWarmUp_Result.Text = "";
+            // 
+            // groupBox26
+            // 
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryTH);
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryID);
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryHK);
+            this.groupBox26.Location = new System.Drawing.Point(32, 24);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Size = new System.Drawing.Size(266, 39);
+            this.groupBox26.TabIndex = 97;
+            this.groupBox26.TabStop = false;
+            // 
+            // cbWarmUp_CountryTH
+            // 
+            this.cbWarmUp_CountryTH.AutoSize = true;
+            this.cbWarmUp_CountryTH.Location = new System.Drawing.Point(181, 15);
+            this.cbWarmUp_CountryTH.Name = "cbWarmUp_CountryTH";
+            this.cbWarmUp_CountryTH.Size = new System.Drawing.Size(41, 17);
+            this.cbWarmUp_CountryTH.TabIndex = 97;
+            this.cbWarmUp_CountryTH.Text = "TH";
+            this.cbWarmUp_CountryTH.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryTH.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryTH_CheckedChanged);
+            // 
+            // cbWarmUp_CountryID
+            // 
+            this.cbWarmUp_CountryID.AutoSize = true;
+            this.cbWarmUp_CountryID.Location = new System.Drawing.Point(102, 15);
+            this.cbWarmUp_CountryID.Name = "cbWarmUp_CountryID";
+            this.cbWarmUp_CountryID.Size = new System.Drawing.Size(37, 17);
+            this.cbWarmUp_CountryID.TabIndex = 95;
+            this.cbWarmUp_CountryID.Text = "ID";
+            this.cbWarmUp_CountryID.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryID.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryID_CheckedChanged);
+            // 
+            // cbWarmUp_CountryHK
+            // 
+            this.cbWarmUp_CountryHK.AutoSize = true;
+            this.cbWarmUp_CountryHK.Location = new System.Drawing.Point(22, 15);
+            this.cbWarmUp_CountryHK.Name = "cbWarmUp_CountryHK";
+            this.cbWarmUp_CountryHK.Size = new System.Drawing.Size(41, 17);
+            this.cbWarmUp_CountryHK.TabIndex = 94;
+            this.cbWarmUp_CountryHK.Text = "HK";
+            this.cbWarmUp_CountryHK.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryHK.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryHK_CheckedChanged);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4109,6 +4228,7 @@
             this.groupBox22.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
+            this.tabPage12.ResumeLayout(false);
             this.tp_AddWordings.ResumeLayout(false);
             this.tp_AddWordings.PerformLayout();
             this.tc_AddWordings.ResumeLayout(false);
@@ -4186,6 +4306,10 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBox24.ResumeLayout(false);
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4538,6 +4662,16 @@
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.TextBox txtGenCopyBat_DateRange;
         private System.Windows.Forms.Button btnGenCopyBat_OpenFolder;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.Button btnWarmUp_Check;
+        private System.Windows.Forms.RichTextBox rtbWarmUp_RequestUrl;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private System.Windows.Forms.RichTextBox rtbWarmUp_Result;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.CheckBox cbWarmUp_CountryTH;
+        private System.Windows.Forms.CheckBox cbWarmUp_CountryID;
+        private System.Windows.Forms.CheckBox cbWarmUp_CountryHK;
     }
 }
 

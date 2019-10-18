@@ -1687,7 +1687,7 @@ namespace JobsDBTool
                                 selectItem.Payload = xe.Value;
                             }
                         }
-                        
+
                         ls.Add(selectItem);
                     }
                     dic.Add(item.Attribute("name").Value, ls);
@@ -3296,7 +3296,7 @@ Order by b.LastUserUpdateTime;";
         {
             others_rbAuthType_Change(2);
         }
-        
+
         private void others_rbAuthType_Account_CheckedChanged(object sender, EventArgs e)
         {
             others_rbAuthType_Change(0);
@@ -3310,7 +3310,7 @@ Order by b.LastUserUpdateTime;";
             }
             catch { }
         }
-        
+
         private void others_cbAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectItem accountInfo = (SelectItem)this.others_cbAccount.SelectedItem;
@@ -3368,7 +3368,7 @@ Order by b.LastUserUpdateTime;";
             if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_account || this.authinfo_tab_login.SelectedTab == this.authinfo_tab_employer)
             {
                 if (this.authinfo_tab_login.SelectedTab == this.authinfo_tab_account)
-                { 
+                {
                     if (string.IsNullOrEmpty(accountNum) || string.IsNullOrEmpty(subAccount))
                     {
                         MessageBox.Show("Please input AccountNum & SubAccount first");
@@ -3765,7 +3765,7 @@ Order by b.LastUserUpdateTime;";
             try
             {
                 IList<Dictionary<string, object>> serverList = new List<Dictionary<string, object>>();
-                
+
                 for (int i = 0; i < listGenCopyBat_ServerInfo.Count; i++)
                 {
                     var findControls = this.plGenCopyBat_ServerList.Controls.Find("cbField_" + i, false);
@@ -3799,7 +3799,7 @@ Order by b.LastUserUpdateTime;";
                             serverList.Add(dicServer);
                         }
                     }
-                } 
+                }
                 if (serverList.Count() == 0)
                 {
                     MessageBox.Show("Please select server");
@@ -3822,7 +3822,7 @@ Order by b.LastUserUpdateTime;";
             string batPath = @"Backup\_GenCopyBat_" + DateTime.Now.ToString("yyyyMMdd") + "_V" + index + ".bat";
             KernelClass.PhysicalFile.AddToFile(batContent, batPath);
             this.txtGenCopyBat_BatPath.Text = CommonHelper.GetAbsolutePath(batPath);
-             
+
         }
 
         private void cbGenCopyBat_Template_SelectedIndexChanged(object sender, EventArgs e)
@@ -3881,7 +3881,7 @@ Order by b.LastUserUpdateTime;";
             if (KernelClass.PhysicalFile.SaveFile(result, resultPath, false))
             {
                 CommonHelper.RunBat(batPath);
-            }            
+            }
         }
 
         private void btnGenCopyBat_OpenFolder_Click(object sender, EventArgs e)
@@ -3889,6 +3889,117 @@ Order by b.LastUserUpdateTime;";
             string batPath = htConfig["OpenBackupPath"].ToString();
             CommonHelper.RunBat(batPath);
         }
+
+        private void btnWarmUp_Check_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.rtbWarmUp_Result.Text = string.Empty;
+                var urls = this.rtbWarmUp_RequestUrl.Lines;
+                ThreadStart thStart = new ThreadStart(delegate { ProAppendResult(urls); });//threadStart委托 
+                Thread thread = new Thread(thStart);
+                thread.Priority = ThreadPriority.Highest;
+                thread.IsBackground = true; //关闭窗体继续执行
+                thread.Start();
+            }
+            catch
+            {
+                MessageBox.Show("The Result is err");
+
+            }
+        }
+
+        public void ProAppendResult(string[] urls)
+        {
+            foreach (var url in urls)
+            {
+                if (!string.IsNullOrEmpty(url))
+                {
+                    BaseHelper.AsyncAppendResult(this.rtbWarmUp_Result, ResultType.None, Environment.NewLine);
+                    BaseHelper.AsyncAppendResult(this.rtbWarmUp_Result, ResultType.None, "Start warmup url: " + url);
+                    BaseHelper.AsyncAppendResult(this.rtbWarmUp_Result, ResultType.None, Environment.NewLine);
+                    if (!HttpWebRequestHelper.CheckAccessWebSite((url.Contains("http") ? url : "http://" + url), 5000))
+                    {
+                        BaseHelper.AsyncAppendResult(this.rtbWarmUp_Result, ResultType.Failure, "         warmup failed.");
+                        //MessageBox.Show("It is not access for " + url);
+                        continue;
+                    }
+                    else
+                    {
+                        BaseHelper.AsyncAppendResult(this.rtbWarmUp_Result, ResultType.Success, "         warmup successed.");
+                    }
+                }
+            }
+
+        }
+
+        private void cbWarmUp_CountryHK_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_request_url_list();
+        }
+
+        private void cbWarmUp_CountryID_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_request_url_list();
+        }
+
+        private void cbWarmUp_CountryTH_CheckedChanged(object sender, EventArgs e)
+        {
+            generate_request_url_list();
+        }
+
+        private void generate_request_url_list()
+        {
+            this.rtbWarmUp_RequestUrl.Text = string.Empty;
+            if (this.cbWarmUp_CountryHK.Checked)
+            {
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("HKWeb6.jobsdb.com");
+            }
+
+            if (this.cbWarmUp_CountryID.Checked)
+            {
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("IDWeb6.jobsdb.com");
+            }
+
+            if (this.cbWarmUp_CountryTH.Checked)
+            {
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb6.jobsdb.com");
+            }
+        }
+
 
     }
 
@@ -4058,5 +4169,13 @@ Order by b.LastUserUpdateTime;";
         public List<string> NameList { get; set; }
 
     }
+
+    public enum ResultType
+    {
+        None = 0,
+        Success = 1,
+        Failure = 2
+    }
+
     #endregion
 }
