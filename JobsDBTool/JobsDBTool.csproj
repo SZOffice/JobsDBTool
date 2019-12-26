@@ -312,6 +312,9 @@
     <None Include="Resource\InputData.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resource\OpenBackup.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resource\OpenNote.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

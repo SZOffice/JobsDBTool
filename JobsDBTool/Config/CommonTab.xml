@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <add key="OpenBackupPath">D:\SZOffice\JobsDBTool\JobsDBTool\Resource\OpenBackup.bat</add>
   <add key="DropDownToText">
     <![CDATA[
         <columns name="Common_RunSql_Template">
@@ -15,18 +16,54 @@
               EmployerId:100300085
             </SqlParam>
           </column>
+          
+          <column name="GetAdLoaderInfo">
+            <SqlQuery>
+              SELECT em.EmployerID, em.AccountNum, em.SubAccount, eup.UserManagementID
+              FROM JobsDBHK.dbo.EmpMast em WITH(NOLOCK)
+              INNER JOIN JobsDBHK.dbo.Emp_UserManagement_Profile eup WITH(NOLOCK) ON em.EmployerID=eup.EmployerID AND eup.UserType=1
+              WHERE AccountNum=@AccountNum
+            </SqlQuery>
+            <SqlParam>
+              AccountNum:730;
+              EmployerId:100300085
+            </SqlParam>
+          </column>
+          
         </columns>   
         
         <columns name="Common_GenCopyBat_Template">
-          <column name="Copy Web.Config to local">
+          <column name="To Local: Web: Web.Config">
             <SourcePath>d$\jobsDBv8\JobsDB.Web\web.config</SourcePath>
-            <TargetPath>{Env}_{CountryCode}\JobsDB.Web\</TargetPath>
-            <IsToLocal>1</IsToLocal>
+            <TargetPath>{Env}_{CountryCode}\JobsDB.Web\%server%\</TargetPath>
+            <BatType>1</BatType>
           </column>
-          <column name="Copy Web.Config from local">
+          <column name="To Server: Web: Web.Config">
             <SourcePath>d:\jobsDBv8\JobsDB.Web\web.config</SourcePath>
             <TargetPath>d$\jobsDBv8\JobsDB.Web\web.config</TargetPath>
-            <IsToLocal>0</IsToLocal>
+            <BatType>2</BatType>
+          </column>
+          
+          <column name="To Local: Web: UnhandledEx.**.log">
+            <SourcePath>e$\Jobsdb\Log\{CountryCode}\%date%\UnhandledEx.%date%.log</SourcePath>
+            <TargetPath>{Env}_{CountryCode}\Log\%server%\</TargetPath>
+            <BatType>1</BatType>
+          </column>
+          <column name="To Local: Web: PaymentGateway.**.log">
+            <SourcePath>e$\Jobsdb\Log\{CountryCode}\%date%\PaymentGateway.%date%.log</SourcePath>
+            <TargetPath>{Env}_{CountryCode}\Log\%server%\</TargetPath>
+            <BatType>1</BatType>
+          </column>
+          <column name="To Local: Nginx: PaymentGateway.**.log">
+            <SourcePath>/var/log/nginx/paymentgateway.access.log</SourcePath>
+            <TargetPath>{Env}_{CountryCode}\Nginx\%server%\</TargetPath>
+            <BatType>3</BatType>
+          </column>
+          
+          <column name="To Local: Web: FileSystemProperty.Config">
+            <SourcePath>d$\jobsDBv8\JobsDB.Web\Config\FileSystemProperty.config</SourcePath>
+            <TargetPath>{Env}_{CountryCode}\JobsDB.Web\%server%\</TargetPath>
+            <BatType>1</BatType>
           </column>
         </columns>
       ]]>
