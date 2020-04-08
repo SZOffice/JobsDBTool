@@ -172,7 +172,7 @@ namespace JobsDBTool.Helper
             try
             {
                 HttpWebRequest myReq = WebRequest.Create(url) as HttpWebRequest;
-                myReq.Method = "HEAD";
+                myReq.Method = "GET";
                 myReq.Timeout = timeout;
 
                 myRes = myReq.GetResponse() as HttpWebResponse;

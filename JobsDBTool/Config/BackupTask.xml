@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <add key="BackupTaskLastestPath">D:\workspaces\JobsDBTool\bin\Debug\Resource\BackupTask.csv</add>
+  <add key="CodePath">D:\jobsDBV8</add>
+  <add key="BackupTaskLastestPath">D:\Tools\JobsDBTool\Resource\BackupTask.csv</add>
   <add key="BackupTaskPath">D:\bkTask\BKFiles</add>
-  <add key="BackupTaskPythonPath">D:\workspaces\JobsDBTool\bin\Debug\Resource\Python_CopyFile.py</add>
+  <add key="BackupTaskPythonPath">D:\Tools\JobsDBTool\Resource\Python_CopyFile.py</add>
   <add key="BackupTaskBat">
     <![CDATA[
       @echo off
@@ -16,7 +17,10 @@ Set pythonPath="{3}"
 Set isComment=False
 Set isAddToday=True
 Set isBKWording="{4}"
-Set wordingFilePath="D:\\workspaces\\JobsDBTool\\bin\\Debug\\Resource\\InputData.csv"
+Set isDeployPackage="{6}"
+Set curDate={7}
+Set rar="C:\Program Files\7-Zip\7z"
+Set wordingFilePath="D:\\Tools\\JobsDBTool\\Resource\\InputData.csv"
 
 Set LogFile={5}.log
 Set TempFile={5}.tmp
@@ -25,12 +29,32 @@ Set "RedirectLogCommand=>%TempFile% & type %TempFile% & type %TempFile% > %LogFi
 echo. %RedirectLogCommand%
 echo Copy JobsDB BK to BKFolder... %RedirectLogCommand%
 	
-If "%isBKWording%" == "True" (
+If %isDeployPackage% == "True" (
+  echo "delete last folder"
+  rd/s/q  "%targetDir%\_V1"
+  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_HK"
+  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_TH"
+  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_ID"
+  Set isAddToday=False
+)
+
+If %isBKWording% == "True" (
 	python %pythonPath% %configPath% %sourceDir% %targetDir% %isComment% %isAddToday% %RedirectLogCommand%
 ) else (
 	python %pythonPath% %configPath% %sourceDir% %targetDir% %isComment% %isAddToday% %isBKWording% %wordingFilePath% %RedirectLogCommand%
 )
 if ERRORLEVEL 1 goto error
+
+If %isDeployPackage% == "True" (
+  echo "compression to rar file"
+  %rar% a -r %targetDir%/_V1/CFS_Web_Production.rar %targetDir%/_V1/JobsDB.Web
+
+  echo "copy rar to each countries"
+  echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_HK\CFS_Web_Production_HK.rar"
+  echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_TH\CFS_Web_Production_TH.rar"
+  echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_ID\CFS_Web_Production_ID.rar"
+)
+
 goto eof
 
 :error
@@ -65,7 +89,7 @@ pause & exit
         </columns>        
         <columns name="BackupTask_TaskName">
           <column name="Task Name"></column>
-          <column name="Deploy_1121">Deploy_1121</column>
+          <column name="Deploy_Package">Deploy_Package</column>
           <column name="HotFix">HotFix</column>
           <column name="Temp">Temp</column>
           <column name="Debug">Debug</column>

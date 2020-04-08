@@ -76,8 +76,9 @@
             this.extractdll_rtbSource = new System.Windows.Forms.RichTextBox();
             this.extractdll_Result = new System.Windows.Forms.RichTextBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.label54 = new System.Windows.Forms.Label();
+            this.cbCommon_RunSql_Country = new System.Windows.Forms.ComboBox();
             this.rtbCommon_RunSql_SqlQuery = new System.Windows.Forms.RichTextBox();
-            this.plCommon_RunSql_Params = new System.Windows.Forms.Panel();
             this.label45 = new System.Windows.Forms.Label();
             this.cbCommon_RunSql_SqlTemplate = new System.Windows.Forms.ComboBox();
             this.gvCommon_RunSql_SqlResult = new System.Windows.Forms.DataGridView();
@@ -107,8 +108,15 @@
             this.label47 = new System.Windows.Forms.Label();
             this.txtGenCopyBat_SourcePath = new System.Windows.Forms.TextBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.btnWarmUp_Check = new System.Windows.Forms.Button();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.cbWarmUp_CountryTH = new System.Windows.Forms.CheckBox();
+            this.cbWarmUp_CountryID = new System.Windows.Forms.CheckBox();
+            this.cbWarmUp_CountryHK = new System.Windows.Forms.CheckBox();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.rtbWarmUp_Result = new System.Windows.Forms.RichTextBox();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
             this.rtbWarmUp_RequestUrl = new System.Windows.Forms.RichTextBox();
+            this.btnWarmUp_Check = new System.Windows.Forms.Button();
             this.tp_AddWordings = new System.Windows.Forms.TabPage();
             this.tc_AddWordings = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -166,6 +174,10 @@
             this.btnGetAbbr = new System.Windows.Forms.Button();
             this.txtClassField = new System.Windows.Forms.TextBox();
             this.tp_BackupTask = new System.Windows.Forms.TabPage();
+            this.cbBackupGitBranch = new System.Windows.Forms.ComboBox();
+            this.btnBackupRefreshBranchOption = new System.Windows.Forms.Button();
+            this.btnBackupDeployPackage = new System.Windows.Forms.Button();
+            this.btnBackupFileList = new System.Windows.Forms.Button();
             this.cbBackupTaskTaskName = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtBackupTaskSubmitResult = new System.Windows.Forms.TextBox();
@@ -378,13 +390,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.groupBox24 = new System.Windows.Forms.GroupBox();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.rtbWarmUp_Result = new System.Windows.Forms.RichTextBox();
-            this.groupBox26 = new System.Windows.Forms.GroupBox();
-            this.cbWarmUp_CountryTH = new System.Windows.Forms.CheckBox();
-            this.cbWarmUp_CountryID = new System.Windows.Forms.CheckBox();
-            this.cbWarmUp_CountryHK = new System.Windows.Forms.CheckBox();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -405,6 +410,9 @@
             this.groupBox22.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.tabPage12.SuspendLayout();
+            this.groupBox26.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox24.SuspendLayout();
             this.tp_AddWordings.SuspendLayout();
             this.tc_AddWordings.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -452,9 +460,6 @@
             this.groupBox23.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox24.SuspendLayout();
-            this.groupBox25.SuspendLayout();
-            this.groupBox26.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -941,8 +946,9 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.label54);
+            this.tabPage10.Controls.Add(this.cbCommon_RunSql_Country);
             this.tabPage10.Controls.Add(this.rtbCommon_RunSql_SqlQuery);
-            this.tabPage10.Controls.Add(this.plCommon_RunSql_Params);
             this.tabPage10.Controls.Add(this.label45);
             this.tabPage10.Controls.Add(this.cbCommon_RunSql_SqlTemplate);
             this.tabPage10.Controls.Add(this.gvCommon_RunSql_SqlResult);
@@ -954,27 +960,41 @@
             this.tabPage10.Text = "Run Sql";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(9, 42);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(43, 13);
+            this.label54.TabIndex = 65;
+            this.label54.Text = "Country";
+            // 
+            // cbCommon_RunSql_Country
+            // 
+            this.cbCommon_RunSql_Country.DisplayMember = "1";
+            this.cbCommon_RunSql_Country.FormattingEnabled = true;
+            this.cbCommon_RunSql_Country.Items.AddRange(new object[] {
+            "HK",
+            "TH",
+            "ID",
+            "SG"});
+            this.cbCommon_RunSql_Country.Location = new System.Drawing.Point(64, 39);
+            this.cbCommon_RunSql_Country.Name = "cbCommon_RunSql_Country";
+            this.cbCommon_RunSql_Country.Size = new System.Drawing.Size(79, 21);
+            this.cbCommon_RunSql_Country.TabIndex = 64;
+            // 
             // rtbCommon_RunSql_SqlQuery
             // 
-            this.rtbCommon_RunSql_SqlQuery.Location = new System.Drawing.Point(3, 39);
+            this.rtbCommon_RunSql_SqlQuery.Location = new System.Drawing.Point(230, 3);
             this.rtbCommon_RunSql_SqlQuery.Name = "rtbCommon_RunSql_SqlQuery";
-            this.rtbCommon_RunSql_SqlQuery.Size = new System.Drawing.Size(370, 88);
+            this.rtbCommon_RunSql_SqlQuery.Size = new System.Drawing.Size(600, 102);
             this.rtbCommon_RunSql_SqlQuery.TabIndex = 54;
             this.rtbCommon_RunSql_SqlQuery.Text = "";
-            // 
-            // plCommon_RunSql_Params
-            // 
-            this.plCommon_RunSql_Params.AutoScroll = true;
-            this.plCommon_RunSql_Params.BackColor = System.Drawing.Color.Transparent;
-            this.plCommon_RunSql_Params.Location = new System.Drawing.Point(399, 5);
-            this.plCommon_RunSql_Params.Name = "plCommon_RunSql_Params";
-            this.plCommon_RunSql_Params.Size = new System.Drawing.Size(434, 120);
-            this.plCommon_RunSql_Params.TabIndex = 53;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(19, 15);
+            this.label45.Location = new System.Drawing.Point(9, 15);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(51, 13);
             this.label45.TabIndex = 27;
@@ -983,7 +1003,7 @@
             // cbCommon_RunSql_SqlTemplate
             // 
             this.cbCommon_RunSql_SqlTemplate.FormattingEnabled = true;
-            this.cbCommon_RunSql_SqlTemplate.Location = new System.Drawing.Point(81, 12);
+            this.cbCommon_RunSql_SqlTemplate.Location = new System.Drawing.Point(64, 12);
             this.cbCommon_RunSql_SqlTemplate.Name = "cbCommon_RunSql_SqlTemplate";
             this.cbCommon_RunSql_SqlTemplate.Size = new System.Drawing.Size(160, 21);
             this.cbCommon_RunSql_SqlTemplate.TabIndex = 52;
@@ -1000,7 +1020,7 @@
             // 
             // btnCommon_RunSql_Run
             // 
-            this.btnCommon_RunSql_Run.Location = new System.Drawing.Point(298, 10);
+            this.btnCommon_RunSql_Run.Location = new System.Drawing.Point(149, 68);
             this.btnCommon_RunSql_Run.Name = "btnCommon_RunSql_Run";
             this.btnCommon_RunSql_Run.Size = new System.Drawing.Size(75, 23);
             this.btnCommon_RunSql_Run.TabIndex = 50;
@@ -1265,15 +1285,77 @@
             this.tabPage12.Text = "WarmUp";
             this.tabPage12.UseVisualStyleBackColor = true;
             // 
-            // btnWarmUp_Check
+            // groupBox26
             // 
-            this.btnWarmUp_Check.Location = new System.Drawing.Point(348, 33);
-            this.btnWarmUp_Check.Name = "btnWarmUp_Check";
-            this.btnWarmUp_Check.Size = new System.Drawing.Size(105, 23);
-            this.btnWarmUp_Check.TabIndex = 94;
-            this.btnWarmUp_Check.Text = "Check Web";
-            this.btnWarmUp_Check.UseVisualStyleBackColor = true;
-            this.btnWarmUp_Check.Click += new System.EventHandler(this.btnWarmUp_Check_Click);
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryTH);
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryID);
+            this.groupBox26.Controls.Add(this.cbWarmUp_CountryHK);
+            this.groupBox26.Location = new System.Drawing.Point(32, 24);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Size = new System.Drawing.Size(266, 39);
+            this.groupBox26.TabIndex = 97;
+            this.groupBox26.TabStop = false;
+            // 
+            // cbWarmUp_CountryTH
+            // 
+            this.cbWarmUp_CountryTH.AutoSize = true;
+            this.cbWarmUp_CountryTH.Location = new System.Drawing.Point(181, 15);
+            this.cbWarmUp_CountryTH.Name = "cbWarmUp_CountryTH";
+            this.cbWarmUp_CountryTH.Size = new System.Drawing.Size(41, 17);
+            this.cbWarmUp_CountryTH.TabIndex = 97;
+            this.cbWarmUp_CountryTH.Text = "TH";
+            this.cbWarmUp_CountryTH.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryTH.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryTH_CheckedChanged);
+            // 
+            // cbWarmUp_CountryID
+            // 
+            this.cbWarmUp_CountryID.AutoSize = true;
+            this.cbWarmUp_CountryID.Location = new System.Drawing.Point(102, 15);
+            this.cbWarmUp_CountryID.Name = "cbWarmUp_CountryID";
+            this.cbWarmUp_CountryID.Size = new System.Drawing.Size(37, 17);
+            this.cbWarmUp_CountryID.TabIndex = 95;
+            this.cbWarmUp_CountryID.Text = "ID";
+            this.cbWarmUp_CountryID.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryID.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryID_CheckedChanged);
+            // 
+            // cbWarmUp_CountryHK
+            // 
+            this.cbWarmUp_CountryHK.AutoSize = true;
+            this.cbWarmUp_CountryHK.Location = new System.Drawing.Point(22, 15);
+            this.cbWarmUp_CountryHK.Name = "cbWarmUp_CountryHK";
+            this.cbWarmUp_CountryHK.Size = new System.Drawing.Size(41, 17);
+            this.cbWarmUp_CountryHK.TabIndex = 94;
+            this.cbWarmUp_CountryHK.Text = "HK";
+            this.cbWarmUp_CountryHK.UseVisualStyleBackColor = true;
+            this.cbWarmUp_CountryHK.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryHK_CheckedChanged);
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.rtbWarmUp_Result);
+            this.groupBox25.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox25.Location = new System.Drawing.Point(487, 0);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(346, 358);
+            this.groupBox25.TabIndex = 96;
+            this.groupBox25.TabStop = false;
+            // 
+            // rtbWarmUp_Result
+            // 
+            this.rtbWarmUp_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbWarmUp_Result.Location = new System.Drawing.Point(3, 16);
+            this.rtbWarmUp_Result.Name = "rtbWarmUp_Result";
+            this.rtbWarmUp_Result.Size = new System.Drawing.Size(340, 339);
+            this.rtbWarmUp_Result.TabIndex = 64;
+            this.rtbWarmUp_Result.Text = "";
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.rtbWarmUp_RequestUrl);
+            this.groupBox24.Location = new System.Drawing.Point(3, 75);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(478, 280);
+            this.groupBox24.TabIndex = 95;
+            this.groupBox24.TabStop = false;
             // 
             // rtbWarmUp_RequestUrl
             // 
@@ -1283,6 +1365,16 @@
             this.rtbWarmUp_RequestUrl.Size = new System.Drawing.Size(472, 261);
             this.rtbWarmUp_RequestUrl.TabIndex = 64;
             this.rtbWarmUp_RequestUrl.Text = "";
+            // 
+            // btnWarmUp_Check
+            // 
+            this.btnWarmUp_Check.Location = new System.Drawing.Point(348, 33);
+            this.btnWarmUp_Check.Name = "btnWarmUp_Check";
+            this.btnWarmUp_Check.Size = new System.Drawing.Size(105, 23);
+            this.btnWarmUp_Check.TabIndex = 94;
+            this.btnWarmUp_Check.Text = "Check Web";
+            this.btnWarmUp_Check.UseVisualStyleBackColor = true;
+            this.btnWarmUp_Check.Click += new System.EventHandler(this.btnWarmUp_Check_Click);
             // 
             // tp_AddWordings
             // 
@@ -1877,6 +1969,10 @@
             // 
             // tp_BackupTask
             // 
+            this.tp_BackupTask.Controls.Add(this.cbBackupGitBranch);
+            this.tp_BackupTask.Controls.Add(this.btnBackupRefreshBranchOption);
+            this.tp_BackupTask.Controls.Add(this.btnBackupDeployPackage);
+            this.tp_BackupTask.Controls.Add(this.btnBackupFileList);
             this.tp_BackupTask.Controls.Add(this.cbBackupTaskTaskName);
             this.tp_BackupTask.Controls.Add(this.label17);
             this.tp_BackupTask.Controls.Add(this.txtBackupTaskSubmitResult);
@@ -1902,6 +1998,44 @@
             this.tp_BackupTask.TabIndex = 7;
             this.tp_BackupTask.Text = "    Backup Task    ";
             this.tp_BackupTask.UseVisualStyleBackColor = true;
+            // 
+            // cbBackupGitBranch
+            // 
+            this.cbBackupGitBranch.FormattingEnabled = true;
+            this.cbBackupGitBranch.Location = new System.Drawing.Point(470, 13);
+            this.cbBackupGitBranch.Name = "cbBackupGitBranch";
+            this.cbBackupGitBranch.Size = new System.Drawing.Size(266, 21);
+            this.cbBackupGitBranch.TabIndex = 48;
+            // 
+            // btnBackupRefreshBranchOption
+            // 
+            this.btnBackupRefreshBranchOption.Location = new System.Drawing.Point(749, 13);
+            this.btnBackupRefreshBranchOption.Name = "btnBackupRefreshBranchOption";
+            this.btnBackupRefreshBranchOption.Size = new System.Drawing.Size(76, 25);
+            this.btnBackupRefreshBranchOption.TabIndex = 47;
+            this.btnBackupRefreshBranchOption.Text = "Refresh";
+            this.btnBackupRefreshBranchOption.UseVisualStyleBackColor = true;
+            this.btnBackupRefreshBranchOption.Click += new System.EventHandler(this.btnBackupRefreshBranchOption_Click);
+            // 
+            // btnBackupDeployPackage
+            // 
+            this.btnBackupDeployPackage.Location = new System.Drawing.Point(348, 221);
+            this.btnBackupDeployPackage.Name = "btnBackupDeployPackage";
+            this.btnBackupDeployPackage.Size = new System.Drawing.Size(94, 25);
+            this.btnBackupDeployPackage.TabIndex = 46;
+            this.btnBackupDeployPackage.Text = "Deploy Package";
+            this.btnBackupDeployPackage.UseVisualStyleBackColor = true;
+            this.btnBackupDeployPackage.Click += new System.EventHandler(this.btnBackupDeployPackage_Click);
+            // 
+            // btnBackupFileList
+            // 
+            this.btnBackupFileList.Location = new System.Drawing.Point(749, 44);
+            this.btnBackupFileList.Name = "btnBackupFileList";
+            this.btnBackupFileList.Size = new System.Drawing.Size(76, 25);
+            this.btnBackupFileList.TabIndex = 45;
+            this.btnBackupFileList.Text = "Get File List";
+            this.btnBackupFileList.UseVisualStyleBackColor = true;
+            this.btnBackupFileList.Click += new System.EventHandler(this.btnBackupFileList_Click);
             // 
             // cbBackupTaskTaskName
             // 
@@ -1934,7 +2068,7 @@
             // 
             // btnBackupTaskLoad
             // 
-            this.btnBackupTaskLoad.Location = new System.Drawing.Point(470, 21);
+            this.btnBackupTaskLoad.Location = new System.Drawing.Point(378, 24);
             this.btnBackupTaskLoad.Name = "btnBackupTaskLoad";
             this.btnBackupTaskLoad.Size = new System.Drawing.Size(76, 25);
             this.btnBackupTaskLoad.TabIndex = 40;
@@ -1955,12 +2089,12 @@
             // 
             this.txtBackupTaskLastestPath.Location = new System.Drawing.Point(90, 26);
             this.txtBackupTaskLastestPath.Name = "txtBackupTaskLastestPath";
-            this.txtBackupTaskLastestPath.Size = new System.Drawing.Size(271, 20);
+            this.txtBackupTaskLastestPath.Size = new System.Drawing.Size(198, 20);
             this.txtBackupTaskLastestPath.TabIndex = 38;
             // 
             // btnBackupTaskLastestPath
             // 
-            this.btnBackupTaskLastestPath.Location = new System.Drawing.Point(378, 22);
+            this.btnBackupTaskLastestPath.Location = new System.Drawing.Point(294, 24);
             this.btnBackupTaskLastestPath.Name = "btnBackupTaskLastestPath";
             this.btnBackupTaskLastestPath.Size = new System.Drawing.Size(75, 25);
             this.btnBackupTaskLastestPath.TabIndex = 37;
@@ -4113,78 +4247,6 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // groupBox24
-            // 
-            this.groupBox24.Controls.Add(this.rtbWarmUp_RequestUrl);
-            this.groupBox24.Location = new System.Drawing.Point(3, 75);
-            this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Size = new System.Drawing.Size(478, 280);
-            this.groupBox24.TabIndex = 95;
-            this.groupBox24.TabStop = false;
-            // 
-            // groupBox25
-            // 
-            this.groupBox25.Controls.Add(this.rtbWarmUp_Result);
-            this.groupBox25.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox25.Location = new System.Drawing.Point(487, 0);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(346, 358);
-            this.groupBox25.TabIndex = 96;
-            this.groupBox25.TabStop = false;
-            // 
-            // rtbWarmUp_Result
-            // 
-            this.rtbWarmUp_Result.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbWarmUp_Result.Location = new System.Drawing.Point(3, 16);
-            this.rtbWarmUp_Result.Name = "rtbWarmUp_Result";
-            this.rtbWarmUp_Result.Size = new System.Drawing.Size(340, 339);
-            this.rtbWarmUp_Result.TabIndex = 64;
-            this.rtbWarmUp_Result.Text = "";
-            // 
-            // groupBox26
-            // 
-            this.groupBox26.Controls.Add(this.cbWarmUp_CountryTH);
-            this.groupBox26.Controls.Add(this.cbWarmUp_CountryID);
-            this.groupBox26.Controls.Add(this.cbWarmUp_CountryHK);
-            this.groupBox26.Location = new System.Drawing.Point(32, 24);
-            this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Size = new System.Drawing.Size(266, 39);
-            this.groupBox26.TabIndex = 97;
-            this.groupBox26.TabStop = false;
-            // 
-            // cbWarmUp_CountryTH
-            // 
-            this.cbWarmUp_CountryTH.AutoSize = true;
-            this.cbWarmUp_CountryTH.Location = new System.Drawing.Point(181, 15);
-            this.cbWarmUp_CountryTH.Name = "cbWarmUp_CountryTH";
-            this.cbWarmUp_CountryTH.Size = new System.Drawing.Size(41, 17);
-            this.cbWarmUp_CountryTH.TabIndex = 97;
-            this.cbWarmUp_CountryTH.Text = "TH";
-            this.cbWarmUp_CountryTH.UseVisualStyleBackColor = true;
-            this.cbWarmUp_CountryTH.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryTH_CheckedChanged);
-            // 
-            // cbWarmUp_CountryID
-            // 
-            this.cbWarmUp_CountryID.AutoSize = true;
-            this.cbWarmUp_CountryID.Location = new System.Drawing.Point(102, 15);
-            this.cbWarmUp_CountryID.Name = "cbWarmUp_CountryID";
-            this.cbWarmUp_CountryID.Size = new System.Drawing.Size(37, 17);
-            this.cbWarmUp_CountryID.TabIndex = 95;
-            this.cbWarmUp_CountryID.Text = "ID";
-            this.cbWarmUp_CountryID.UseVisualStyleBackColor = true;
-            this.cbWarmUp_CountryID.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryID_CheckedChanged);
-            // 
-            // cbWarmUp_CountryHK
-            // 
-            this.cbWarmUp_CountryHK.AutoSize = true;
-            this.cbWarmUp_CountryHK.Location = new System.Drawing.Point(22, 15);
-            this.cbWarmUp_CountryHK.Name = "cbWarmUp_CountryHK";
-            this.cbWarmUp_CountryHK.Size = new System.Drawing.Size(41, 17);
-            this.cbWarmUp_CountryHK.TabIndex = 94;
-            this.cbWarmUp_CountryHK.Text = "HK";
-            this.cbWarmUp_CountryHK.UseVisualStyleBackColor = true;
-            this.cbWarmUp_CountryHK.CheckedChanged += new System.EventHandler(this.cbWarmUp_CountryHK_CheckedChanged);
-            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4229,6 +4291,10 @@
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.tabPage12.ResumeLayout(false);
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox24.ResumeLayout(false);
             this.tp_AddWordings.ResumeLayout(false);
             this.tp_AddWordings.PerformLayout();
             this.tc_AddWordings.ResumeLayout(false);
@@ -4306,10 +4372,6 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox24.ResumeLayout(false);
-            this.groupBox25.ResumeLayout(false);
-            this.groupBox26.ResumeLayout(false);
-            this.groupBox26.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4616,7 +4678,6 @@
         private System.Windows.Forms.Button btnCommon_RunSql_Run;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox cbCommon_RunSql_SqlTemplate;
-        private System.Windows.Forms.Panel plCommon_RunSql_Params;
         private System.Windows.Forms.RichTextBox rtbCommon_RunSql_SqlQuery;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.ComboBox cbGenCopyBat_Template;
@@ -4672,6 +4733,12 @@
         private System.Windows.Forms.CheckBox cbWarmUp_CountryTH;
         private System.Windows.Forms.CheckBox cbWarmUp_CountryID;
         private System.Windows.Forms.CheckBox cbWarmUp_CountryHK;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox cbCommon_RunSql_Country;
+        private System.Windows.Forms.Button btnBackupDeployPackage;
+        private System.Windows.Forms.Button btnBackupFileList;
+        private System.Windows.Forms.ComboBox cbBackupGitBranch;
+        private System.Windows.Forms.Button btnBackupRefreshBranchOption;
     }
 }
 

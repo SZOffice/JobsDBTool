@@ -34,6 +34,46 @@ namespace JobsDBTool.Helper
             pro.WaitForExit();
         }
 
+        /// <summary>
+        /// 运行cmd命令
+        /// 不显示命令窗口
+        /// </summary>
+        /// <param name="cmdExe">指定应用程序的完整路径</param>
+        /// <param name="cmdStr">执行命令行参数</param>
+        public static string RunCmd2(string cmdStr)
+        {
+            string result = "";
+            try
+            {
+                string command = cmdStr.Trim().TrimEnd('&') + "&exit";
+                using (Process myPro = new Process())
+                {
+                    myPro.StartInfo.FileName = "cmd.exe";
+                    myPro.StartInfo.UseShellExecute = false;
+                    myPro.StartInfo.RedirectStandardInput = true;
+                    myPro.StartInfo.RedirectStandardOutput = true;
+                    myPro.StartInfo.RedirectStandardError = true;
+                    myPro.StartInfo.CreateNoWindow = true;
+                    myPro.Start();
+
+                    myPro.StandardInput.WriteLine(command);
+                    myPro.StandardInput.AutoFlush = true;
+
+                    //获取cmd窗口的输出信息
+                    string outPut = myPro.StandardOutput.ReadToEnd();
+                    int P = outPut.IndexOf(command+"\r\n") + (command+"\r\n").Length;
+                    result = outPut.Substring(P, outPut.Length - P);
+
+                    myPro.WaitForExit();
+                }
+            }
+            catch
+            {
+
+            }
+            return result;
+        }
+
         public static string copyFileToBK(string backupFolderPath, string filePath, string taskName, int index)
         {
             return copyFileToBK(backupFolderPath, filePath, taskName, index, false);

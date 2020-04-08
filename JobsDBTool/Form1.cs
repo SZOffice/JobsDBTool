@@ -1957,7 +1957,73 @@ Order by b.LastUserUpdateTime;";
             this.txtBackupTaskName.Text = taskName.Value;
         }
 
-        private void btnBackupSubmit_Click(object sender, EventArgs e)
+        private void btnBackupDeployPackage_Click(object sender, EventArgs e)
+        {
+            backup_submit(true);
+        }
+
+        private void btnBackupRefreshBranchOption_Click(object sender, EventArgs e)
+        {
+            this.cbBackupGitBranch.Items.Clear();
+            string[] branches = CommonHelper.RunCmd2("cd /d \""+htConfig["CodePath"].ToString()+"\" && git branch").Split(new string[] { "\n" }, StringSplitOptions.None);
+            foreach (string branch in branches)
+            {
+                string item = branch.Trim();
+                var arrBranch = branch.Trim().Split(' ');
+                if (arrBranch.Length > 1)
+                {
+                    item = arrBranch[1];
+                }
+                this.cbBackupGitBranch.Items.Add(item);
+                if (arrBranch.Length > 1)
+                {
+                    this.cbBackupGitBranch.SelectedItem = item;
+                } 
+            }
+        }
+
+        private void btnBackupFileList_Click(object sender, EventArgs e)
+        {
+            string gitBranch = string.Empty;
+            try
+            {
+                gitBranch = this.cbBackupGitBranch.SelectedItem.ToString();
+            }
+            catch
+            {
+
+            }
+            if (gitBranch == "")
+            {
+                MessageBox.Show("请填写Git Branch", "提示信息",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            this.txtBackupTaskFileList.Text = string.Empty;
+            string sCommand = "cd /d \""+htConfig["CodePath"].ToString()+"\" && " + (gitBranch=="master"?"git diff --name-only":"git diff --name-status master");
+            string[] list = CommonHelper.RunCmd2(sCommand).Split(new string[] { "\n" }, StringSplitOptions.None);
+            
+            foreach(var log in list){
+                string item = log.Trim();
+                if (string.IsNullOrEmpty(item)) continue;
+
+                if (gitBranch != "master")
+                {
+                    var arrLog = log.Trim().Split('\t');
+                    if (arrLog.Length > 1)
+                    {
+                        item = arrLog[1];
+                    }
+                }
+                this.txtBackupTaskFileList.Text += item + Environment.NewLine;
+            }
+        }
+
+        private void btnBackupSubmit_Click(object sender, EventArgs e){
+            backup_submit(false);
+        }
+
+        private void backup_submit(bool isDeployPackage)
         {
             this.txtBackupTaskSubmitResult.Text = "";
             this.txtBackupTaskSubmitResult.Enabled = true;
@@ -2013,8 +2079,10 @@ Order by b.LastUserUpdateTime;";
                     string.Format(backupTaskBat, fileListPath,
                         this.txtBackupTaskTargetPath.Text,
                         backupTaskTaskPath + @"\", backupTaskPythonPath,
-                        this.cbBackupTaskBackWording.Checked ? "True" : "Flase",
-                        fileName + "_V" + index)
+                        this.cbBackupTaskBackWording.Checked && !isDeployPackage ? "True" : "Flase",
+                        fileName + "_V" + index,
+                        isDeployPackage,
+                        DateTime.Now.ToString("yyyyMMdd"))
                     , batPath))
                 {
 
@@ -3589,41 +3657,7 @@ Order by b.LastUserUpdateTime;";
         {
             SelectItem sqlTemplate = (SelectItem)this.cbCommon_RunSql_SqlTemplate.SelectedItem;
             this.rtbCommon_RunSql_SqlQuery.Text = sqlTemplate.SqlQuery;
-            var arrParam = sqlTemplate.SqlParam.Split(';');
-            totalFieldProperty = arrParam.Length;
-
-            Label[] lbs = new Label[totalFieldProperty];
-            TextBox[] tbs = new TextBox[totalFieldProperty];
-
-            int index_y = 0;
-            int start_x = 10;
-            for (int i = 0; i < totalFieldProperty; i++)
-            {
-                lbs[i] = new Label();
-                tbs[i] = new TextBox();
-
-                if (index_y % 3 == 0 && index_y > 1)
-                {
-                    start_x += 210;
-                    index_y = 0;
-                }
-
-                lbs[i].Name = "lbField_" + i;
-                lbs[i].Text = arrParam[i].Split(':')[0].Trim();
-                lbs[i].Width = 80;
-
-                lbs[i].Location = new System.Drawing.Point(start_x, 30 * index_y + 10);
-                tbs[i].Location = new System.Drawing.Point(start_x + 80, 30 * index_y + 10);
-                index_y++;
-
-                tbs[i].Name = "tbField_" + i;
-                tbs[i].Width = 120;
-
-                tbs[i].Text = arrParam[i].Split(':')[1].Trim();
-
-                this.plCommon_RunSql_Params.Controls.Add(lbs[i]);
-                this.plCommon_RunSql_Params.Controls.Add(tbs[i]);
-            }
+            
         }
 
         private void btnCommon_RunSql_Run_Click(object sender, EventArgs e)
@@ -3640,16 +3674,8 @@ Order by b.LastUserUpdateTime;";
                 KernelClass.SqlHelper sqlHelper = new KernelClass.SqlHelper(sourceDB);
                 sqlHelper.OpenConnection();
                 DataSet ds = new DataSet();
-                string sqlQuery = this.rtbCommon_RunSql_SqlQuery.Text;
-
-                for (int i = 0; i < totalFieldProperty; i++)
-                {
-                    Label lb = (Label)(this.plCommon_RunSql_Params.Controls.Find("lbField_" + i, false)[0]);
-                    string lbTxt = lb.Text.Trim();
-                    TextBox tb = (TextBox)(this.plCommon_RunSql_Params.Controls.Find("tbField_" + i, false)[0]);
-                    sqlQuery = sqlQuery.Replace("@" + lbTxt, "N'" + tb.Text.Trim().Replace("'", "''") + "'");
-                }
-
+                string sqlQuery = ReplaceCountryCode(this.rtbCommon_RunSql_SqlQuery.Text, this.cbCommon_RunSql_Country.SelectedItem.ToString());
+                
                 ds = sqlHelper.ExecuteQuery(sqlQuery);
                 gvCommon_RunSql_SqlResult.DataSource = ds.Tables[0];
             }
@@ -3954,51 +3980,53 @@ Order by b.LastUserUpdateTime;";
             if (this.cbWarmUp_CountryHK.Checked)
             {
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb1.jobsdb.com/HK/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb2.jobsdb.com/HK/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb3.jobsdb.com/HK/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb4.jobsdb.com/HK/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb5.jobsdb.com/HK/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("HKWeb6.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://HKWeb6.jobsdb.com/HK/EN/myjobsdb/about-profile");
             }
 
             if (this.cbWarmUp_CountryID.Checked)
             {
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb1.jobsdb.com/ID/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb2.jobsdb.com/ID/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb3.jobsdb.com/ID/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb4.jobsdb.com/ID/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb5.jobsdb.com/ID/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("IDWeb6.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("https://IDWeb6.jobsdb.com/ID/EN/myjobsdb/about-profile");
             }
 
             if (this.cbWarmUp_CountryTH.Checked)
             {
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb1.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb1.jobsdb.com/TH/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb2.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb2.jobsdb.com/TH/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb3.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb3.jobsdb.com/TH/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb4.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb4.jobsdb.com/TH/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb5.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb5.jobsdb.com/TH/EN/myjobsdb/about-profile");
                 this.rtbWarmUp_RequestUrl.AppendText(Environment.NewLine);
-                this.rtbWarmUp_RequestUrl.AppendText("THWeb6.jobsdb.com");
+                this.rtbWarmUp_RequestUrl.AppendText("THWeb6.jobsdb.com/TH/EN/myjobsdb/about-profile");
             }
         }
+
+
 
 
     }
