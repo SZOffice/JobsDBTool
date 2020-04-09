@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <add key="CodePath">D:\jobsDBV8</add>
   <add key="BackupTaskLastestPath">D:\Tools\JobsDBTool\Resource\BackupTask.csv</add>
   <add key="BackupTaskPath">D:\bkTask\BKFiles</add>
   <add key="BackupTaskPythonPath">D:\Tools\JobsDBTool\Resource\Python_CopyFile.py</add>
@@ -19,6 +18,7 @@ Set isAddToday=True
 Set isBKWording="{4}"
 Set isDeployPackage="{6}"
 Set curDate={7}
+Set packageEnv="{8}"
 Set rar="C:\Program Files\7-Zip\7z"
 Set wordingFilePath="D:\\Tools\\JobsDBTool\\Resource\\InputData.csv"
 
@@ -31,12 +31,13 @@ echo Copy JobsDB BK to BKFolder... %RedirectLogCommand%
 	
 If %isDeployPackage% == "True" (
   echo "delete last folder"
-  rd/s/q  "%targetDir%\_V1"
-  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_HK"
-  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_TH"
-  rd/s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_ID"
+  rd /s/q  "%targetDir%\_V1"
+  rd /s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_HK"
+  rd /s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_TH"
+  rd /s/q  "%targetDir%\Local Deploy Package\Deploy_%curDate%_ID"
   Set isAddToday=False
 )
+if ERRORLEVEL 1 goto error
 
 If %isBKWording% == "True" (
 	python %pythonPath% %configPath% %sourceDir% %targetDir% %isComment% %isAddToday% %RedirectLogCommand%
@@ -46,6 +47,19 @@ If %isBKWording% == "True" (
 if ERRORLEVEL 1 goto error
 
 If %isDeployPackage% == "True" (
+  echo "processing config file"
+  If exist "%targetDir%\_V1\JobsDB.Web\config\FileSystemProperty.config" (
+    echo "backup config folder"
+	echo d|xcopy "%targetDir%\_V1\JobsDB.Web\Config" "%targetDir%\_V1\Config"
+	rd /s/q "%targetDir%\_V1\JobsDB.Web\Config"
+	If %packageEnv% == "prod" (
+		echo f|xcopy "%targetDir%\_V1\Config\FileSystemProperty.Prod.config" "%targetDir%\_V1\JobsDB.Web\Config\FileSystemProperty.config"
+	) else (
+	    echo f|xcopy "%targetDir%\_V1\Config\FileSystemProperty.Preview.config" "%targetDir%\_V1\JobsDB.Web\Config\FileSystemProperty.config"
+	)
+  )
+  if ERRORLEVEL 1 goto error
+  
   echo "compression to rar file"
   %rar% a -r %targetDir%/_V1/CFS_Web_Production.rar %targetDir%/_V1/JobsDB.Web
 
@@ -53,7 +67,16 @@ If %isDeployPackage% == "True" (
   echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_HK\CFS_Web_Production_HK.rar"
   echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_TH\CFS_Web_Production_TH.rar"
   echo f|xcopy "%targetDir%\_V1\CFS_Web_Production.rar" "%targetDir%\Local Deploy Package\Deploy_%curDate%_ID\CFS_Web_Production_ID.rar"
+  echo "delete temp rar"
+  del /s/q  "%targetDir%\_V1\CFS_Web_Production.rar"
+  echo "rollback config"
+  If exist "%targetDir%\_V1\JobsDB.Web\config\FileSystemProperty.config" (
+    echo "backup config folder"
+	echo a|xcopy "%targetDir%\_V1\Config" "%targetDir%\_V1\JobsDB.Web\Config"
+	rd /s/q "%targetDir%\_V1\Config"
+  )
 )
+if ERRORLEVEL 1 goto error
 
 goto eof
 

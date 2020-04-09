@@ -390,6 +390,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSourceConnProviderName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.cbBackupDeployEnv = new System.Windows.Forms.ComboBox();
             this.gb_DBType.SuspendLayout();
             this.tc1.SuspendLayout();
             this.tp_Common.SuspendLayout();
@@ -1969,6 +1970,7 @@
             // 
             // tp_BackupTask
             // 
+            this.tp_BackupTask.Controls.Add(this.cbBackupDeployEnv);
             this.tp_BackupTask.Controls.Add(this.cbBackupGitBranch);
             this.tp_BackupTask.Controls.Add(this.btnBackupRefreshBranchOption);
             this.tp_BackupTask.Controls.Add(this.btnBackupDeployPackage);
@@ -4247,6 +4249,17 @@
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // cbBackupDeployEnv
+            // 
+            this.cbBackupDeployEnv.FormattingEnabled = true;
+            this.cbBackupDeployEnv.Items.AddRange(new object[] {
+            "prod",
+            "preview"});
+            this.cbBackupDeployEnv.Location = new System.Drawing.Point(275, 223);
+            this.cbBackupDeployEnv.Name = "cbBackupDeployEnv";
+            this.cbBackupDeployEnv.Size = new System.Drawing.Size(67, 21);
+            this.cbBackupDeployEnv.TabIndex = 49;
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4739,6 +4752,7 @@
         private System.Windows.Forms.Button btnBackupFileList;
         private System.Windows.Forms.ComboBox cbBackupGitBranch;
         private System.Windows.Forms.Button btnBackupRefreshBranchOption;
+        private System.Windows.Forms.ComboBox cbBackupDeployEnv;
     }
 }
 

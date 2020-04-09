@@ -500,6 +500,8 @@ namespace JobsDBTool
                     {
                         this.cbBackupTaskTaskName.SelectedIndex = 0;
                     }
+
+                    this.cbBackupDeployEnv.SelectedIndex = 0;
                 }
             }
             else
@@ -1965,7 +1967,17 @@ Order by b.LastUserUpdateTime;";
         private void btnBackupRefreshBranchOption_Click(object sender, EventArgs e)
         {
             this.cbBackupGitBranch.Items.Clear();
-            string[] branches = CommonHelper.RunCmd2("cd /d \""+htConfig["CodePath"].ToString()+"\" && git branch").Split(new string[] { "\n" }, StringSplitOptions.None);
+            this.txtBackupTaskSubmitResult.Text = "";
+            this.txtBackupTaskSubmitResult.Enabled = true;
+
+            string targetPath = this.txtBackupTaskTargetPath.Text.Trim();
+            string command = "cd /d \"" + targetPath + "\" && git branch";
+            this.txtBackupTaskSubmitResult.Text = "\r\n\r\n"
+                + "load branchs:" + command
+                + "\r\n"
+                + this.txtBackupTaskSubmitResult.Text;
+
+            string[] branches = CommonHelper.RunCmd2(command).Split(new string[] { "\n" }, StringSplitOptions.None);
             foreach (string branch in branches)
             {
                 string item = branch.Trim();
@@ -2000,7 +2012,14 @@ Order by b.LastUserUpdateTime;";
                 return;
             }
             this.txtBackupTaskFileList.Text = string.Empty;
-            string sCommand = "cd /d \""+htConfig["CodePath"].ToString()+"\" && " + (gitBranch=="master"?"git diff --name-only":"git diff --name-status master");
+            string targetPath = this.txtBackupTaskTargetPath.Text.Trim();
+            string sCommand = "cd /d \"" + targetPath + "\" && " + (gitBranch == "master" ? "git diff --name-only" : "git diff --name-status master");
+            
+            this.txtBackupTaskSubmitResult.Text = "\r\n\r\n"
+                + "get branch logs:" + sCommand
+                + "\r\n"
+                + this.txtBackupTaskSubmitResult.Text;
+
             string[] list = CommonHelper.RunCmd2(sCommand).Split(new string[] { "\n" }, StringSplitOptions.None);
             
             foreach(var log in list){
@@ -2082,7 +2101,8 @@ Order by b.LastUserUpdateTime;";
                         this.cbBackupTaskBackWording.Checked && !isDeployPackage ? "True" : "Flase",
                         fileName + "_V" + index,
                         isDeployPackage,
-                        DateTime.Now.ToString("yyyyMMdd"))
+                        DateTime.Now.ToString("yyyyMMdd"),
+                        this.cbBackupDeployEnv.SelectedItem.ToString())
                     , batPath))
                 {
 
